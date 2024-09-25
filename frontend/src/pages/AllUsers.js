@@ -14,6 +14,7 @@ const AllUsers = () => {
     role: "",
     _id: "",
   });
+  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchAllUsers = async () => {
     const fetchData = await fetch(SummaryApi.allUser.url, {
@@ -36,8 +37,24 @@ const AllUsers = () => {
     fetchAllUsers();
   }, []);
 
+  // Filtrer les utilisateurs selon le terme de recherche
+  const filteredUsers = allUser.filter(
+    (user) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="bg-gray-100 pb-4">
+      <div className="mb-4 flex justify-right">
+        <input
+          type="text"
+          placeholder="Rechercher un utilisateur..."
+          className="w-1/2 max-w-xs p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-gray-400"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       <table className="w-full userTable bg-white shadow-md rounded-lg">
         <thead>
           <tr className="bg-gray-800 text-white">
@@ -50,7 +67,7 @@ const AllUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {allUser.map((el, index) => {
+          {filteredUsers.map((el, index) => {
             return (
               <tr key={el._id} className="border-b hover:bg-gray-50">
                 <td className="p-3">{index + 1}</td>
@@ -60,7 +77,7 @@ const AllUsers = () => {
                 <td className="p-3">{moment(el?.createdAt).format("LL")}</td>
                 <td className="p-3">
                   <button
-                    className="bg-yellow-200 p-2 rounded-full cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-300"
+                    className="bg-yellow-100 p-2 rounded-full cursor-pointer hover:bg-yellow-500 hover:text-white transition duration-300"
                     onClick={() => {
                       setUpdateUserDetails(el);
                       setOpenUpdateRole(true);

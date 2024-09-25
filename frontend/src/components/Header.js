@@ -69,7 +69,7 @@ const Header = () => {
             onChange={handleSearch}
             value={search}
           />
-          <div className="text-lg min-w-[50px] h-8 bg-yellow-600 flex items-center justify-center rounded-r-full text-white">
+          <div className="text-lg min-w-[50px] h-8 bg-gold flex items-center justify-center rounded-r-full text-white">
             <GrSearch />
           </div>
         </div>
@@ -116,7 +116,7 @@ const Header = () => {
                 <FaShoppingCart />
               </span>
 
-              <div className="bg-yellow-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-3">
+              <div className="bg-gold text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-3">
                 <p className="text-sm">{context?.cartProductCount}</p>
               </div>
             </Link>
@@ -126,7 +126,7 @@ const Header = () => {
             {user?._id ? (
               <button
                 onClick={handleLogout}
-                className="px-3 py-1 rounded-full text-white bg-yellow-600 hover:bg-yellow-700"
+                className="px-3 py-1 rounded-full text-white bg-gold hover:bg-yellow-700"
               >
                 Déconnexion
               </button>
