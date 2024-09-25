@@ -1,12 +1,13 @@
-const displayINRCurrency = (num) => {
-    const formatter = new Intl.NumberFormat('en-IN',{
-        style : "currency",
-        currency : 'INR',
-        minimumFractionDigits : 2
-    })
+// helpers/displayCurrency.js
 
-    return formatter.format(num)
+const displayTNDCurrency = (num) => {
+  const formatter = new Intl.NumberFormat('fr-TN', { // Utilisation de la locale française pour la Tunisie
+      style: "currency",
+      currency: 'TND',
+      minimumFractionDigits: 3 // Utilisez 3 pour les dinars tunisiens
+  });
 
+  return formatter.format(num);
 }
 
-export default displayINRCurrency
+export default displayTNDCurrency;
