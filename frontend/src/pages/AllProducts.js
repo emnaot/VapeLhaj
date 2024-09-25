@@ -21,8 +21,9 @@ const AllProducts = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300 min-h-screen p-4">
-      <div className="bg-white py-4 px-6 flex justify-between items-center shadow-md rounded-lg">
+    <div className="bg-white">
+      <div className="bg-gray-200 py-4 px-6 flex justify-between items-center shadow-md  rounded-lg">
+        
         <h2 className="font-bold text-xl text-gray-700">Tous les produits</h2>
         <button
           className="border-2 border-gold text-gold hover:bg-gold hover:text-white transition-all py-2 px-4 rounded-full shadow-md"
