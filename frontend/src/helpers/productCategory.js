@@ -1,11 +1,9 @@
 const productCategory = [
-    { id : 1, label : "E-Cigarettes", value : "e-cigarettes"},
-    { id : 2, label : "E-Liquide", value : "e-liquide"},
-    { id : 3, label : "Accessoires", value : "accessoires"},
-    { id : 4, label : "DIY", value : "diy"},
-    { id : 5, label : "Kits d'E-Cigarettes", value : "kits"},
-  
-]
+  { id: 1, label: "E-Liquide", value: "e-liquide" },
+  { id: 2, label: "Puff", value: "puff" },
+  { id: 3, label: "Pod", value: "pod" },
+  { id: 4, label: "Kit Complet", value: "kit-complet" },
+  { id: 5, label: "Colis", value: "colis" },
+];
 
-
-export default productCategory
+export default productCategory;
