@@ -10,9 +10,9 @@ const Home = () => {
       <CategoryList />
       <BannerProduct />
 
-      <HorizontalCardProduct category={"puff"} heading={"Top's Puffs"} />
+      <VerticalCardProduct category={"puff"} heading={"Top's Puffs"} />
       <VerticalCardProduct category={"e-liquide"} heading={"E-Liquides"} />
-      <HorizontalCardProduct category={"pod"} heading={"Popular's Pods"} />
+      <VerticalCardProduct category={"pod"} heading={"Popular's Pods"} />
 
       <VerticalCardProduct category={"kit-complet"} heading={"Kits Complets"} />
       <VerticalCardProduct category={"colis"} heading={"Colis Spéciaux"} />
