@@ -3,7 +3,7 @@ import image1 from '../assest/banner/img1.jpg'
 import image2 from '../assest/banner/img2.gif'
 import image3 from '../assest/banner/img3.gif'
 import image4 from '../assest/banner/img4.gif'
-import image5 from '../assest/banner/img5.webp'
+import image5 from '../assest/banner/img5.gif'
 
 
 import image1Mobile from '../assest/banner/img1_mobile.jpg'
