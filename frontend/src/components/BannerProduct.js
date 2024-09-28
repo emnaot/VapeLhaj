@@ -7,10 +7,10 @@ import image5 from '../assest/banner/img5.gif'
 
 
 import image1Mobile from '../assest/banner/img1_mobile.jpg'
-import image2Mobile from '../assest/banner/img2_mobile.jpg'
-import image3Mobile from '../assest/banner/img3_mobile.jpg'
-import image4Mobile from '../assest/banner/img4_mobile.jpg'
-import image5Mobile from '../assest/banner/img5_mobile.png'
+import image2Mobile from '../assest/banner/img2_mobile.gif'
+import image3Mobile from '../assest/banner/img3_mobile.gif'
+import image4Mobile from '../assest/banner/img4_mobile.gif'
+import image5Mobile from '../assest/banner/img5_mobile.gif'
 
 import { FaAngleRight } from "react-icons/fa6";
 import { FaAngleLeft } from "react-icons/fa6";
@@ -66,8 +66,8 @@ const BannerProduct = () => {
 
                 <div className='absolute z-10 h-full w-full md:flex items-center hidden '>
                     <div className=' flex justify-between w-full text-2xl'>
-                        <button onClick={preveImage} className='bg-white shadow-md rounded-full p-1'><FaAngleLeft/></button>
-                        <button onClick={nextImage} className='bg-white shadow-md rounded-full p-1'><FaAngleRight/></button> 
+                        <button onClick={preveImage} className='bg-gold-dark shadow-md rounded-full p-1'><FaAngleLeft className='text-white'/></button>
+                        <button onClick={nextImage} className='bg-gold-dark shadow-md rounded-full p-1'><FaAngleRight className='text-white'/></button> 
                     </div>
                 </div>
 
