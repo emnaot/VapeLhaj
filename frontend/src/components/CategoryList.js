@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SummaryApi from "../common";
 import { Link } from "react-router-dom";
+import categoryImage from '../assest/banner/categ.gif'; // Importez l'image ici
 
 const CategoryList = () => {
   const [categoryProduct, setCategoryProduct] = useState([]);
@@ -40,13 +41,21 @@ const CategoryList = () => {
               return (
                 <Link
                   to={"/product-category?category=" + product?.category}
-                  className="cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-md rounded-md bg-gray-200 p-3 flex items-center justify-center border border-gray-200 flex-shrink-0"
+                  className="cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-md rounded-md flex items-center justify-center border border-gold flex-shrink-0"
                   key={product?.category}
+                  style={{
+                    backgroundImage: `url(${categoryImage})`, // Utilisez l'importation ici
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    height: '50px', // Hauteur ajustée
+                    width: '100%',
+                    color: 'black',
+                  }}
                 >
-                  {/* Liens avec hover et effet de zoom */}
-                  <p className="text-center text-sm md:text-base capitalize font-medium text-black hover:text-yellow-500 transition-colors duration-300">
+                  {/* Texte centré avec taille réduite et effet de hover */}
+                  <p className="text-center text-xs md:text-lg capitalize font-medium hover:text-yellow-500 transition-colors duration-300">
                     {product?.category}
-                  </p> {/* Texte centré avec taille réduite et effet de hover */}
+                  </p>
                 </Link>
               );
             })}
