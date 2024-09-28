@@ -47,13 +47,13 @@ const CategoryList = () => {
                     backgroundImage: `url(${categoryImage})`, // Utilisez l'importation ici
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    height: '50px', // Hauteur ajustée
+                    height: '40px', // Hauteur ajustée
                     width: '100%',
                     color: 'black',
                   }}
                 >
                   {/* Texte centré avec taille réduite et effet de hover */}
-                  <p className="text-center text-xs md:text-lg capitalize font-medium hover:text-yellow-500 transition-colors duration-300">
+                  <p className="text-center text-xs md:text-base capitalize font-medium hover:text-yellow-500 transition-colors duration-300">
                     {product?.category}
                   </p>
                 </Link>
