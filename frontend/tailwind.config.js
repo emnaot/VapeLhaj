@@ -9,10 +9,10 @@ module.exports = {
         gold: '#Be994E', 
         'gold-dark': '#9d7d43', 
         'white-dark': '#896d3b',
-        'gold-white': '#e6d5b9', 
-
-
+        'gold-white': '#e6d5b9',
+        purple:'#A020F0' 
       },
+    
     },
   },
   plugins: [],

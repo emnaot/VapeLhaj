@@ -133,7 +133,7 @@ const Header = () => {
             ) : (
               <Link
                 to={"/login"}
-                className="px-3 py-1 rounded-full text-white bg-yellow-600 hover:bg-yellow-700"
+                className="px-3 py-1 rounded-full text-white bg-gold hover:bg-yellow-700"
               >
                 Connexion
               </Link>
