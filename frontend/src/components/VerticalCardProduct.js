@@ -119,13 +119,21 @@ const VerticalCardProduct = ({ category, heading }) => {
                     {product?.category}
                   </p>
                   <div className="flex gap-3">
-                    {/* Ajout du texte en gras et couleur différente */}
-                    <p className="font-bold  text-lg text-purple">
-                      {displayINRCurrency(product?.sellingPrice)}
-                    </p>
-                    <p className="text-gray-500 line-through">
-                      {displayINRCurrency(product?.price)}
-                    </p>
+                    {/* Affichage des prix selon la condition */}
+                    {product?.sellingPrice === product?.price ? (
+                      <p className="font-bold text-lg text-purple">
+                        {displayINRCurrency(product?.sellingPrice)}
+                      </p>
+                    ) : (
+                      <>
+                        <p className="font-bold text-lg text-purple">
+                          {displayINRCurrency(product?.sellingPrice)}
+                        </p>
+                        <p className="text-gray-500 line-through">
+                          {displayINRCurrency(product?.price)}
+                        </p>
+                      </>
+                    )}
                   </div>
                 </div>
               </Link>

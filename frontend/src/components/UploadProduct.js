@@ -3,7 +3,6 @@ import { CgClose } from "react-icons/cg";
 import productCategory from "../helpers/productCategory";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import uploadImage from "../helpers/uploadImage";
-import DisplayImage from "./DisplayImage";
 import { MdDelete } from "react-icons/md";
 import SummaryApi from "../common";
 import { toast } from "react-toastify";
@@ -23,7 +22,6 @@ const UploadProduct = ({ onClose, fetchData }) => {
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-
     setData((prev) => ({
       ...prev,
       [name]: value,
@@ -52,6 +50,12 @@ const UploadProduct = ({ onClose, fetchData }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Vérification que le prix de vente ne soit pas supérieur au prix
+    if (parseFloat(data.sellingPrice) > parseFloat(data.price)) {
+      toast.error("Le prix de vente ne peut pas être supérieur au prix.");
+      return;
+    }
 
     const response = await fetch(SummaryApi.uploadProduct.url, {
       method: SummaryApi.uploadProduct.method,
@@ -218,30 +222,52 @@ const UploadProduct = ({ onClose, fetchData }) => {
             required
           />
 
+          {/* Condition d'affichage des prix */}
+          <div className="mt-4">
+            {data.price === data.sellingPrice ? (
+              <p className="text-lg font-semibold">Prix : {data.price} TND</p>
+            ) : (
+              <div>
+                <p className="text-lg font-semibold">Prix : {data.price} TND</p>
+                <p className="text-lg font-semibold">Prix de Vente : {data.sellingPrice} TND</p>
+              </div>
+            )}
+          </div>
+
           <label htmlFor="description" className="mt-3 text-lg font-semibold">
             Description :
           </label>
           <textarea
             className="h-28 bg-gray-200 border border-gray-300 resize-none p-3 rounded shadow transition duration-300 hover:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark"
-            placeholder="Entrez la description du produit"
-            rows={3}
-            onChange={handleOnChange}
-            name="description"
+            placeholder="Décrire le produit"
             value={data.description}
-          ></textarea>
+            name="description"
+            onChange={handleOnChange}
+            required
+          />
 
-          <button className="px-4 py-2 bg-gold text-white mb-4 rounded shadow hover:bg-gold-dark transition-colors duration-200">
-            Télécharger le Produit
-          </button>
+          <div className="flex justify-center mt-5">
+            <button
+              type="submit"
+              className="w-full bg-gold text-white p-3 rounded shadow hover:bg-gold-dark transition duration-300"
+            >
+              Ajouter le Produit
+            </button>
+          </div>
         </form>
       </div>
 
-      {/***affichage de l'image en plein écran */}
       {openFullScreenImage && (
-        <DisplayImage
-          onClose={() => setOpenFullScreenImage(false)}
-          imgUrl={fullScreenImage}
-        />
+        <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center"
+          onClick={() => setOpenFullScreenImage(false)}
+        >
+          <img
+            src={fullScreenImage}
+            alt={fullScreenImage}
+            className="max-h-full max-w-full object-contain"
+          />
+        </div>
       )}
     </div>
   );
