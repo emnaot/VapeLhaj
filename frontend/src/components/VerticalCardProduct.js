@@ -99,9 +99,15 @@ const VerticalCardProduct = ({ category, heading }) => {
                 className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white rounded-lg"
               >
                 <div className="bg-gray-100 h-64 p-4 flex justify-center items-center relative rounded-lg group">
+                  {/* Ajout de l'étiquette "Promo" */}
+                  {product?.sellingPrice < product?.price && (
+                    <span className="absolute top-2 left-2 bg-flio text-gray-700 text-sm font-bold px-2 py-1 rounded">
+                      Promo
+                    </span>
+                  )}
                   <img
                     src={product.productImage[0]}
-                    className="object-cover h-56 w-56 mx-auto rounded-lg hover:scale-110 transition-all"
+                    className="object-cover h-72 w-72 mx-auto rounded-lg hover:scale-110 transition-all" // Augmentation de la taille ici
                     alt={product.productName}
                   />
                   <div className="absolute bottom-0 left-0 m-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">

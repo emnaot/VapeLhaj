@@ -10,7 +10,8 @@ module.exports = {
         'gold-dark': '#9d7d43', 
         'white-dark': '#896d3b',
         'gold-white': '#e6d5b9',
-        purple:'#A020F0' 
+        purple:'#A020F0' ,
+        flio:'#e1ff3e',
       },
     
     },
