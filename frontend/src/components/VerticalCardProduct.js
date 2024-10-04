@@ -61,14 +61,14 @@ const VerticalCardProduct = ({ category, heading }) => {
       </h2>
 
       {showScrollButtons && (
-        <div className="absolute left-0 right-0 flex justify-between top-[45%] transform -translate-y-1/2 z-10"> {/* Modifié ici */}
+        <div className="absolute left-0 right-0 flex justify-between top-[45%] transform -translate-y-1/2 z-10">
           <button
             onClick={scrollLeft}
             className="w-12 h-12 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center"
           >
             <FaAngleLeft className="text-2xl" />
           </button>
-    
+
           <button
             onClick={scrollRight}
             className="w-12 h-12 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center"
@@ -108,8 +108,12 @@ const VerticalCardProduct = ({ category, heading }) => {
               >
                 <div
                   className="bg-gray-100 h-72 p-4 flex justify-center items-center relative rounded-lg group"
-                  onMouseEnter={() => !isMobile && setHoveredIndex(index)}
-                  onMouseLeave={() => !isMobile && setHoveredIndex(null)}
+                  onMouseEnter={() => {
+                    !isMobile && setHoveredIndex(index);
+                  }}
+                  onMouseLeave={() => {
+                    !isMobile && setHoveredIndex(null);
+                  }}
                 >
                   {product?.sellingPrice < product?.price && (
                     <span className="absolute top-2 left-2 bg-flio text-gray-700 text-sm font-bold px-2 py-1 rounded">
@@ -118,7 +122,9 @@ const VerticalCardProduct = ({ category, heading }) => {
                   )}
                   <img
                     src={product.productImage[0]}
-                    className="object-cover h-72 w-72 mx-auto rounded-lg hover:scale-110 transition-all"
+                    className={`object-cover h-72 w-72 mx-auto rounded-lg transition-transform duration-300 ease-in-out ${
+                      hoveredIndex === index ? "scale-110" : ""
+                    }`} // Appliquer l'effet de zoom uniquement au produit survolé
                     alt={product.productName}
                   />
                   {(isMobile || hoveredIndex === index) && (
@@ -137,17 +143,25 @@ const VerticalCardProduct = ({ category, heading }) => {
                   <p className="capitalize text-gray-600">
                     {product?.category}
                   </p>
-                  <div className="flex gap-3">
+                  <div className="flex gap-3 justify-center">
+                    {" "}
+                    {/* Centering price */}
                     {product?.sellingPrice === product?.price ? (
-                      <p className="font-bold text-lg text-purple">
+                      <p className="font-bold text-lg text-black text-center">
+                        {" "}
+                        {/* Centered for both web and mobile */}
                         {displayINRCurrency(product?.sellingPrice)}
                       </p>
                     ) : (
                       <>
-                        <p className="font-bold text-lg text-purple">
+                        <p className="font-bold text-lg text-purple ml-[-9px]">
+                          {" "}
+                          {/* Ajustez ml[-5px] pour glisser à gauche */}
                           {displayINRCurrency(product?.sellingPrice)}
                         </p>
-                        <p className="text-gray-500 line-through">
+                        <p className="text-gray-500 line-through text-center">
+                          {" "}
+                          {/* Center original price */}
                           {displayINRCurrency(product?.price)}
                         </p>
                       </>
