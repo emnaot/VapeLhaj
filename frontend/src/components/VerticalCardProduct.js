@@ -12,17 +12,16 @@ const VerticalCardProduct = ({ category, heading }) => {
   const [loading, setLoading] = useState(true);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [showScrollButtons, setShowScrollButtons] = useState(false);
   const loadingList = new Array(13).fill(null);
   const scrollElement = useRef();
   const { fetchUserAddToCart } = useContext(Context);
 
-  // Function to handle adding product to the cart
   const handleAddToCart = async (e, id) => {
     await addToCart(e, id);
     fetchUserAddToCart();
   };
 
-  // Function to fetch product data based on category
   const fetchData = async () => {
     setLoading(true);
     const categoryProduct = await fetchCategoryWiseProduct(category);
@@ -31,9 +30,9 @@ const VerticalCardProduct = ({ category, heading }) => {
   };
 
   useEffect(() => {
-    fetchData(); // Fetch data when component mounts
+    fetchData();
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Update mobile state on window resize
+      setIsMobile(window.innerWidth <= 768);
     };
     window.addEventListener("resize", handleResize);
     return () => {
@@ -41,7 +40,6 @@ const VerticalCardProduct = ({ category, heading }) => {
     };
   }, []);
 
-  // Functions to scroll the product cards
   const scrollRight = () => {
     const scrollAmount = 4 * 275;
     scrollElement.current.scrollLeft += scrollAmount;
@@ -55,29 +53,30 @@ const VerticalCardProduct = ({ category, heading }) => {
   return (
     <div
       className="container mx-auto px-4 my-6 relative"
-      onMouseEnter={() => setHoveredIndex(null)}
-      onMouseLeave={() => setHoveredIndex(null)}
+      onMouseEnter={() => setShowScrollButtons(true)}
+      onMouseLeave={() => setShowScrollButtons(false)}
     >
       <h2 className="text-3xl font-extrabold text-black antialiased tracking-tight py-4">
         {heading}
       </h2>
 
-      {/* Buttons to scroll left and right */}
-      <div className="absolute left-0 right-0 flex justify-between top-1/2 transform -translate-y-1/2 z-10">
-        <button
-          onClick={scrollLeft}
-          className="p-2 bg-gray-300 rounded-full shadow-lg hover:bg-gray-400"
-        >
-          <FaAngleLeft className="text-xl" />
-        </button>
-
-        <button
-          onClick={scrollRight}
-          className="p-2 bg-gray-300 rounded-full shadow-lg hover:bg-gray-400"
-        >
-          <FaAngleRight className="text-xl" />
-        </button>
-      </div>
+      {showScrollButtons && (
+        <div className="absolute left-0 right-0 flex justify-between top-[45%] transform -translate-y-1/2 z-10"> {/* Modifié ici */}
+          <button
+            onClick={scrollLeft}
+            className="w-12 h-12 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center"
+          >
+            <FaAngleLeft className="text-2xl" />
+          </button>
+    
+          <button
+            onClick={scrollRight}
+            className="w-12 h-12 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center"
+          >
+            <FaAngleRight className="text-2xl" />
+          </button>
+        </div>
+      )}
 
       <div
         className="flex items-center gap-4 md:gap-6 overflow-x-scroll scrollbar-none transition-all"
@@ -89,7 +88,7 @@ const VerticalCardProduct = ({ category, heading }) => {
                 key={index}
                 className="w-full min-w-[240px] md:min-w-[280px] max-w-[240px] md:max-w-[280px] bg-white rounded-lg"
               >
-                <div className="bg-gray-100 h-64 p-4 flex justify-center items-center animate-pulse rounded-lg"></div>
+                <div className="bg-gray-100 h-72 p-4 flex justify-center items-center animate-pulse rounded-lg"></div>
                 <div className="p-4 grid gap-3">
                   <h2 className="font-medium text-base md:text-lg text-ellipsis line-clamp-1 text-black p-1 py-2 animate-pulse rounded-full bg-gray-200"></h2>
                   <p className="capitalize text-gray-600 p-1 animate-pulse rounded-full bg-gray-200 py-2"></p>
@@ -108,7 +107,7 @@ const VerticalCardProduct = ({ category, heading }) => {
                 className="w-full min-w-[240px] md:min-w-[280px] max-w-[240px] md:max-w-[280px] bg-white rounded-lg"
               >
                 <div
-                  className="bg-gray-100 h-64 p-4 flex justify-center items-center relative rounded-lg group"
+                  className="bg-gray-100 h-72 p-4 flex justify-center items-center relative rounded-lg group"
                   onMouseEnter={() => !isMobile && setHoveredIndex(index)}
                   onMouseLeave={() => !isMobile && setHoveredIndex(null)}
                 >
