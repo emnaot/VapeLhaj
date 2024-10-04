@@ -10,16 +10,19 @@ import Context from "../context";
 const VerticalCardProduct = ({ category, heading }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showButtons, setShowButtons] = useState(false); // État pour contrôler la visibilité des boutons
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const loadingList = new Array(13).fill(null);
   const scrollElement = useRef();
   const { fetchUserAddToCart } = useContext(Context);
 
+  // Function to handle adding product to the cart
   const handleAddToCart = async (e, id) => {
     await addToCart(e, id);
     fetchUserAddToCart();
   };
 
+  // Function to fetch product data based on category
   const fetchData = async () => {
     setLoading(true);
     const categoryProduct = await fetchCategoryWiseProduct(category);
@@ -28,59 +31,65 @@ const VerticalCardProduct = ({ category, heading }) => {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchData(); // Fetch data when component mounts
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Update mobile state on window resize
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
+  // Functions to scroll the product cards
   const scrollRight = () => {
-    const scrollAmount = 4 * 275; // Ajustez si nécessaire
+    const scrollAmount = 4 * 275;
     scrollElement.current.scrollLeft += scrollAmount;
   };
 
   const scrollLeft = () => {
-    const scrollAmount = 4 * 275; // Ajustez si nécessaire
+    const scrollAmount = 4 * 275;
     scrollElement.current.scrollLeft -= scrollAmount;
   };
 
   return (
     <div
       className="container mx-auto px-4 my-6 relative"
-      onMouseEnter={() => setShowButtons(true)} // Afficher les boutons au survol
-      onMouseLeave={() => setShowButtons(false)} // Cacher les boutons en dehors
+      onMouseEnter={() => setHoveredIndex(null)}
+      onMouseLeave={() => setHoveredIndex(null)}
     >
       <h2 className="text-3xl font-extrabold text-black antialiased tracking-tight py-4">
         {heading}
       </h2>
 
+      {/* Buttons to scroll left and right */}
+      <div className="absolute left-0 right-0 flex justify-between top-1/2 transform -translate-y-1/2 z-10">
+        <button
+          onClick={scrollLeft}
+          className="p-2 bg-gray-300 rounded-full shadow-lg hover:bg-gray-400"
+        >
+          <FaAngleLeft className="text-xl" />
+        </button>
+
+        <button
+          onClick={scrollRight}
+          className="p-2 bg-gray-300 rounded-full shadow-lg hover:bg-gray-400"
+        >
+          <FaAngleRight className="text-xl" />
+        </button>
+      </div>
+
       <div
         className="flex items-center gap-4 md:gap-6 overflow-x-scroll scrollbar-none transition-all"
         ref={scrollElement}
       >
-        {showButtons && ( // Affiche les boutons uniquement si showButtons est vrai
-          <>
-            <button
-              className="bg-white rounded-full p-2 absolute left-0 text-lg hidden md:block shadow-md hover:shadow-lg"
-              onClick={scrollLeft}
-              style={{ zIndex: 10, top: "40%" }} // Positionne le bouton plus haut
-            >
-              <FaAngleLeft className="text-black text-2xl" />
-            </button>
-            <button
-              className="bg-white rounded-full p-2 absolute right-0 text-lg hidden md:block shadow-md hover:shadow-lg"
-              onClick={scrollRight}
-              style={{ zIndex: 10, top: "40%" }} // Positionne le bouton plus haut
-            >
-              <FaAngleRight className="text-black text-2xl" />
-            </button>
-          </>
-        )}
-
         {loading
           ? loadingList.map((_, index) => (
               <div
                 key={index}
-                className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white rounded-lg"
+                className="w-full min-w-[240px] md:min-w-[280px] max-w-[240px] md:max-w-[280px] bg-white rounded-lg"
               >
-                <div className="bg-gray-100 h-64 p-4 min-w-[280px] md:min-w-[145px] flex justify-center items-center animate-pulse rounded-lg"></div>
+                <div className="bg-gray-100 h-64 p-4 flex justify-center items-center animate-pulse rounded-lg"></div>
                 <div className="p-4 grid gap-3">
                   <h2 className="font-medium text-base md:text-lg text-ellipsis line-clamp-1 text-black p-1 py-2 animate-pulse rounded-full bg-gray-200"></h2>
                   <p className="capitalize text-gray-600 p-1 animate-pulse rounded-full bg-gray-200 py-2"></p>
@@ -96,10 +105,13 @@ const VerticalCardProduct = ({ category, heading }) => {
               <Link
                 key={index}
                 to={"product/" + product?._id}
-                className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white rounded-lg"
+                className="w-full min-w-[240px] md:min-w-[280px] max-w-[240px] md:max-w-[280px] bg-white rounded-lg"
               >
-                <div className="bg-gray-100 h-64 p-4 flex justify-center items-center relative rounded-lg group">
-                  {/* Ajout de l'étiquette "Promo" */}
+                <div
+                  className="bg-gray-100 h-64 p-4 flex justify-center items-center relative rounded-lg group"
+                  onMouseEnter={() => !isMobile && setHoveredIndex(index)}
+                  onMouseLeave={() => !isMobile && setHoveredIndex(null)}
+                >
                   {product?.sellingPrice < product?.price && (
                     <span className="absolute top-2 left-2 bg-flio text-gray-700 text-sm font-bold px-2 py-1 rounded">
                       Promo
@@ -107,15 +119,17 @@ const VerticalCardProduct = ({ category, heading }) => {
                   )}
                   <img
                     src={product.productImage[0]}
-                    className="object-cover h-72 w-72 mx-auto rounded-lg hover:scale-110 transition-all" // Augmentation de la taille ici
+                    className="object-cover h-72 w-72 mx-auto rounded-lg hover:scale-110 transition-all"
                     alt={product.productName}
                   />
-                  <div className="absolute bottom-0 left-0 m-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <IoBagAdd
-                      className="text-3xl text-gold hover:text-gold-dark transition-colors cursor-pointer"
-                      onClick={(e) => handleAddToCart(e, product?._id)}
-                    />
-                  </div>
+                  {(isMobile || hoveredIndex === index) && (
+                    <div className="absolute bottom-2 left-2 opacity-100 transition-opacity duration-200">
+                      <IoBagAdd
+                        className="text-4xl text-gold hover:text-gold-dark transition-colors cursor-pointer"
+                        onClick={(e) => handleAddToCart(e, product?._id)}
+                      />
+                    </div>
+                  )}
                 </div>
                 <div className="p-4 grid gap-3">
                   <h2 className="font-medium text-base md:text-lg text-ellipsis line-clamp-1 text-black">
@@ -125,7 +139,6 @@ const VerticalCardProduct = ({ category, heading }) => {
                     {product?.category}
                   </p>
                   <div className="flex gap-3">
-                    {/* Affichage des prix selon la condition */}
                     {product?.sellingPrice === product?.price ? (
                       <p className="font-bold text-lg text-purple">
                         {displayINRCurrency(product?.sellingPrice)}
