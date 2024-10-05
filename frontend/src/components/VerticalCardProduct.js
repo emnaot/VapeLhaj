@@ -55,6 +55,7 @@ const VerticalCardProduct = ({ category, heading }) => {
       className="container mx-auto px-4 my-6 relative"
       onMouseEnter={() => setShowScrollButtons(true)}
       onMouseLeave={() => setShowScrollButtons(false)}
+      style={{ fontFamily: "inherit" }} // Garder la police par défaut pour le conteneur
     >
       <h2 className="text-3xl font-extrabold text-black antialiased tracking-tight py-4">
         {heading}
@@ -79,18 +80,18 @@ const VerticalCardProduct = ({ category, heading }) => {
       )}
 
       <div
-        className="flex items-center gap-4 md:gap-6 overflow-x-scroll scrollbar-none transition-all"
+        className="flex items-stretch gap-4 md:gap-6 overflow-x-scroll scrollbar-none transition-all"
         ref={scrollElement}
       >
         {loading
           ? loadingList.map((_, index) => (
               <div
                 key={index}
-                className="w-full min-w-[240px] md:min-w-[280px] max-w-[240px] md:max-w-[280px] bg-white rounded-lg"
+                className="w-full min-w-[240px] md:min-w-[280px] max-w-[240px] md:max-w-[280px] bg-white rounded-lg flex flex-col"
               >
                 <div className="bg-gray-100 h-72 p-4 flex justify-center items-center animate-pulse rounded-lg"></div>
-                <div className="p-4 grid gap-3">
-                  <h2 className="font-medium text-base md:text-lg text-ellipsis line-clamp-1 text-black p-1 py-2 animate-pulse rounded-full bg-gray-200"></h2>
+                <div className="p-4 grid gap-3 flex-grow">
+                  <h2 className="font-medium text-base md:text-lg text-black p-1 py-2 animate-pulse rounded-full bg-gray-200"></h2>
                   <p className="capitalize text-gray-600 p-1 animate-pulse rounded-full bg-gray-200 py-2"></p>
                   <div className="flex gap-3">
                     <p className="text-gray-600 font-medium p-1 animate-pulse rounded-full bg-gray-200 w-full py-2"></p>
@@ -104,7 +105,7 @@ const VerticalCardProduct = ({ category, heading }) => {
               <Link
                 key={index}
                 to={"product/" + product?._id}
-                className="w-full min-w-[240px] md:min-w-[280px] max-w-[240px] md:max-w-[280px] bg-white rounded-lg"
+                className="w-full min-w-[240px] md:min-w-[280px] max-w-[240px] md:max-w-[280px] bg-white rounded-lg flex flex-col"
               >
                 <div
                   className="bg-gray-100 h-72 p-4 flex justify-center items-center relative rounded-lg group"
@@ -124,7 +125,7 @@ const VerticalCardProduct = ({ category, heading }) => {
                     src={product.productImage[0]}
                     className={`object-cover h-72 w-72 mx-auto rounded-lg transition-transform duration-300 ease-in-out ${
                       hoveredIndex === index ? "scale-110" : ""
-                    }`} // Appliquer l'effet de zoom uniquement au produit survolé
+                    }`}
                     alt={product.productName}
                   />
                   {(isMobile || hoveredIndex === index) && (
@@ -136,32 +137,27 @@ const VerticalCardProduct = ({ category, heading }) => {
                     </div>
                   )}
                 </div>
-                <div className="p-4 grid gap-3">
-                  <h2 className="font-medium text-base md:text-lg text-ellipsis line-clamp-1 text-black">
+                <div className="p-4 grid gap-3 flex-grow">
+                  <h2
+                    className="font-medium text-base md:text-lg text-black text-center min-h-[50px] flex items-center justify-center"
+                    style={{ fontFamily: "Calibri" }}
+                  >
                     {product?.productName}
                   </h2>
-                  <p className="capitalize text-gray-600">
+                  <p className="capitalize text-gray-600 text-center">
                     {product?.category}
                   </p>
-                  <div className="flex gap-3 justify-center">
-                    {" "}
-                    {/* Centering price */}
+                  <div className="flex gap-3 justify-center items-end">
                     {product?.sellingPrice === product?.price ? (
                       <p className="font-bold text-lg text-black text-center">
-                        {" "}
-                        {/* Centered for both web and mobile */}
                         {displayINRCurrency(product?.sellingPrice)}
                       </p>
                     ) : (
                       <>
                         <p className="font-bold text-lg text-purple ml-[-9px]">
-                          {" "}
-                          {/* Ajustez ml[-5px] pour glisser à gauche */}
                           {displayINRCurrency(product?.sellingPrice)}
                         </p>
                         <p className="text-gray-500 line-through text-center">
-                          {" "}
-                          {/* Center original price */}
                           {displayINRCurrency(product?.price)}
                         </p>
                       </>
