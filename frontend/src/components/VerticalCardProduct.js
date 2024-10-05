@@ -50,6 +50,16 @@ const VerticalCardProduct = ({ category, heading }) => {
     scrollElement.current.scrollLeft -= scrollAmount;
   };
 
+  // Fonction pour générer un nombre d'évaluations fixe
+  const fixedRatingCount = 25; // Nombre d'évaluations fixe
+
+  // Fonction pour obtenir la couleur des étoiles en fonction du nombre d'évaluations
+  const getStarColor = (index) => {
+    if (fixedRatingCount >= 40) return "text-yellow-500"; // Jaune pour 40+ évaluations
+    if (fixedRatingCount >= 20) return "text-orange-500"; // Orange pour 20-39 évaluations
+    return "text-red-500"; // Rouge pour moins de 20 évaluations
+  };
+
   return (
     <div
       className="container mx-auto px-4 my-6 relative"
@@ -57,7 +67,10 @@ const VerticalCardProduct = ({ category, heading }) => {
       onMouseLeave={() => setShowScrollButtons(false)}
       style={{ fontFamily: "inherit" }} // Garder la police par défaut pour le conteneur
     >
-      <h2 className="text-3xl font-extrabold text-black antialiased tracking-tight py-4">
+      <h2
+        className="text-4xl font-extrabold text-black antialiased tracking-tight py-9"
+        style={{ fontFamily: "Consolas", textAlign: "center" }} // Application des styles demandés
+      >
         {heading}
       </h2>
 
@@ -139,14 +152,23 @@ const VerticalCardProduct = ({ category, heading }) => {
                 </div>
                 <div className="p-4 grid gap-3 flex-grow">
                   <h2
-                    className="font-medium text-base md:text-lg text-black text-center min-h-[50px] flex items-center justify-center"
+                    className="font-medium text-base md:text-lg text-gray-600 text-center min-h-[50px] flex items-center justify-center"
                     style={{ fontFamily: "Calibri" }}
                   >
                     {product?.productName}
                   </h2>
                   <p className="capitalize text-gray-600 text-center">
-                    {product?.category}
+                    {product?.brandName}
                   </p>
+                  {/* Ajout des étoiles d'évaluation et du nombre d'évaluations */}
+                  <div className="flex justify-center items-center my-1">
+                    {[...Array(5)].map((_, starIndex) => (
+                      <span key={starIndex} className={`${getStarColor(starIndex)} text-xl`}>
+                        ★
+                      </span>
+                    ))}
+                    <span className="text-gray-600 ml-2">{fixedRatingCount} évaluations</span>
+                  </div>
                   <div className="flex gap-3 justify-center items-end">
                     {product?.sellingPrice === product?.price ? (
                       <p className="font-bold text-lg text-black text-center">
