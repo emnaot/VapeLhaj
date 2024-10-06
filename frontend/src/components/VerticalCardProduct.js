@@ -50,26 +50,24 @@ const VerticalCardProduct = ({ category, heading }) => {
     scrollElement.current.scrollLeft -= scrollAmount;
   };
 
-  // Fonction pour générer un nombre d'évaluations fixe
-  const fixedRatingCount = 25; // Nombre d'évaluations fixe
+  const fixedRatingCount = 25;
 
-  // Fonction pour obtenir la couleur des étoiles en fonction du nombre d'évaluations
   const getStarColor = (index) => {
-    if (fixedRatingCount >= 40) return "text-yellow-500"; // Jaune pour 40+ évaluations
-    if (fixedRatingCount >= 20) return "text-orange-500"; // Orange pour 20-39 évaluations
-    return "text-red-500"; // Rouge pour moins de 20 évaluations
+    if (fixedRatingCount >= 40) return "text-yellow-500";
+    if (fixedRatingCount >= 20) return "text-orange-500";
+    return "text-red-500";
   };
 
   return (
     <div
-      className="container mx-auto px-4 my-6 relative"
+      className="container mx-auto px-4 md:px-20 my-6 relative"
       onMouseEnter={() => setShowScrollButtons(true)}
       onMouseLeave={() => setShowScrollButtons(false)}
-      style={{ fontFamily: "inherit" }} // Garder la police par défaut pour le conteneur
+      style={{ fontFamily: "inherit" }}
     >
       <h2
         className="text-4xl font-extrabold text-black antialiased tracking-tight py-9"
-        style={{ fontFamily: "Consolas", textAlign: "center" }} // Application des styles demandés
+        style={{ fontFamily: "Consolas", textAlign: "center" }}
       >
         {heading}
       </h2>
@@ -100,7 +98,7 @@ const VerticalCardProduct = ({ category, heading }) => {
           ? loadingList.map((_, index) => (
               <div
                 key={index}
-                className="w-full min-w-[260px] md:min-w-[300px] max-w-[260px] md:max-w-[300px] bg-white rounded-lg flex flex-col"
+                className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white rounded-lg flex flex-col"
               >
                 <div className="bg-gray-100 h-80 p-4 flex justify-center items-center animate-pulse rounded-lg"></div>
                 <div className="p-4 grid gap-3 flex-grow">
@@ -118,7 +116,7 @@ const VerticalCardProduct = ({ category, heading }) => {
               <Link
                 key={index}
                 to={"product/" + product?._id}
-                className="w-full min-w-[260px] md:min-w-[300px] max-w-[260px] md:max-w-[300px] bg-white rounded-lg flex flex-col"
+                className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white rounded-lg flex flex-col"
               >
                 <div
                   className="bg-gray-100 h-80 p-4 flex justify-center items-center relative rounded-lg group"
@@ -160,7 +158,6 @@ const VerticalCardProduct = ({ category, heading }) => {
                   <p className="capitalize text-gray-600 text-center">
                     {product?.brandName}
                   </p>
-                  {/* Ajout des étoiles d'évaluation et du nombre d'évaluations */}
                   <div className="flex justify-center items-center my-1">
                     {[...Array(5)].map((_, starIndex) => (
                       <span
