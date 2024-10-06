@@ -72,7 +72,8 @@ const VerticalCardProduct = ({ category, heading }) => {
         {heading}
       </h2>
 
-      {showScrollButtons && (
+      {/* Affiche les boutons de scroll uniquement sur la version desktop */}
+      {!isMobile && showScrollButtons && (
         <div className="absolute left-0 right-0 flex justify-between top-[45%] transform -translate-y-1/2 z-10">
           <button
             onClick={scrollLeft}
