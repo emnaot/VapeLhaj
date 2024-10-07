@@ -40,14 +40,20 @@ const VerticalCardProduct = ({ category, heading }) => {
     };
   }, []);
 
+  const scrollAmount = 4 * 300;
+
   const scrollRight = () => {
-    const scrollAmount = 4 * 275;
-    scrollElement.current.scrollLeft += scrollAmount;
+    scrollElement.current.scrollTo({
+      left: scrollElement.current.scrollLeft + scrollAmount,
+      behavior: "smooth",
+    });
   };
 
   const scrollLeft = () => {
-    const scrollAmount = 4 * 275;
-    scrollElement.current.scrollLeft -= scrollAmount;
+    scrollElement.current.scrollTo({
+      left: scrollElement.current.scrollLeft - scrollAmount,
+      behavior: "smooth",
+    });
   };
 
   const fixedRatingCount = 25;
@@ -56,6 +62,11 @@ const VerticalCardProduct = ({ category, heading }) => {
     if (fixedRatingCount >= 40) return "text-yellow-500";
     if (fixedRatingCount >= 20) return "text-orange-500";
     return "text-red-500";
+  };
+
+  const calculateDiscountPercentage = (price, sellingPrice) => {
+    const discount = ((price - sellingPrice) / price) * 100;
+    return Math.round(discount);
   };
 
   return (
@@ -72,19 +83,18 @@ const VerticalCardProduct = ({ category, heading }) => {
         {heading}
       </h2>
 
-      {/* Affiche les boutons de scroll uniquement sur la version desktop */}
       {!isMobile && showScrollButtons && (
         <div className="absolute left-0 right-0 flex justify-between top-[45%] transform -translate-y-1/2 z-10">
           <button
             onClick={scrollLeft}
-            className="w-14 h-14 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center"
+            className="w-14 h-14 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center transition-transform duration-300 ease-in-out transform hover:scale-110"
           >
             <FaAngleLeft className="text-3xl" />
           </button>
 
           <button
             onClick={scrollRight}
-            className="w-14 h-14 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center"
+            className="w-14 h-14 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center transition-transform duration-300 ease-in-out transform hover:scale-110"
           >
             <FaAngleRight className="text-3xl" />
           </button>
@@ -149,14 +159,14 @@ const VerticalCardProduct = ({ category, heading }) => {
                     </div>
                   )}
                 </div>
-                <div className="p-4 grid gap-3 flex-grow">
-                  <h2
+                <div className="p-0 grid gap-0 flex-grow"> {/* Réduction supplémentaire de l'espacement */}
+                <h2
                     className="font-medium text-base md:text-lg text-gray-600 text-center min-h-[50px] flex items-center justify-center"
                     style={{ fontFamily: "Calibri" }}
                   >
                     {product?.productName}
                   </h2>
-                  <p className="capitalize text-gray-600 text-center">
+                  <p className="capitalize text-gray-600 text-center mb-1"> {/* Réduction de la marge ici */}
                     {product?.brandName}
                   </p>
                   <div className="flex justify-center items-center my-1">
@@ -179,12 +189,21 @@ const VerticalCardProduct = ({ category, heading }) => {
                       </p>
                     ) : (
                       <>
-                        <p className="font-bold text-lg text-purple ml-[-9px]">
-                          {displayINRCurrency(product?.sellingPrice)}
-                        </p>
-                        <p className="text-gray-500 line-through text-center">
-                          {displayINRCurrency(product?.price)}
-                        </p>
+                        <div className="flex items-center">
+                          <p className="font-bold text-lg text-purple ml-[-9px]">
+                            {displayINRCurrency(product?.sellingPrice)}
+                          </p>
+                          <p className="text-gray-500 line-through text-center mx-2"> {/* Réduction de l'espace ici */}
+                            {displayINRCurrency(product?.price)}
+                          </p>
+                          <p className="text-sm bg-flio text-black px-2 py-1 rounded-full ml-1">
+                            {calculateDiscountPercentage(
+                              product?.price,
+                              product?.sellingPrice
+                            )}
+                            %
+                          </p>
+                        </div>
                       </>
                     )}
                   </div>
