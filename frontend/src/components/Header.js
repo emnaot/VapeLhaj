@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
-import Logo from "./Logo";
+import Logo from "./Logo"; // Assure-toi d'avoir le bon chemin pour le logo
 import { GrSearch } from "react-icons/gr";
+import { FaShoppingCart, FaBolt } from "react-icons/fa";
 import { FaRegCircleUser } from "react-icons/fa6";
-import { FaShoppingCart } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SummaryApi from "../common";
@@ -53,95 +53,96 @@ const Header = () => {
   };
 
   return (
-    <header className="h-16 shadow-md bg-white fixed w-full z-40">
-      <div className="h-full container mx-auto flex items-center px-4 justify-between">
-        <div className="">
+<header className="fixed top-0 left-0 right-0 w-full py-1 bg-transparent z-40 flex justify-center mb-6">
+  <div className="text-white w-full max-w-[1350px] mx-auto px-8 h-[72px] flex items-center justify-between rounded-xl shadow-md" style={{ backgroundColor: '#111111' }}>
+{/* Logo Section */}
+        <div className="flex items-center">
           <Link to={"/"}>
-            <Logo w={175} h={100} />
+            <Logo w={120} h={50} /> {/* Ajuste la taille du logo */}
           </Link>
         </div>
 
-        <div className="hidden lg:flex items-center w-full justify-between max-w-sm border rounded-full focus-within:shadow pl-2">
-          <input
-            type="text"
-            placeholder="recherchez un produit ici..."
-            className="w-full outline-none"
-            onChange={handleSearch}
-            value={search}
-          />
-          <div className="text-lg min-w-[50px] h-8 bg-gold flex items-center justify-center rounded-r-full text-white">
-            <GrSearch />
-          </div>
-        </div>
+        {/* Liens de navigation */}
+        <nav className="hidden lg:flex space-x-8 items-center">
+          {/* Bouton Promotion */}
+          <button className="flex items-center px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition">
+            <FaBolt className="mr-2" /> Promotion
+          </button>
 
-        <div className="flex items-center gap-7">
-          <div className="relative flex justify-center">
-            {user?._id && (
-              <div
-                className="text-3xl cursor-pointer relative flex justify-center"
-                onClick={() => setMenuDisplay((preve) => !preve)}
-              >
+          {/* Autres liens */}
+          <Link to="/e-cigarettes" className="hover:underline">E-Cigarettes</Link>
+          <Link to="/e-liquide" className="hover:underline">E-Liquide</Link>
+          <Link to="/diy" className="hover:underline">DIY</Link>
+          <Link to="/experts" className="hover:underline">Experts</Link>
+          <Link to="/contact" className="hover:underline">Contact</Link>
+        </nav>
+
+        {/* Section icônes */}
+        <div className="flex items-center gap-6">
+          {/* Icône de recherche */}
+          <div className="relative">
+            <div className="hidden lg:block">
+              <input
+                type="text"
+                placeholder="Rechercher..."
+                className="w-64 pl-4 py-2 rounded-full bg-gray-100 text-black focus:outline-none"
+                onChange={handleSearch}
+                value={search}
+              />
+            </div>
+            <GrSearch className="text-xl cursor-pointer lg:hidden" />
+          </div>
+
+          {/* Icône utilisateur */}
+          <div className="relative">
+            {user?._id ? (
+              <div className="cursor-pointer relative flex justify-center" onClick={() => setMenuDisplay(!menuDisplay)}>
                 {user?.profilePic ? (
-                  <img
-                    src={user?.profilePic}
-                    className="w-10 h-10 rounded-full"
-                    alt={user?.name}
-                  />
+                  <img src={user?.profilePic} className="w-10 h-10 rounded-full" alt={user?.name} />
                 ) : (
-                  <FaRegCircleUser />
+                  <FaRegCircleUser className="text-2xl" />
                 )}
               </div>
-            )}
-
-            {menuDisplay && (
-              <div className="absolute bg-yellow-50 bottom-0 top-11 h-fit p-2 shadow-md rounded-md border border-yellow-300">
-                <nav>
-                  {user?.role === ROLE.ADMIN && (
-                    <Link
-                      to={"/admin-panel/all-products"}
-                      className="whitespace-nowrap block hover:bg-yellow-200 px-2 py-1 rounded text-yellow-700 font-semibold transition duration-200"
-                      onClick={() => setMenuDisplay((preve) => !preve)}
-                    >
-                      Panneau d'administration
-                    </Link>
-                  )}
-                </nav>
-              </div>
-            )}
-          </div>
-
-          {user?._id && (
-            <Link to={"/cart"} className="text-2xl relative">
-              <span>
-                <FaShoppingCart />
-              </span>
-
-              <div className="bg-gold text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-3">
-                <p className="text-sm">{context?.cartProductCount}</p>
-              </div>
-            </Link>
-          )}
-
-          <div>
-            {user?._id ? (
-              <button
-                onClick={handleLogout}
-                className="px-3 py-1 rounded-full text-white bg-gold hover:bg-yellow-700"
-              >
-                Déconnexion
-              </button>
             ) : (
-              <Link
-                to={"/login"}
-                className="px-3 py-1 rounded-full text-white bg-gold hover:bg-yellow-700"
-              >
+              <Link to="/login" className="px-3 py-1 rounded-full text-white bg-yellow-500 hover:bg-yellow-700">
                 Connexion
               </Link>
             )}
+
+            {menuDisplay && user?._id && (
+              <div className="absolute bg-yellow-50 top-12 right-0 p-2 shadow-md rounded-md border border-yellow-300">
+                {user?.role === ROLE.ADMIN && (
+                  <Link
+                    to="/admin-panel/all-products"
+                    className="block px-2 py-1 hover:bg-yellow-200 rounded text-yellow-700 font-semibold"
+                    onClick={() => setMenuDisplay(false)}
+                  >
+                    Admin Panel
+                  </Link>
+                )}
+                <button
+                  onClick={handleLogout}
+                  className="mt-2 px-3 py-1 w-full text-center bg-yellow-500 text-white rounded-lg hover:bg-yellow-700"
+                >
+                  Déconnexion
+                </button>
+              </div>
+            )}
           </div>
+
+          {/* Icône panier */}
+          <Link to="/cart" className="relative">
+            <FaShoppingCart className="text-2xl cursor-pointer" />
+            {context?.cartProductCount > 0 && (
+              <div className="bg-yellow-500 text-white text-sm w-5 h-5 rounded-full flex items-center justify-center absolute -top-2 -right-3">
+                {context?.cartProductCount}
+              </div>
+            )}
+          </Link>
         </div>
       </div>
     </header>
+    
   );
 };
 
