@@ -77,8 +77,8 @@ const VerticalCardProduct = ({ category, heading }) => {
       style={{ fontFamily: "inherit" }}
     >
       <h2
-        className="text-4xl font-extrabold text-black antialiased tracking-tight py-9"
-        style={{ fontFamily: "Consolas", textAlign: "center" }}
+        className="text-3xl font-normal text-black antialiased tracking-tight py-9"
+        style={{ fontFamily: "Franklin Gothic", textAlign: "center" }}
       >
         {heading}
       </h2>
@@ -109,9 +109,9 @@ const VerticalCardProduct = ({ category, heading }) => {
           ? loadingList.map((_, index) => (
               <div
                 key={index}
-                className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white rounded-lg flex flex-col"
+                className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white rounded-2xl flex flex-col"
               >
-                <div className="bg-gray-100 h-80 p-4 flex justify-center items-center animate-pulse rounded-lg"></div>
+                <div className="bg-gray-100 h-80 p-4 flex justify-center items-center animate-pulse rounded-2xl"></div>
                 <div className="p-4 grid gap-3 flex-grow">
                   <h2 className="font-medium text-base md:text-lg text-black p-1 py-2 animate-pulse rounded-full bg-gray-200"></h2>
                   <p className="capitalize text-gray-600 p-1 animate-pulse rounded-full bg-gray-200 py-2"></p>
@@ -127,10 +127,10 @@ const VerticalCardProduct = ({ category, heading }) => {
               <Link
                 key={index}
                 to={"product/" + product?._id}
-                className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white rounded-lg flex flex-col"
+                className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white rounded-2xl flex flex-col"
               >
                 <div
-                  className="bg-gray-100 h-80 p-4 flex justify-center items-center relative rounded-lg group"
+                  className="bg-gray-100 h-80 p-4 flex justify-center items-center relative rounded-2xl group"
                   onMouseEnter={() => {
                     !isMobile && setHoveredIndex(index);
                   }}
@@ -145,7 +145,7 @@ const VerticalCardProduct = ({ category, heading }) => {
                   )}
                   <img
                     src={product.productImage[0]}
-                    className={`object-cover h-80 w-80 mx-auto rounded-lg transition-transform duration-300 ease-in-out ${
+                    className={`object-cover h-80 w-80 mx-auto rounded-2xl transition-transform duration-300 ease-in-out ${
                       hoveredIndex === index ? "scale-110" : ""
                     }`}
                     alt={product.productName}
@@ -159,14 +159,21 @@ const VerticalCardProduct = ({ category, heading }) => {
                     </div>
                   )}
                 </div>
-                <div className="p-0 grid gap-0 flex-grow"> {/* Réduction supplémentaire de l'espacement */}
-                <h2
-                    className="font-medium text-base md:text-lg text-gray-600 text-center min-h-[50px] flex items-center justify-center"
+                <div className="p-0 grid gap-0 flex-grow">
+                  {" "}
+                  {/* Réduction supplémentaire de l'espacement */}
+                  <h2
+                    className="font-bold text-base md:text-xm text-black text-center min-h-[50px] flex items-center justify-center" // Remplacez font-medium par font-bold
                     style={{ fontFamily: "Calibri" }}
                   >
                     {product?.productName}
                   </h2>
-                  <p className="capitalize text-gray-600 text-center mb-1"> {/* Réduction de la marge ici */}
+                  <p
+                    className="capitalize text-gray-600 text-center mb-1"
+                    style={{ fontFamily: "Calibri" }}
+                  >
+                    {" "}
+                    {/* Réduction de la marge ici */}
                     {product?.brandName}
                   </p>
                   <div className="flex justify-center items-center my-1">
@@ -193,7 +200,9 @@ const VerticalCardProduct = ({ category, heading }) => {
                           <p className="font-bold text-lg text-purple ml-[-9px]">
                             {displayINRCurrency(product?.sellingPrice)}
                           </p>
-                          <p className="text-gray-500 line-through text-center mx-2"> {/* Réduction de l'espace ici */}
+                          <p className="text-gray-500 line-through text-center mx-2">
+                            {" "}
+                            {/* Réduction de l'espace ici */}
                             {displayINRCurrency(product?.price)}
                           </p>
                           <p className="text-sm bg-flio text-black px-2 py-1 rounded-full ml-1">
