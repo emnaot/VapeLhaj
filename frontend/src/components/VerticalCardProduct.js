@@ -56,7 +56,7 @@ const VerticalCardProduct = ({ category, heading }) => {
     });
   };
 
-  const fixedRatingCount = 25;
+  const fixedRatingCount = 0;
 
   const getStarColor = (index) => {
     if (fixedRatingCount >= 40) return "text-yellow-500";
@@ -87,16 +87,16 @@ const VerticalCardProduct = ({ category, heading }) => {
         <div className="absolute left-0 right-0 flex justify-between top-[45%] transform -translate-y-1/2 z-10">
           <button
             onClick={scrollLeft}
-            className="w-14 h-14 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center transition-transform duration-300 ease-in-out transform hover:scale-110"
+            className="w-14 h-14 p-2 bg-transparent rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center transition-transform duration-300 ease-in-out transform hover:scale-110"
           >
-            <FaAngleLeft className="text-3xl" />
+            <FaAngleLeft className="text-2xl" />
           </button>
 
           <button
             onClick={scrollRight}
-            className="w-14 h-14 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center transition-transform duration-300 ease-in-out transform hover:scale-110"
+            className="w-14 h-14 p-2 bg-transparent rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center transition-transform duration-300 ease-in-out transform hover:scale-110"
           >
-            <FaAngleRight className="text-3xl" />
+            <FaAngleRight className="text-2xl" />
           </button>
         </div>
       )}
@@ -139,7 +139,7 @@ const VerticalCardProduct = ({ category, heading }) => {
                   }}
                 >
                   {product?.sellingPrice < product?.price && (
-                    <span className="absolute top-2 left-2 bg-flio text-gray-700 text-sm font-bold px-2 py-1 rounded">
+                    <span className="absolute top-2 left-2 bg-flio font-semibold text-gray-700 text-sm  px-2 py-1 rounded">
                       Promo
                     </span>
                   )}
