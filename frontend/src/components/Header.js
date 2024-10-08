@@ -74,17 +74,17 @@ const Header = () => {
     setSearch(value);
 
     if (value) {
-      navigate(`/search?q=${value}`);
+      navigate(`/search?q=${value}`); // Correction ici pour utiliser les backticks
     } else {
       navigate("/search");
     }
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 w-full py-0 bg-transparent z-40 flex justify-center mb-6">
+    <header className="fixed top-0 left-0 right-0 w-full py-0 bg-white z-40 flex justify-center mb-6">
       <div
         className={`text-white w-full ${
-          isMobile ? "px-4 h-[60px] rounded-none" : "max-w-[1350px] px-8 h-[72px] rounded-2xl"
+          isMobile ? "px-4 h-[70px] rounded-none" : "max-w-[1350px] px-8 h-[72px] rounded-2xl"
         } mx-auto flex items-center justify-between shadow-md`}
         style={{ backgroundColor: "#111111" }}
       >
@@ -112,7 +112,7 @@ const Header = () => {
                 categoryProduct.slice(0, 5).map((category, index) => (
                   <Link
                     key={index}
-                    to={`/product-category?category=${category.category}`} // Adaptation de l'URL
+                    to={`/product-category?category=${category.category}`} // Correction ici pour utiliser les backticks
                     className="hover:underline"
                   >
                     {category.category} {/* Affichage du nom de la catégorie */}
@@ -254,6 +254,26 @@ const Header = () => {
                 )}
               </Link>
             </div>
+          </div>
+        )}
+
+        {/* Menu des catégories pour la version mobile */}
+        {isMobile && categoryMenuOpen && (
+          <div className="absolute top-full left-0 w-full bg-white text-black z-50 flex flex-col items-center p-2 space-y-1 border border-gray-700">
+            {loading ? (
+              <div>Chargement des catégories...</div>
+            ) : (
+              categoryProduct.map((category, index) => (
+                <Link
+                  key={index}
+                  to={`/product-category?category=${category.category}`} // Correction ici pour utiliser les backticks
+                  className="w-full text-center py-2 border-b border-gray-500 hover:bg-gray-100 hover:text-black transition-colors"
+                  onClick={() => setCategoryMenuOpen(false)} // Fermer le menu après avoir cliqué
+                >
+                  {category.category}
+                </Link>
+              ))
+            )}
           </div>
         )}
       </div>

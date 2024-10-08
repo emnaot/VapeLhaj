@@ -25,10 +25,10 @@ const CardImage = ({ imageUrl, title, buttonText, category }) => {
   );
 };
 
-// Composant pour afficher la grille de cartes
 const ProductGrid = () => {
   const [categoryProduct, setCategoryProduct] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Détection mobile
 
   // Fonction pour récupérer les catégories à partir de l'API
   const fetchCategoryProduct = async () => {
@@ -39,37 +39,76 @@ const ProductGrid = () => {
     setCategoryProduct(dataResponse.data);
   };
 
+  // Mettre à jour l'état mobile lors du redimensionnement de la fenêtre
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Mobile si la largeur de la fenêtre est ≤ 768px
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     fetchCategoryProduct(); // Charger les catégories lors du montage du composant
   }, []);
 
   return (
     <div className="mx-auto px-4 md:px-0 max-w-[1350px] py-3">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Première carte - Dirige vers la catégorie "puff" */}
-        {categoryProduct.length > 0 ? (
-          <CardImage 
-            imageUrl="https://www.onlinevapeshop.us/cdn/shop/collections/Vozol-Vista-16000.jpg?v=1714852015&width=1500" 
-            title="Vozol Vista 16000" 
-            buttonText="ACHETER" 
-            category="puff" // Redirection vers "puff"
-          />
-        ) : (
-          <div className="w-full h-64 md:h-80 bg-gray-200 animate-pulse rounded-2xl"></div> // Placeholder de chargement
-        )}
-
-        {/* Deuxième carte - Dirige vers la catégorie "pods" */}
-        {categoryProduct.length > 0 ? (
-          <CardImage 
-            imageUrl="https://img.over-blog-kiwi.com/0/91/03/66/20200621/ob_062aca_drag-x-de-chez-voopoo.jpg" 
-            title="Pod mod - Drag X" 
-            buttonText="ACHETER" 
-            category="pod" // Redirection vers "pods"
-          />
-        ) : (
-          <div className="w-full h-64 md:h-80 bg-gray-200 animate-pulse rounded-2xl"></div> // Placeholder de chargement
-        )}
-      </div>
+      {isMobile ? (
+        // Version mobile: Afficher les deux cartes côte à côte avec un défilement horizontal
+        <div className="flex overflow-x-scroll no-scrollbar space-x-4">
+          {categoryProduct.length > 0 ? (
+            <>
+              <div className="min-w-[80%]">
+                <CardImage 
+                  imageUrl="https://www.onlinevapeshop.us/cdn/shop/collections/Vozol-Vista-16000.jpg?v=1714852015&width=1500" 
+                  title="Vozol Vista 16000" 
+                  buttonText="ACHETER" 
+                  category="puff" // Redirection vers "puff"
+                />
+              </div>
+              <div className="min-w-[80%]">
+                <CardImage 
+                  imageUrl="https://img.over-blog-kiwi.com/0/91/03/66/20200621/ob_062aca_drag-x-de-chez-voopoo.jpg" 
+                  title="Pod mod - Drag X" 
+                  buttonText="ACHETER" 
+                  category="pod" // Redirection vers "pod"
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="w-full h-64 bg-gray-200 animate-pulse rounded-2xl"></div>
+              <div className="w-full h-64 bg-gray-200 animate-pulse rounded-2xl"></div>
+            </>
+          )}
+        </div>
+      ) : (
+        // Version desktop: Afficher les deux cartes en grille
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {categoryProduct.length > 0 ? (
+            <>
+              <CardImage 
+                imageUrl="https://www.onlinevapeshop.us/cdn/shop/collections/Vozol-Vista-16000.jpg?v=1714852015&width=1500" 
+                title="Vozol Vista 16000" 
+                buttonText="ACHETER" 
+                category="puff" // Redirection vers "puff"
+              />
+              <CardImage 
+                imageUrl="https://img.over-blog-kiwi.com/0/91/03/66/20200621/ob_062aca_drag-x-de-chez-voopoo.jpg" 
+                title="Pod mod - Drag X" 
+                buttonText="ACHETER" 
+                category="pod" // Redirection vers "pod"
+              />
+            </>
+          ) : (
+            <>
+              <div className="w-full h-64 md:h-80 bg-gray-200 animate-pulse rounded-2xl"></div>
+              <div className="w-full h-64 md:h-80 bg-gray-200 animate-pulse rounded-2xl"></div>
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 };
