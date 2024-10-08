@@ -84,7 +84,7 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 w-full py-0 bg-transparent z-40 flex justify-center mb-6">
       <div
         className={`text-white w-full ${
-          isMobile ? "px-4 h-[60px] rounded-none" : "max-w-[1350px] px-8 h-[72px] rounded-xl"
+          isMobile ? "px-4 h-[60px] rounded-none" : "max-w-[1350px] px-8 h-[72px] rounded-2xl"
         } mx-auto flex items-center justify-between shadow-md`}
         style={{ backgroundColor: "#111111" }}
       >
