@@ -11,11 +11,12 @@ import image3Mobile from "../assest/banner/img3_mobile.gif";
 import image4Mobile from "../assest/banner/img4_mobile.gif";
 import image5Mobile from "../assest/banner/img5_mobile.gif";
 
-import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
+import { FaAngleRight, FaAngleLeft, FaPause, FaPlay } from "react-icons/fa"; // Importing play and pause icons
 import { useNavigate } from "react-router-dom"; // Utilisation de useNavigate pour la redirection
 
 const BannerProduct = () => {
   const [currentImage, setCurrentImage] = useState(0);
+  const [paused, setPaused] = useState(false); // State to control pause/play
   const navigate = useNavigate(); // Hook pour gérer la redirection
 
   // Images pour la version desktop
@@ -68,17 +69,24 @@ const BannerProduct = () => {
 
   // Change l'image automatiquement toutes les 5 secondes
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextImage();
-    }, 5000);
+    if (!paused) {
+      const interval = setInterval(() => {
+        nextImage();
+      }, 5000);
 
-    return () => clearInterval(interval); // Nettoyage de l'intervalle
-  }, [currentImage]);
+      return () => clearInterval(interval); // Nettoyage de l'intervalle
+    }
+  }, [currentImage, paused]);
 
   // Fonction pour rediriger vers la catégorie correspondant à l'image actuelle
   const handleBuyClick = () => {
     const category = bannerCategories[currentImage]; // Catégorie associée à l'image
     navigate(`/product-category?category=${category}`); // Redirige vers la page de catégorie
+  };
+
+  // Toggle pause/play
+  const togglePause = () => {
+    setPaused(!paused);
   };
 
   return (
@@ -101,6 +109,16 @@ const BannerProduct = () => {
         >
           <FaAngleRight className="text-black text-base" />{" "}
         </button>
+
+        {/* Button to pause/play the slideshow */}
+        <button
+          onClick={togglePause}
+          className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-gray-200 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          style={{ backgroundColor: "#ffffff80" }}
+        >
+          {paused ? <FaPlay className="text-black text-base" /> : <FaPause className="text-black text-base" />}
+        </button>
+
         {/* Overlay avec texte attirant et bouton */}
         <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-center text-white p-4">
           <h2 className="text-sm md:text-2xl font-semibold mb-4">
@@ -113,6 +131,7 @@ const BannerProduct = () => {
             Acheter &nbsp; <span>&#8250;</span>
           </button>
         </div>
+
         {/* Version desktop et tablette - Affichage d'une seule image */}
         <div className="hidden md:flex h-full w-full overflow-hidden rounded-2xl">
           <img
@@ -121,6 +140,7 @@ const BannerProduct = () => {
             alt={`Banner ${currentImage}`}
           />
         </div>
+
         {/* Version mobile - Affichage d'une seule image */}
         <div className="flex md:hidden h-full w-full overflow-hidden rounded-2xl">
           <img

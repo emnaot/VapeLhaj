@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import SummaryApi from "../common"; // Pour charger les catégories
 import { Link } from "react-router-dom"; // Pour la redirection
 
+// Importing local images
+import image1 from "../assest/banner/Vozol.webp"; // Change the name to the actual file name
+import image2 from "../assest/banner/drag.jpg"; // Change the name to the actual file name
+
 // Composant pour afficher chaque carte avec une image, un titre et un bouton
 const CardImage = ({ imageUrl, title, buttonText, category }) => {
   return (
@@ -16,9 +20,10 @@ const CardImage = ({ imageUrl, title, buttonText, category }) => {
         <h2 className="text-lg md:text-2xl font-semibold mb-4">{title}</h2>
         <Link 
           to={`/product-category?category=${category}`} // Redirection dynamique vers la catégorie
-          className="px-4 py-2 rounded-2xl transition-all text-white border border-white hover:text-gray-300"
+          className="px-4 py-2 rounded-2xl transition-all text-white"
         >
-          {buttonText} &nbsp; <span>&#8250;</span>
+          <span className="hover:underline"> {buttonText} </span> {/* Underline only on hover */}
+          &nbsp; <span>&#8250;</span> {/* No underline here */}
         </Link>
       </div>
     </div>
@@ -61,7 +66,7 @@ const ProductGrid = () => {
             <>
               <div className="min-w-[80%]">
                 <CardImage 
-                  imageUrl="https://www.onlinevapeshop.us/cdn/shop/collections/Vozol-Vista-16000.jpg?v=1714852015&width=1500" 
+                  imageUrl={image1} // Local image for Vozol Vista
                   title="Vozol Vista 16000" 
                   buttonText="ACHETER" 
                   category="puff" // Redirection vers "puff"
@@ -69,7 +74,7 @@ const ProductGrid = () => {
               </div>
               <div className="min-w-[80%]">
                 <CardImage 
-                  imageUrl="https://img.over-blog-kiwi.com/0/91/03/66/20200621/ob_062aca_drag-x-de-chez-voopoo.jpg" 
+                  imageUrl={image2} // Local image for Drag X
                   title="Pod mod - Drag X" 
                   buttonText="ACHETER" 
                   category="pod" // Redirection vers "pod"
@@ -89,13 +94,13 @@ const ProductGrid = () => {
           {categoryProduct.length > 0 ? (
             <>
               <CardImage 
-                imageUrl="https://www.onlinevapeshop.us/cdn/shop/collections/Vozol-Vista-16000.jpg?v=1714852015&width=1500" 
+                imageUrl={image1} // Local image for Vozol Vista
                 title="Vozol Vista 16000" 
                 buttonText="ACHETER" 
                 category="puff" // Redirection vers "puff"
               />
               <CardImage 
-                imageUrl="https://img.over-blog-kiwi.com/0/91/03/66/20200621/ob_062aca_drag-x-de-chez-voopoo.jpg" 
+                imageUrl={image2} // Local image for Drag X
                 title="Pod mod - Drag X" 
                 buttonText="ACHETER" 
                 category="pod" // Redirection vers "pod"
