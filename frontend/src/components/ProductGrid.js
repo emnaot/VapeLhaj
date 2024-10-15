@@ -9,12 +9,21 @@ const CardImage = ({ imageUrl, title, buttonText, category }) => {
   return (
     <div className="relative w-full h-[250px] md:h-80 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
       <div className="w-full h-full overflow-hidden">
-        <img src={imageUrl} alt={title} className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-110" />
+        <img
+          src={imageUrl}
+          alt={title}
+          className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-110"
+        />
       </div>
       <div className="absolute inset-0 bg-black bg-opacity-10 flex flex-col justify-center items-center text-center text-white p-4">
         <h2 className="text-lg md:text-2xl font-semibold mb-4">{title}</h2>
-        <Link to={`/product-category?category=${category}`} className="px-4 py-2 rounded-2xl transition-all text-white">
-          <span className="hover:underline">{buttonText}</span> &nbsp; <span>&#8250;</span>
+        <Link
+          to={`/product-category?category=${category}`}
+          className="px-4 py-2 rounded-2xl transition-all text-white"
+        >
+          <span className="hover:underline">{buttonText}</span>
+          &nbsp;
+          <span className="text-2xl">&#8250;</span> {/* Flèche plus grande */}
         </Link>
       </div>
     </div>
@@ -47,10 +56,20 @@ const ProductGrid = () => {
           {categoryProduct.length > 0 ? (
             <>
               <div className="min-w-[100%]">
-                <CardImage imageUrl={image1} title="Vozol Vista 16000" buttonText="ACHETER" category="puff" />
+                <CardImage
+                  imageUrl={image1}
+                  title="Vozol Vista 16000"
+                  buttonText="ACHETER"
+                  category="puff"
+                />
               </div>
               <div className="min-w-[100%]">
-                <CardImage imageUrl={image2} title="Pod mod - Drag X" buttonText="ACHETER" category="pod" />
+                <CardImage
+                  imageUrl={image2}
+                  title="Pod mod - Drag X"
+                  buttonText="ACHETER"
+                  category="pod"
+                />
               </div>
             </>
           ) : (
@@ -64,8 +83,18 @@ const ProductGrid = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {categoryProduct.length > 0 ? (
             <>
-              <CardImage imageUrl={image1} title="Vozol Vista 16000" buttonText="ACHETER" category="puff" />
-              <CardImage imageUrl={image2} title="Pod mod - Drag X" buttonText="ACHETER" category="pod" />
+              <CardImage
+                imageUrl={image1}
+                title="Vozol Vista 16000"
+                buttonText="ACHETER"
+                category="puff"
+              />
+              <CardImage
+                imageUrl={image2}
+                title="Pod mod - Drag X"
+                buttonText="ACHETER"
+                category="pod"
+              />
             </>
           ) : (
             <>

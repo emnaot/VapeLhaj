@@ -75,43 +75,48 @@ const BannerProduct = () => {
     <div className="mx-auto px-4 md:px-0 max-w-[1350px] mt-5">
       <div
         className={`w-full relative rounded-2xl group ${
-          isMobile ? "h-[400px]" : "h-[480px]"
+          isMobile ? "h-[400px]" : "h-[550px]" // Increase height only for desktop
         }`}
       >
-        <button
-          onClick={prevImage}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-5 shadow-lg hover:bg-gray-200 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          style={{ backgroundColor: "#ffffff80" }}
-        >
-          <FaAngleLeft className="text-black text-base" />
-        </button>
-        <button
-          onClick={nextImage}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-5 shadow-lg hover:bg-gray-200 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          style={{ backgroundColor: "#ffffff80" }}
-        >
-          <FaAngleRight className="text-black text-base" />
-        </button>
-        <button
-          onClick={togglePause}
-          className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-gray-200 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          style={{ backgroundColor: "#ffffff80" }}
-        >
-          {paused ? (
-            <FaPlay className="text-black text-base" />
-          ) : (
-            <FaPause className="text-black text-base" />
-          )}
-        </button>
+        {!isMobile && (
+          <>
+            <button
+              onClick={prevImage}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-5 shadow-lg hover:bg-gray-200 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{ backgroundColor: "#ffffff80" }}
+            >
+              <FaAngleLeft className="text-black text-base" />
+            </button>
+            <button
+              onClick={nextImage}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-5 shadow-lg hover:bg-gray-200 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{ backgroundColor: "#ffffff80" }}
+            >
+              <FaAngleRight className="text-black text-base" />
+            </button>
+            <button
+              onClick={togglePause}
+              className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-gray-200 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{ backgroundColor: "#ffffff80" }}
+            >
+              {paused ? (
+                <FaPlay className="text-black text-base" />
+              ) : (
+                <FaPause className="text-black text-base" />
+              )}
+            </button>
+          </>
+        )}
         <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-center text-white p-4">
           <h2 className="text-sm md:text-2xl font-semibold mb-4">
             {bannerTexts[currentImage]}
           </h2>
           <button
             onClick={handleBuyClick}
-            className="text-white px-4 py-2 border border-white rounded-lg hover:bg-white hover:text-black transition-all bg-transparent"
+            className="text-white px-4 py-2 border border-white rounded-lg hover:bg-white/50 hover:text-gray-700 "
           >
-            Acheter &nbsp; <span>&#8250;</span>
+            <span className="font-semibold">Acheter</span> &nbsp;{" "}
+            <span className="font-semibold " > &#8250;</span>
           </button>
         </div>
         <div
