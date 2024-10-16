@@ -7,7 +7,7 @@ import { IoBagAdd } from "react-icons/io5";
 import addToCart from "../helpers/addToCart";
 import Context from "../context";
 
-const VerticalCardProduct = ({ category, heading }) => {
+const VerticalCardProduct = ({ category, heading, description }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -76,11 +76,26 @@ const VerticalCardProduct = ({ category, heading }) => {
       style={{ fontFamily: "inherit" }}
     >
       <h2
-        className="text-3xl font-normal text-black antialiased tracking-tight py-9"
+        className="text-3xl font-normal text-black antialiased tracking-tight pb-4  mt-12"  // Remplacer py-9 par pb-4 pour réduire l'espace
         style={{ fontFamily: "Franklin Gothic", textAlign: "center" }}
       >
         {heading}
       </h2>
+
+      {/* Description de la catégorie */}
+      <p className="text-lg text-gray-600 text-center mb-4 font-semibold text-[15px]">
+        {description}
+      </p>
+
+      {/* Bouton "Tout Voir" */}
+      <div className="text-center mb-6">
+        <Link
+          to={`/category/${category}`}
+          className="inline-block text-gold hover:text-gold-dark font-bold text-xm"
+        >
+          TOUT VOIR &gt;
+        </Link>
+      </div>
 
       {!isMobile && showScrollButtons && (
         <div className="absolute left-0 right-0 flex justify-between top-[45%] transform -translate-y-1/2 z-10">
