@@ -76,24 +76,24 @@ const VerticalCardProduct = ({ category, heading, description }) => {
       style={{ fontFamily: "inherit" }}
     >
       <h2
-        className="text-3xl font-normal text-black antialiased tracking-tight pb-4  mt-12"  // Remplacer py-9 par pb-4 pour réduire l'espace
+        className="text-3xl font-normal text-black antialiased tracking-tight pb-4 mt-12"
         style={{ fontFamily: "Franklin Gothic", textAlign: "center" }}
       >
         {heading}
       </h2>
 
       {/* Description de la catégorie */}
-      <p className="text-lg text-gray-600 text-center mb-4 font-semibold text-[15px]">
+      <p className="text-lg text-gray-600 text-center mb-4 font-semibold text-[14.75px]">
         {description}
       </p>
 
-      {/* Bouton "Tout Voir" */}
+      {/* Bouton "Tout Voir" avec redirection basée sur la catégorie */}
       <div className="text-center mb-6">
         <Link
-          to={`/category/${category}`}
-          className="inline-block text-gold hover:text-gold-dark font-bold text-xm"
+          to={`/product-category?category=${category}`}
+          className="inline-block text-gold hover:text-gold-dark font-bold text-[15px]"
         >
-          TOUT VOIR &gt;
+          <span className="hover:underline">TOUT VOIR</span> &gt;
         </Link>
       </div>
 

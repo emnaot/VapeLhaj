@@ -13,7 +13,7 @@ const Home = () => {
       <VerticalCardProduct
         category={"puff"}
         heading={"Puffs Populaires"}
-        description="Découvrez notre sélection de puffs populaires, parfaits pour une expérience de vape intense et agréable."
+        description="Découvrez notre sélection de puffs populaires, parfaits pour une expérience de vape intense et agréable. "
       />
 
       {/* E-Liquides */}
