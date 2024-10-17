@@ -23,16 +23,19 @@ const deleteAddToCartProduct = require('../controller/user/deleteAddToCartProduc
 const searchProduct = require('../controller/product/searchProduct')
 const filterProductController = require('../controller/product/filterProduct')
 
-
+const getContacts = require('../controller/contact/getContacts');
+const contactFormController = require('../controller/contact/contactForm');
 
 router.post("/signup",userSignUpController)
 router.post("/signin",userSignInController)
 router.get("/user-details",authToken,userDetailsController)
 router.get("/userLogout",userLogout)
-
+// Route pour soumettre le formulaire de contact
+router.post('/contact', contactFormController);
 //admin panel 
 router.get("/all-user",authToken,allUsers)
 router.post("/update-user",authToken,updateUser)
+router.get('/admin/contacts', authToken, getContacts);
 
 //product
 router.post("/upload-product",authToken,UploadProductController)
