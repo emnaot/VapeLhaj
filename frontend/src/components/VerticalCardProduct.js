@@ -83,7 +83,7 @@ const VerticalCardProduct = ({ category, heading, description }) => {
       </h2>
 
       {/* Description de la catégorie */}
-      <p className="text-lg text-gray-600 text-center mb-4 font-semibold text-[14.75px]">
+      <p className="text-lg text-gray-600 text-center mb-4 font-semibold text-[14.5px]">
         {description}
       </p>
 
