@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion"; // Import framer-motion for hover animation only
 
 const WhyChooseUs = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -16,18 +17,17 @@ const WhyChooseUs = () => {
     {
       title: "Prix Incroyables",
       description: "Les meilleurs produits aux meilleurs prix du marché",
-      icon: "🛒", // Placeholder for an actual icon (you can use an SVG or image here)
+      icon: "🛒",
     },
     {
       title: "Service Client 24h/7j",
       description: "Aides & Conseils via chat en ligne ou WhatsApp",
-      icon: "💬", // Placeholder for an actual icon
+      icon: "💬",
     },
     {
       title: "SAV Efficace",
-      description:
-        "Produit défectueux sans retour grâce au SAV efficace et simple",
-      icon: "📦", // Placeholder for an actual icon
+      description: "Produit défectueux sans retour grâce au SAV efficace et simple",
+      icon: "📦",
     },
   ];
 
@@ -44,6 +44,7 @@ const WhyChooseUs = () => {
         >
           Ce qui fait de Vape Lhaj votre meilleur choix
         </h2>
+
         <p
           className={`text-center mb-10 ${
             isMobile ? "text-sm" : "text-base"
@@ -55,25 +56,24 @@ const WhyChooseUs = () => {
         <div
           className={`${
             isMobile
-              ? "flex overflow-x-auto gap-4" // Mobile view: horizontal scroll
+              ? "flex overflow-x-auto gap-4"
               : "grid grid-cols-1 sm:grid-cols-3 gap-6"
           }`}
           style={isMobile ? { whiteSpace: "nowrap" } : {}}
         >
           {features.map((feature, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`p-6 rounded-lg text-center inline-block ${
+              className={`p-6 rounded-2xl text-center inline-block ${
                 isMobile ? "text-sm min-w-[250px]" : ""
               }`}
               style={{
                 backgroundColor: "#252525",
-                flexShrink: 0, // Prevent shrinking in mobile horizontal scroll
+                flexShrink: 0,
               }}
+              whileHover={{ scale: 1.05, transition: { duration: 0.3 } }} // Only hover effect
             >
-              <div
-                className={`mb-4 ${isMobile ? "text-3xl" : "text-4xl"}`}
-              >
+              <div className={`mb-4 ${isMobile ? "text-3xl" : "text-4xl"}`}>
                 {feature.icon}
               </div>
               <h3
@@ -84,7 +84,7 @@ const WhyChooseUs = () => {
                 {feature.title}
               </h3>
               <p className="text-gray-300">{feature.description}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
