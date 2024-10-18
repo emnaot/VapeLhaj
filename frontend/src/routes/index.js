@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
-import ForgotPassowrd from "../pages/ForgotPassowrd";
+import ForgotPassword from "../pages/ForgotPassowrd"; // Corrected spelling
 import SignUp from "../pages/SignUp";
 import AdminPanel from "../pages/AdminPanel";
 import AllUsers from "../pages/AllUsers";
@@ -12,9 +12,8 @@ import ProductDetails from "../pages/ProductDetails";
 import Cart from "../pages/Cart";
 import SearchProduct from "../pages/SearchProduct";
 import FAQ from "../pages/Faq.js";
-
-// Import de la page Contact
 import Contact from "../pages/Contact.js";
+import ScrollToTop from "../components/ScrollToTop"; // Import the ScrollToTop component
 
 const router = createBrowserRouter([
   {
@@ -23,43 +22,93 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Home />,
+        element: (
+          <>
+            <ScrollToTop /> {/* Add ScrollToTop here */}
+            <Home />
+          </>
+        ),
       },
       {
         path: "login",
-        element: <Login />,
+        element: (
+          <>
+            <ScrollToTop />
+            <Login />
+          </>
+        ),
       },
       {
         path: "forgot-password",
-        element: <ForgotPassowrd />,
+        element: (
+          <>
+            <ScrollToTop />
+            <ForgotPassword />
+          </>
+        ),
       },
       {
         path: "sign-up",
-        element: <SignUp />,
+        element: (
+          <>
+            <ScrollToTop />
+            <SignUp />
+          </>
+        ),
       },
       {
         path: "product-category",
-        element: <CategoryProduct />,
+        element: (
+          <>
+            <ScrollToTop />
+            <CategoryProduct />
+          </>
+        ),
       },
       {
         path: "product/:id",
-        element: <ProductDetails />,
+        element: (
+          <>
+            <ScrollToTop />
+            <ProductDetails />
+          </>
+        ),
       },
       {
         path: "cart",
-        element: <Cart />,
+        element: (
+          <>
+            <ScrollToTop />
+            <Cart />
+          </>
+        ),
       },
       {
         path: "search",
-        element: <SearchProduct />,
+        element: (
+          <>
+            <ScrollToTop />
+            <SearchProduct />
+          </>
+        ),
       },
       {
         path: "contact", // Ajout de la route pour la page Contact
-        element: <Contact />,
+        element: (
+          <>
+            <ScrollToTop />
+            <Contact />
+          </>
+        ),
       },
       {
         path: "faq", // Ajout de la route pour la page FAQ
-        element: <FAQ />,
+        element: (
+          <>
+            <ScrollToTop />
+            <FAQ />
+          </>
+        ),
       },
       {
         path: "admin-panel",
@@ -67,11 +116,21 @@ const router = createBrowserRouter([
         children: [
           {
             path: "all-users",
-            element: <AllUsers />,
+            element: (
+              <>
+                <ScrollToTop />
+                <AllUsers />
+              </>
+            ),
           },
           {
             path: "all-products",
-            element: <AllProducts />,
+            element: (
+              <>
+                <ScrollToTop />
+                <AllProducts />
+              </>
+            ),
           },
         ],
       },

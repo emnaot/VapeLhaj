@@ -10,6 +10,7 @@ import SummaryApi from './common';
 import Context from './context';
 import { useDispatch } from 'react-redux';
 import { setUserDetails } from './store/userSlice';
+import WhyChooseUs from './components/WhyChooseUs'; 
 
 function App() {
   const dispatch = useDispatch()
@@ -61,6 +62,7 @@ function App() {
         <main className='min-h-[calc(100vh-120px)] pt-16'>
           <Outlet/>
         </main>
+        <WhyChooseUs /> 
         <Footer/>
       </Context.Provider>
     </>
