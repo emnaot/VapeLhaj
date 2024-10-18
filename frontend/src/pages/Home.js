@@ -2,6 +2,7 @@ import React from "react";
 import BannerProduct from "../components/BannerProduct";
 import VerticalCardProduct from "../components/VerticalCardProduct";
 import ProductGrid from "../components/ProductGrid";
+import BrandSelection from "../components/BrandSelection"; // Import the BrandSelection component
 
 const Home = () => {
   return (
@@ -22,6 +23,9 @@ const Home = () => {
         heading={"E-Liquides"}
         description="Explorez notre sélection de nouveaux e-liquides et kits DIY pour personnaliser votre expérience de vape."
       />
+
+      {/* Call the BrandSelection component here */}
+      <BrandSelection />
 
       {/* Meilleurs Pods */}
       <VerticalCardProduct

@@ -11,9 +11,10 @@ import CategoryProduct from "../pages/CategoryProduct";
 import ProductDetails from "../pages/ProductDetails";
 import Cart from "../pages/Cart";
 import SearchProduct from "../pages/SearchProduct";
+import FAQ from "../pages/Faq.js";
 
 // Import de la page Contact
-import Contact from '../pages/Contact.js';
+import Contact from "../pages/Contact.js";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "contact", // Ajout de la route pour la page Contact
         element: <Contact />,
+      },
+      {
+        path: "faq", // Ajout de la route pour la page FAQ
+        element: <FAQ />,
       },
       {
         path: "admin-panel",
