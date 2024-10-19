@@ -29,6 +29,11 @@ const Header = () => {
   const [categoryProduct, setCategoryProduct] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // Fonction pour capitaliser la première lettre de chaque catégorie
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  };
+
   // Récupérer les catégories à partir de l'API
   const fetchCategoryProduct = async () => {
     setLoading(true);
@@ -74,9 +79,17 @@ const Header = () => {
     setSearch(value);
 
     if (value) {
-      navigate(`/search?q=${value}`); // Correction ici pour utiliser les backticks
+      navigate(`/search?q=${value}`);
     } else {
       navigate("/search");
+    }
+  };
+
+  const handleUserIconClick = () => {
+    if (!user?._id) {
+      navigate("/login"); // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+    } else {
+      setMenuDisplay(!menuDisplay); // Afficher ou masquer le menu utilisateur si l'utilisateur est connecté
     }
   };
 
@@ -114,10 +127,10 @@ const Header = () => {
                 categoryProduct.slice(0, 5).map((category, index) => (
                   <Link
                     key={index}
-                    to={`/product-category?category=${category.category}`} // Correction ici pour utiliser les backticks
+                    to={`/product-category?category=${category.category}`}
                     className="hover:underline"
                   >
-                    {category.category} {/* Affichage du nom de la catégorie */}
+                    {capitalizeFirstLetter(category.category)}
                   </Link>
                 ))
               )}
@@ -151,30 +164,22 @@ const Header = () => {
 
               {/* Icône utilisateur (modifiée avec LuUser2) */}
               <div className="relative">
-                {user?._id ? (
-                  <div
-                    className="cursor-pointer relative flex justify-center"
-                    onClick={() => setMenuDisplay(!menuDisplay)}
-                  >
-                    {user?.profilePic ? (
-                      <img
-                        src={user?.profilePic}
-                        className="w-10 h-10 rounded-full"
-                        alt={user?.name}
-                      />
-                    ) : (
-                      <LuUser2 className="text-2xl" /> // Nouvelle icône de profil
-                    )}
-                  </div>
-                ) : (
-                  <Link
-                    to="/login"
-                    className="px-3 py-1 rounded-full text-white bg-yellow-500 hover:bg-yellow-700"
-                  >
-                    Connexion
-                  </Link>
-                )}
+                <div
+                  className="cursor-pointer relative flex justify-center"
+                  onClick={handleUserIconClick} // Redirige ou ouvre le menu utilisateur
+                >
+                  {user?.profilePic ? (
+                    <img
+                      src={user?.profilePic}
+                      className="w-10 h-10 rounded-full"
+                      alt={user?.name}
+                    />
+                  ) : (
+                    <LuUser2 className="text-2xl" /> // Nouvelle icône de profil
+                  )}
+                </div>
 
+                {/* Menu utilisateur pour la version web */}
                 {menuDisplay && user?._id && (
                   <div className="absolute bg-yellow-50 top-12 right-0 p-2 shadow-md rounded-md border border-yellow-300">
                     {user?.role === ROLE.ADMIN && (
@@ -223,7 +228,10 @@ const Header = () => {
                 alt="Tunisia"
                 className="w-6 h-4 cursor-pointer"
               />
-              <LuUser2 className="text-2xl text-white cursor-pointer" />
+              <LuUser2
+                className="text-2xl text-white cursor-pointer"
+                onClick={handleUserIconClick} // Redirige ou ouvre le menu utilisateur sur mobile
+              />
             </div>
 
             {/* Logo centré */}
@@ -259,6 +267,27 @@ const Header = () => {
           </div>
         )}
 
+        {/* Menu utilisateur ou Connexion pour la version mobile */}
+        {isMobile && menuDisplay && user?._id && (
+          <div className="absolute bg-yellow-50 top-full right-0 p-2 shadow-md rounded-md border border-yellow-300 w-full">
+            {user?.role === ROLE.ADMIN && (
+              <Link
+                to="/admin-panel/all-products"
+                className="block px-2 py-1 hover:bg-yellow-200 rounded text-yellow-700 font-semibold"
+                onClick={() => setMenuDisplay(false)}
+              >
+                Admin Panel
+              </Link>
+            )}
+            <button
+              onClick={handleLogout}
+              className="mt-2 px-3 py-1 w-full text-center bg-yellow-500 text-white rounded-lg hover:bg-yellow-700"
+            >
+              Déconnexion
+            </button>
+          </div>
+        )}
+
         {/* Menu des catégories pour la version mobile */}
         {isMobile && categoryMenuOpen && (
           <div className="absolute top-full left-0 w-full bg-white text-black z-50 flex flex-col items-center p-2 space-y-1 border border-gray-700">
@@ -268,11 +297,11 @@ const Header = () => {
               categoryProduct.map((category, index) => (
                 <Link
                   key={index}
-                  to={`/product-category?category=${category.category}`} // Correction ici pour utiliser les backticks
+                  to={`/product-category?category=${category.category}`}
                   className="w-full text-center py-2 border-b border-gray-500 hover:bg-gray-100 hover:text-black transition-colors"
                   onClick={() => setCategoryMenuOpen(false)} // Fermer le menu après avoir cliqué
                 >
-                  {category.category}
+                  {capitalizeFirstLetter(category.category)}
                 </Link>
               ))
             )}
