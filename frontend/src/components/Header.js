@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import Logo from "./Logo"; // Assure-toi d'avoir le bon chemin pour le logo
 import { GrSearch } from "react-icons/gr";
 import { FaBolt, FaBars } from "react-icons/fa"; // Ajout de FaBars pour le menu mobile
@@ -25,6 +25,7 @@ const Header = () => {
   const URLSearch = new URLSearchParams(searchInput?.search);
   const searchQuery = URLSearch.getAll("q");
   const [search, setSearch] = useState(searchQuery);
+  const menuRef = useRef(null); // Référence pour le menu utilisateur
 
   const [categoryProduct, setCategoryProduct] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -54,6 +55,19 @@ const Header = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Fermer le menu utilisateur lorsque l'utilisateur clique en dehors (fonctionne pour le mobile et le web)
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuDisplay(false); // Fermer le menu si clic en dehors
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef]);
 
   const handleLogout = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {
@@ -101,7 +115,10 @@ const Header = () => {
             ? "px-4 h-[70px] rounded-none"
             : "max-w-[1350px] px-8 h-[72px] rounded-2xl"
         } mx-auto flex items-center justify-between shadow-md`}
-        style={{ backgroundColor: "#111111" }}
+        style={{
+          backgroundColor: "#111111",
+          fontFamily: "Calibri, sans-serif",
+        }} // Appliquer Calibri à tout le texte
       >
         {/* Version Web */}
         {!isMobile && (
@@ -142,7 +159,7 @@ const Header = () => {
             </nav>
 
             {/* Section icônes pour version web */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center justify-center gap-6">
               {/* Icône de recherche */}
               <div className="relative">
                 <GrSearch
@@ -154,7 +171,7 @@ const Header = () => {
                   <input
                     type="text"
                     placeholder="Rechercher..."
-                    className="absolute top-0 left-0 w-64 pl-4 py-2 rounded-full bg-gray-100 text-black focus:outline-none"
+                    className="absolute left-1/2 transform -translate-x-1/2 w-64 pl-3 py-2 rounded-full bg-gray-100 text-black focus:outline-none"
                     onChange={handleSearch}
                     value={search}
                     style={{ marginTop: "40px" }} // Ajuste la position de la barre de recherche sous l'icône
@@ -163,7 +180,7 @@ const Header = () => {
               </div>
 
               {/* Icône utilisateur (modifiée avec LuUser2) */}
-              <div className="relative">
+              <div className="relative" ref={menuRef}>
                 <div
                   className="cursor-pointer relative flex justify-center"
                   onClick={handleUserIconClick} // Redirige ou ouvre le menu utilisateur
@@ -181,11 +198,11 @@ const Header = () => {
 
                 {/* Menu utilisateur pour la version web */}
                 {menuDisplay && user?._id && (
-                  <div className="absolute bg-yellow-50 top-12 right-0 p-2 shadow-md rounded-md border border-yellow-300">
+                  <div className="absolute bg-white top-12 left-1/2 transform -translate-x-1/2  p-2 shadow-md rounded-md border ">
                     {user?.role === ROLE.ADMIN && (
                       <Link
                         to="/admin-panel/all-products"
-                        className="block px-2 py-1 hover:bg-yellow-200 rounded text-yellow-700 font-semibold"
+                        className="block px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded-lg text-black font-semibold"
                         onClick={() => setMenuDisplay(false)}
                       >
                         Admin Panel
@@ -193,7 +210,7 @@ const Header = () => {
                     )}
                     <button
                       onClick={handleLogout}
-                      className="mt-2 px-3 py-1 w-full text-center bg-yellow-500 text-white rounded-lg hover:bg-yellow-700"
+                      className="mt-2 px-3 py-1 w-full text-center bg-gray-200 text-black rounded-lg hover:bg-gray-300 font-semibold"
                     >
                       Déconnexion
                     </button>
@@ -267,13 +284,13 @@ const Header = () => {
           </div>
         )}
 
-        {/* Menu utilisateur ou Connexion pour la version mobile */}
+        {/* Menu utilisateur pour la version mobile */}
         {isMobile && menuDisplay && user?._id && (
-          <div className="absolute bg-yellow-50 top-full right-0 p-2 shadow-md rounded-md border border-yellow-300 w-full">
+          <div className="absolute bg-white top-full right-0 p-4 shadow-md rounded-md border border-white w-full flex flex-col items-center justify-center">
             {user?.role === ROLE.ADMIN && (
               <Link
                 to="/admin-panel/all-products"
-                className="block px-2 py-1 hover:bg-yellow-200 rounded text-yellow-700 font-semibold"
+                className="block w-full mt-1 text-center px-4 py-1  rounded-lg text-black font-semibold bg-gray-200"
                 onClick={() => setMenuDisplay(false)}
               >
                 Admin Panel
@@ -281,7 +298,7 @@ const Header = () => {
             )}
             <button
               onClick={handleLogout}
-              className="mt-2 px-3 py-1 w-full text-center bg-yellow-500 text-white rounded-lg hover:bg-yellow-700"
+              className="mt-2 w-full text-center px-4 py-1 font-semibold bg-gray-200 text-black rounded-lg"
             >
               Déconnexion
             </button>
