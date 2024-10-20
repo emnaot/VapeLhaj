@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import Logo from "./Logo"; // Assure-toi d'avoir le bon chemin pour le logo
+import logo from "../assest/logo.png"; // Import the logo as an image
 import { GrSearch } from "react-icons/gr";
 import { FaBolt, FaBars } from "react-icons/fa"; // Ajout de FaBars pour le menu mobile
 import { LuUser2 } from "react-icons/lu"; // Nouvelle icône utilisateur
@@ -118,7 +118,7 @@ const Header = () => {
         style={{
           backgroundColor: "#111111",
           fontFamily: "Calibri, sans-serif",
-        }} // Appliquer Calibri à tout le texte
+        }}
       >
         {/* Version Web */}
         {!isMobile && (
@@ -126,7 +126,7 @@ const Header = () => {
             {/* Logo Section */}
             <div className="flex items-center">
               <Link to={"/"}>
-                <Logo w={120} h={50} /> {/* Ajuste la taille du logo */}
+                <img src={logo} alt="Logo" width={100} height={40} /> {/* Adjusted size */}
               </Link>
             </div>
 
@@ -253,7 +253,7 @@ const Header = () => {
 
             {/* Logo centré */}
             <Link to="/">
-              <Logo w={120} h={50} /> {/* Ajuste la taille du logo */}
+              <img src={logo} alt="Logo" width={100} height={40} /> {/* Adjusted size */}
             </Link>
 
             {/* Icônes recherche et panier à droite */}
