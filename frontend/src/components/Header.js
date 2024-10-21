@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import logo from "../assest/logo.png"; // Import the logo as an image
+import logo from "../assest/logo.png"; // Import du logo en tant qu'image
 import { GrSearch } from "react-icons/gr";
 import { FaBolt, FaBars } from "react-icons/fa"; // Ajout de FaBars pour le menu mobile
 import { LuUser2 } from "react-icons/lu"; // Nouvelle icône utilisateur
 import { FiShoppingCart } from "react-icons/fi"; // Nouvelle icône panier
+import { IoClose } from "react-icons/io5"; // Icône pour le bouton "X" de fermeture
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SummaryApi from "../common";
@@ -26,6 +27,7 @@ const Header = () => {
   const searchQuery = URLSearch.getAll("q");
   const [search, setSearch] = useState(searchQuery);
   const menuRef = useRef(null); // Référence pour le menu utilisateur
+  const searchRef = useRef(null); // Référence pour la barre de recherche
 
   const [categoryProduct, setCategoryProduct] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -62,12 +64,15 @@ const Header = () => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setMenuDisplay(false); // Fermer le menu si clic en dehors
       }
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setSearchVisible(false); // Fermer la barre de recherche si clic en dehors
+      }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [menuRef]);
+  }, [menuRef, searchRef]);
 
   const handleLogout = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {
@@ -107,8 +112,12 @@ const Header = () => {
     }
   };
 
+  const handleCloseMenu = () => {
+    setCategoryMenuOpen(false); // Fermer le menu quand on clique sur le bouton "X"
+  };
+
   return (
-    <header className="fixed top-0 left-0 right-0 w-full py-0 bg-white z-40 flex justify-center mb-6">
+    <header className="fixed top-0 left-0 right-0 w-full py-0 bg-white z-40 flex justify-center">
       <div
         className={`text-white w-full ${
           isMobile
@@ -126,7 +135,8 @@ const Header = () => {
             {/* Logo Section */}
             <div className="flex items-center">
               <Link to={"/"}>
-                <img src={logo} alt="Logo" width={100} height={40} /> {/* Adjusted size */}
+                <img src={logo} alt="Logo" width={100} height={40} />{" "}
+                {/* Taille ajustée */}
               </Link>
             </div>
 
@@ -161,7 +171,7 @@ const Header = () => {
             {/* Section icônes pour version web */}
             <div className="flex items-center justify-center gap-6">
               {/* Icône de recherche */}
-              <div className="relative">
+              <div className="relative" ref={searchRef}>
                 <GrSearch
                   className="text-xl cursor-pointer"
                   onClick={() => setSearchVisible(!searchVisible)}
@@ -170,11 +180,11 @@ const Header = () => {
                 {searchVisible && (
                   <input
                     type="text"
-                    placeholder="Rechercher..."
-                    className="absolute left-1/2 transform -translate-x-1/2 w-64 pl-3 py-2 rounded-full bg-gray-100 text-black focus:outline-none"
+                    placeholder="Rechercher produits..."
+                    className="absolute left-1/2 transform -translate-x-1/2 pl-4 py-2 rounded-2xl bg-white border border-gray-300 shadow-lg text-black focus:outline-none transition-transform"
                     onChange={handleSearch}
                     value={search}
-                    style={{ marginTop: "40px" }} // Ajuste la position de la barre de recherche sous l'icône
+                    style={{ marginTop: "25px", width: "275px" }} // Largeur personnalisée en pixels
                   />
                 )}
               </div>
@@ -253,7 +263,8 @@ const Header = () => {
 
             {/* Logo centré */}
             <Link to="/">
-              <img src={logo} alt="Logo" width={100} height={40} /> {/* Adjusted size */}
+              <img src={logo} alt="Logo" width={100} height={40} />{" "}
+              {/* Taille ajustée */}
             </Link>
 
             {/* Icônes recherche et panier à droite */}
@@ -264,12 +275,39 @@ const Header = () => {
               />
 
               {searchVisible && (
-                <input
-                  type="text"
-                  placeholder="Rechercher..."
-                  className="absolute top-14 right-0 w-64 pl-4 py-2 rounded-full bg-gray-100 text-black focus:outline-none"
-                  onChange={handleSearch}
-                />
+                <div className="absolute top-14 left-0 right-0 px-4 py-4 bg-white shadow-lg rounded-lg">
+                  <div className="relative flex items-center">
+                    <input
+                      type="text"
+                      placeholder="Rechercher produits"
+                      className="w-full pl-10 py-2 rounded-full bg-gray-100 text-black focus:outline-none"
+                      onChange={handleSearch}
+                    />
+                    {/* Icône de fermeture pour la barre de recherche */}
+                    <IoClose
+                      className="absolute right-4 text-2xl cursor-pointer text-black"
+                      onClick={() => setSearchVisible(false)}
+                    />
+                  </div>
+
+                  {/* Suggestions en dessous de la barre de recherche */}
+                  <div className="mt-2 bg-white rounded-lg shadow-md">
+                    <p className="px-4 py-2 font-semibold text-black">
+                      Suggestions
+                    </p>
+                    <ul>
+                      <li className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-black">
+                      Wotofo nexBar
+                      </li>
+                      <li className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-black">
+                        Friobar
+                      </li>
+                      <li className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-black">
+                      Shigeri Fighter
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               )}
 
               <Link to="/cart" className="relative">
@@ -287,10 +325,18 @@ const Header = () => {
         {/* Menu utilisateur pour la version mobile */}
         {isMobile && menuDisplay && user?._id && (
           <div className="absolute bg-white top-full right-0 p-4 shadow-md rounded-md border border-white w-full flex flex-col items-center justify-center">
+            {/* Bouton X pour fermer le menu */}
+            <button
+              className="absolute top-2 right-4 text-lg cursor-pointer text-black"
+              onClick={() => setMenuDisplay(false)} // Fermer le menu au clic
+            >
+              <IoClose /> {/* Icône X */}
+            </button>
+
             {user?.role === ROLE.ADMIN && (
               <Link
                 to="/admin-panel/all-products"
-                className="block w-full mt-1 text-center px-4 py-1  rounded-lg text-black font-semibold bg-gray-200"
+                className="block w-full mt-4 text-center px-4 py-1 rounded-lg text-black font-semibold bg-gray-200"
                 onClick={() => setMenuDisplay(false)}
               >
                 Admin Panel
@@ -298,33 +344,58 @@ const Header = () => {
             )}
             <button
               onClick={handleLogout}
-              className="mt-2 w-full text-center px-4 py-1 font-semibold bg-gray-200 text-black rounded-lg"
+              className="mt-4 w-full text-center px-4 py-1 font-semibold bg-gray-200 text-black rounded-lg"
             >
               Déconnexion
             </button>
           </div>
         )}
-
-        {/* Menu des catégories pour la version mobile */}
-        {isMobile && categoryMenuOpen && (
-          <div className="absolute top-full left-0 w-full bg-white text-black z-50 flex flex-col items-center p-2 space-y-1 border border-gray-700">
-            {loading ? (
-              <div>Chargement des catégories...</div>
-            ) : (
-              categoryProduct.map((category, index) => (
-                <Link
-                  key={index}
-                  to={`/product-category?category=${category.category}`}
-                  className="w-full text-center py-2 border-b border-gray-500 hover:bg-gray-100 hover:text-black transition-colors"
-                  onClick={() => setCategoryMenuOpen(false)} // Fermer le menu après avoir cliqué
-                >
-                  {capitalizeFirstLetter(category.category)}
-                </Link>
-              ))
-            )}
-          </div>
-        )}
       </div>
+
+      {/* Menu des catégories pour la version mobile en plein écran */}
+      {isMobile && categoryMenuOpen && (
+        <div className="fixed inset-0 top-[70px] bg-white z-50 flex flex-col p-4 overflow-auto">
+          {/* Bouton X pour fermer */}
+          <button
+            className="absolute top-4 right-4 text-3xl cursor-pointer"
+            onClick={handleCloseMenu}
+          >
+            <IoClose />
+          </button>
+
+          {/* Lien Promotion */}
+          <Link
+            to="/promotion"
+            className="block w-full mt-12 mb-8 text-center px-4 py-2 rounded-lg font-semibold bg-gray-200 hover:bg-gray-300 text-black transition-colors"
+            onClick={handleCloseMenu}
+          >
+            <FaBolt className="mr-2 inline" /> Promotion
+          </Link>
+
+          {loading ? (
+            <div>Chargement des catégories...</div>
+          ) : (
+            categoryProduct.map((category, index) => (
+              <Link
+                key={index}
+                to={`/product-category?category=${category.category}`}
+                className="block w-full mb-8 text-center px-4 py-2 rounded-lg text-black font-semibold bg-gray-200 hover:bg-gray-300 transition-colors"
+                onClick={handleCloseMenu} // Fermer le menu après avoir cliqué
+              >
+                {capitalizeFirstLetter(category.category)}
+              </Link>
+            ))
+          )}
+          {/* Lien Contact */}
+          <Link
+            to="/contact"
+            className="block w-full mb-8 text-center px-4 py-2 rounded-lg bg-gray-200 font-semibold hover:bg-gray-300 text-black transition-colors"
+            onClick={handleCloseMenu}
+          >
+            Contact
+          </Link>
+        </div>
+      )}
     </header>
   );
 };
