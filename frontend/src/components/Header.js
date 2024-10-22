@@ -143,7 +143,10 @@ const Header = () => {
             {/* Liens de navigation dynamiques pour version web */}
             <nav className="hidden lg:flex space-x-8 items-center">
               {/* Bouton Promotion */}
-              <button className="flex items-center px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition">
+              <button
+                onClick={() => navigate("/promotion")} // Ajout de la redirection vers la page Promotion
+                className="flex items-center px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition"
+              >
                 <FaBolt className="mr-2" /> Promotion
               </button>
 
@@ -297,13 +300,13 @@ const Header = () => {
                     </p>
                     <ul>
                       <li className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-black">
-                      Wotofo nexBar
+                        Wotofo nexBar
                       </li>
                       <li className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-black">
                         Friobar
                       </li>
                       <li className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-black">
-                      Shigeri Fighter
+                        Shigeri Fighter
                       </li>
                     </ul>
                   </div>

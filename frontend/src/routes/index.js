@@ -13,6 +13,7 @@ import Cart from "../pages/Cart";
 import SearchProduct from "../pages/SearchProduct";
 import FAQ from "../pages/Faq.js";
 import Contact from "../pages/Contact.js";
+import Promotion from "../pages/Promotion"; // Import du composant Promotion
 import ScrollToTop from "../components/ScrollToTop"; // Import the ScrollToTop component
 
 const router = createBrowserRouter([
@@ -107,6 +108,15 @@ const router = createBrowserRouter([
           <>
             <ScrollToTop />
             <FAQ />
+          </>
+        ),
+      },
+      {
+        path: "promotion", // Ajout de la route pour la page Promotion
+        element: (
+          <>
+            <ScrollToTop />
+            <Promotion />
           </>
         ),
       },
