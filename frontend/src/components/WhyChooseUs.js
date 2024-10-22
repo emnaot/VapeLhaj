@@ -36,20 +36,14 @@ const WhyChooseUs = () => {
       className="py-12"
       style={{ fontFamily: "Calibri, sans-serif", backgroundColor: "#111111" }}
     >
-      <div className={`container ${isMobile ? "px-4" : "mx-auto px-4"}`}>
+      <div className={`container ${isMobile ? "px-4" : "mx-auto px-24"}`}> {/* Increased side padding for desktop */}
         <h2
-          className={`text-center ${
-            isMobile ? "text-2xl" : "text-3xl"
-          } font-bold mb-4 text-white`}
+          className={`text-center ${isMobile ? "text-2xl" : "text-3xl"} font-bold mb-4 text-white`}
         >
           Ce qui fait de Vape Lhaj votre meilleur choix
         </h2>
 
-        <p
-          className={`text-center mb-10 ${
-            isMobile ? "text-sm" : "text-base"
-          } text-white`}
-        >
+        <p className={`text-center mb-10 ${isMobile ? "text-sm" : "text-base"} text-white`}>
           "Nous nous engageons à vous offrir une qualité de service irréprochable, car votre satisfaction est notre priorité absolue." - Vape Lhaj
         </p>
 
@@ -64,9 +58,7 @@ const WhyChooseUs = () => {
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className={`p-6 rounded-2xl text-center inline-block ${
-                isMobile ? "text-sm min-w-[250px]" : ""
-              }`}
+              className={`p-6 rounded-2xl text-center inline-block ${isMobile ? "text-sm min-w-[250px]" : ""}`}
               style={{
                 backgroundColor: "#252525",
                 flexShrink: 0,
@@ -76,11 +68,7 @@ const WhyChooseUs = () => {
               <div className={`mb-4 ${isMobile ? "text-3xl" : "text-4xl"}`}>
                 {feature.icon}
               </div>
-              <h3
-                className={`font-bold mb-2 text-white ${
-                  isMobile ? "text-lg" : "text-xl"
-                }`}
-              >
+              <h3 className={`font-bold mb-2 text-white ${isMobile ? "text-lg" : "text-xl"}`}>
                 {feature.title}
               </h3>
               <p className="text-gray-300">{feature.description}</p>
