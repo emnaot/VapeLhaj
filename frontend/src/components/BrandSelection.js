@@ -12,7 +12,6 @@ const BrandSelection = () => {
     { name: "friobar", logo: require("../assest/marques/friobar.png") },
   ];
 
-  // Ref to the scrollable container
   const scrollContainerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Detect if mobile
 
@@ -24,7 +23,6 @@ const BrandSelection = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Scroll handling for mobile using touch (automatic scroll handling in the container)
   const scrollRight = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft += isMobile ? 300 : 1000;
@@ -39,24 +37,22 @@ const BrandSelection = () => {
 
   return (
     <div className="bg-white py-8">
-      {/* Added max-w-[1350px] and px-8 to align with Header */}
       <div
         className={`w-full ${isMobile ? "px-4" : "max-w-[1410px] px-8"} mx-auto`}
       >
-        <h2 className="text-3xl font-normal text-black antialiased tracking-tight pb-6 mt-12"
-        style={{ fontFamily: "Franklin Gothic", textAlign: "center" }}
-      >
-        
-        Les meilleures marques à votre portée
+        <h2
+          className="text-3xl font-normal text-black antialiased tracking-tight pb-6 mt-12"
+          style={{ fontFamily: "Franklin Gothic", textAlign: "center" }}
+        >
+          Les meilleures marques à votre portée
         </h2>
 
-        {/* Scrollable container with buttons for web, touch scroll for mobile */}
-        <div className="relative">
+        <div className="relative group"> {/* Added 'group' for hover effects */}
           {/* Scroll Left Button (web only) */}
           {!isMobile && (
             <button
               onClick={scrollLeft}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 p-1 transition-opacity duration-900"
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               style={{ background: "none", border: "none", fontSize: "16px" }}
             >
               ◀
@@ -82,7 +78,7 @@ const BrandSelection = () => {
           {!isMobile && (
             <button
               onClick={scrollRight}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 p-1 transition-opacity duration-900"
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               style={{ background: "none", border: "none", fontSize: "16px" }}
             >
               ▶

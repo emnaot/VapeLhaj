@@ -33,9 +33,9 @@ const CategoryProduct = () => {
 
   useEffect(() => {
     if (categoryFromUrl) {
-      const initialCategory = categoryFromUrl.split(','); // Gérer plusieurs catégories dans l'URL
+      const initialCategory = categoryFromUrl.split(',');
       setFilterCategoryList(initialCategory);
-      fetchData(initialCategory); // Récupérer les produits pour les catégories initiales
+      fetchData(initialCategory);
     }
   }, [categoryFromUrl]);
 
@@ -44,18 +44,18 @@ const CategoryProduct = () => {
 
     setFilterCategoryList((prev) => {
       if (checked) {
-        return [...prev, value]; // Ajouter la catégorie si cochée
+        return [...prev, value];
       } else {
-        return prev.filter((category) => category !== value); // Retirer la catégorie si décochée
+        return prev.filter((category) => category !== value);
       }
     });
   };
 
   useEffect(() => {
     if (filterCategoryList.length > 0) {
-      fetchData(filterCategoryList); // Récupérer les produits pour les catégories sélectionnées
+      fetchData(filterCategoryList);
     } else {
-      setData([]); // Vider les données si aucune catégorie n'est sélectionnée
+      setData([]);
     }
   }, [filterCategoryList]);
 
@@ -72,7 +72,7 @@ const CategoryProduct = () => {
   };
 
   return (
-    <div className="container mx-auto p-8 bg-white min-h-screen" style={{ fontFamily: 'Calibri, sans-serif', maxWidth: '1428px', paddingLeft: '40px', paddingRight: '40px' }}>
+    <div className="container mx-auto p-4 bg-white min-h-screen" style={{ fontFamily: 'Calibri, sans-serif', maxWidth: '1380px' }}>
       {/* Vue Desktop */}
       <div className="hidden lg:grid grid-cols-[250px,1fr] gap-12">
         {/* Filtres (colonne de gauche) */}
@@ -136,7 +136,7 @@ const CategoryProduct = () => {
         </div>
       </div>
 
-      {/* Vue Mobile - Retourné à l'état initial */}
+      {/* Vue Mobile */}
       <div className="block lg:hidden px-4">
         {/* Filtres au-dessus des produits pour mobile */}
         <div className="bg-white p-2 mb-4">
