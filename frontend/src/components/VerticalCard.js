@@ -73,7 +73,7 @@ const VerticalCard = ({ loading, data = [] }) => {
                   className="capitalize text-gray-600 text-center mb-1"
                   style={{ fontFamily: "Calibri" }}
                 >
-                  {product?.category}
+                  {product?.brandName}
                 </p>
                 <div className="flex justify-center items-center my-1">
                   {[...Array(5)].map((_, starIndex) => (

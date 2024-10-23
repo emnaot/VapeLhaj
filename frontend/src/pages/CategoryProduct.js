@@ -9,7 +9,7 @@ const CategoryProduct = () => {
   const [loading, setLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  
+
   const urlSearch = new URLSearchParams(location.search);
   const categoryFromUrl = urlSearch.get("category");
 
@@ -23,7 +23,7 @@ const CategoryProduct = () => {
         'content-type': 'application/json',
       },
       body: JSON.stringify({
-        category: selectedCategories, // Send the list of selected categories
+        category: selectedCategories,
       }),
     });
     const dataResponse = await response.json();
@@ -33,35 +33,32 @@ const CategoryProduct = () => {
 
   useEffect(() => {
     if (categoryFromUrl) {
-      const initialCategory = categoryFromUrl.split(','); // Handle multiple categories from URL
+      const initialCategory = categoryFromUrl.split(','); // Gérer plusieurs catégories dans l'URL
       setFilterCategoryList(initialCategory);
-      fetchData(initialCategory); // Fetch products for initial categories
+      fetchData(initialCategory); // Récupérer les produits pour les catégories initiales
     }
   }, [categoryFromUrl]);
 
-  // Handle category checkbox changes
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
 
     setFilterCategoryList((prev) => {
       if (checked) {
-        return [...prev, value]; // Add category to list if checked
+        return [...prev, value]; // Ajouter la catégorie si cochée
       } else {
-        return prev.filter((category) => category !== value); // Remove category if unchecked
+        return prev.filter((category) => category !== value); // Retirer la catégorie si décochée
       }
     });
   };
 
-  // Fetch data whenever filterCategoryList is updated
   useEffect(() => {
     if (filterCategoryList.length > 0) {
-      fetchData(filterCategoryList); // Fetch products for selected categories
+      fetchData(filterCategoryList); // Récupérer les produits pour les catégories sélectionnées
     } else {
-      setData([]); // Clear data if no category is selected
+      setData([]); // Vider les données si aucune catégorie n'est sélectionnée
     }
   }, [filterCategoryList]);
 
-  // Handle sorting products
   const handleOnChangeSortBy = (e) => {
     const { value } = e.target;
 
@@ -75,69 +72,76 @@ const CategoryProduct = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      {/* Desktop View */}
-      <div className="hidden lg:grid grid-cols-[200px,1fr]">
-        {/* Filters (left column) */}
-        <div className="bg-white p-2 min-h-[calc(100vh-120px)] overflow-y-scroll">
-          <h3 className="text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300">
-            Sort by
+    <div className="container mx-auto p-8 bg-white min-h-screen" style={{ fontFamily: 'Calibri, sans-serif', maxWidth: '1428px', paddingLeft: '40px', paddingRight: '40px' }}>
+      {/* Vue Desktop */}
+      <div className="hidden lg:grid grid-cols-[250px,1fr] gap-12">
+        {/* Filtres (colonne de gauche) */}
+        <div className="bg-white p-6 rounded-xl shadow-lg min-h-[calc(100vh-120px)] overflow-y-auto">
+          <h3 className="text-lg font-semibold text-gray-700 border-b pb-4 mb-6 border-gray-300">
+            Filtrer les produits
           </h3>
-          <form className="text-sm flex flex-col gap-2 py-2">
-            <div className="flex items-center gap-3">
-              <input
-                type="radio"
-                name="sortBy"
-                onChange={handleOnChangeSortBy}
-                value="asc"
-              />
-              <label>Price - Low to High</label>
-            </div>
-            <div className="flex items-center gap-3">
-              <input
-                type="radio"
-                name="sortBy"
-                onChange={handleOnChangeSortBy}
-                value="dsc"
-              />
-              <label>Price - High to Low</label>
-            </div>
-          </form>
 
-          <h3 className="text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300">
-            Category
-          </h3>
-          <form className="text-sm flex flex-col gap-2 py-2">
-            {productCategory.map((categoryName, index) => (
-              <div className="flex items-center gap-3" key={index}>
+          <div className="mb-8">
+            <h4 className="text-base font-bold text-gray-600 mb-3">Trier par prix</h4>
+            <form className="text-sm space-y-3">
+              <div className="flex items-center space-x-3">
                 <input
-                  type="checkbox"
-                  name="category"
-                  value={categoryName?.value}
-                  checked={filterCategoryList.includes(categoryName?.value)} // Handle multiple selections
-                  onChange={handleCategoryChange}
+                  type="radio"
+                  name="sortBy"
+                  onChange={handleOnChangeSortBy}
+                  value="asc"
+                  className="text-gold focus:ring-gold-dark"
                 />
-                <label htmlFor={categoryName?.value}>{categoryName?.label}</label>
+                <label className="text-gray-600">Prix - Croissant</label>
               </div>
-            ))}
-          </form>
+              <div className="flex items-center space-x-3">
+                <input
+                  type="radio"
+                  name="sortBy"
+                  onChange={handleOnChangeSortBy}
+                  value="dsc"
+                  className="text-gold focus:ring-gold-dark"
+                />
+                <label className="text-gray-600">Prix - Décroissant</label>
+              </div>
+            </form>
+          </div>
+
+          <div>
+            <h4 className="text-base font-bold text-gray-600 mb-3">Catégories</h4>
+            <form className="text-sm space-y-3">
+              {productCategory.map((categoryName, index) => (
+                <div className="flex items-center space-x-3" key={index}>
+                  <input
+                    type="checkbox"
+                    name="category"
+                    value={categoryName?.value}
+                    checked={filterCategoryList.includes(categoryName?.value)}
+                    onChange={handleCategoryChange}
+                    className="text-gold focus:ring-gold-white"
+                  />
+                  <label htmlFor={categoryName?.value} className="text-gray-600">{categoryName?.label}</label>
+                </div>
+              ))}
+            </form>
+          </div>
         </div>
 
-        {/* Products (right column) */}
-        <div className="px-4">
-          <p className="font-medium text-slate-800 text-lg my-2">Search Results: {data.length}</p>
-          <div className="min-h-[calc(100vh-120px)] overflow-y-scroll max-h-[calc(100vh-120px)]">
+        {/* Produits (colonne de droite) */}
+        <div className="bg-white p-6 rounded-xl shadow-lg">
+          <p className="font-semibold text-gray-800 text-lg mb-6">Résultats: {data.length}</p>
+          <div className="min-h-[calc(100vh-120px)] overflow-y-auto max-h-[calc(100vh-120px)] space-y-6">
             {data.length !== 0 && !loading && <VerticalCard data={data} />}
           </div>
         </div>
       </div>
 
-      {/* Mobile View */}
+      {/* Vue Mobile - Retourné à l'état initial */}
       <div className="block lg:hidden px-4">
-        {/* Filters on top of products for mobile */}
+        {/* Filtres au-dessus des produits pour mobile */}
         <div className="bg-white p-2 mb-4">
           <h3 className="text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300">
-            Sort by
+            Trier par
           </h3>
           <form className="text-sm flex flex-col gap-2 py-2">
             <div className="flex items-center gap-3">
@@ -147,7 +151,7 @@ const CategoryProduct = () => {
                 onChange={handleOnChangeSortBy}
                 value="asc"
               />
-              <label>Price - Low to High</label>
+              <label>Prix - Croissant</label>
             </div>
             <div className="flex items-center gap-3">
               <input
@@ -156,12 +160,12 @@ const CategoryProduct = () => {
                 onChange={handleOnChangeSortBy}
                 value="dsc"
               />
-              <label>Price - High to Low</label>
+              <label>Prix - Décroissant</label>
             </div>
           </form>
 
           <h3 className="text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300">
-            Category
+            Catégories
           </h3>
           <form className="text-sm flex flex-col gap-2 py-2">
             {productCategory.map((categoryName, index) => (
@@ -179,9 +183,9 @@ const CategoryProduct = () => {
           </form>
         </div>
 
-        {/* Products displayed below filters on mobile */}
+        {/* Produits affichés sous les filtres pour mobile */}
         <div>
-          <p className="font-medium text-slate-800 text-lg my-2">Search Results: {data.length}</p>
+          <p className="font-medium text-slate-800 text-lg my-2">Résultats: {data.length}</p>
           <div className="min-h-[calc(100vh-120px)]">
             {data.length !== 0 && !loading && <VerticalCard data={data} />}
           </div>

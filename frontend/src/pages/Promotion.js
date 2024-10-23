@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import productCategory from '../helpers/productCategory'; // Assuming this contains the categories
+import productCategory from '../helpers/productCategory'; 
 import VerticalCard from '../components/VerticalCard';
 import SummaryApi from '../common';
 
 const Promotion = () => {
-  const [data, setData] = useState([]); // State for products data
-  const [loading, setLoading] = useState(false); // Loading state
+  const [data, setData] = useState([]); // État pour les données des produits
+  const [loading, setLoading] = useState(false); // État de chargement
   const [filterCategoryList, setFilterCategoryList] = useState(
-    productCategory.map((category) => category.value) // Initialize with all categories selected
+    productCategory.map((category) => category.value) // Initialiser avec toutes les catégories sélectionnées
   );
   const navigate = useNavigate();
 
-  // Function to fetch promotional products from API
+  // Fonction pour récupérer les produits en promotion depuis l'API
   const fetchProducts = async (selectedCategories = []) => {
-    setLoading(true); // Start loading
+    setLoading(true); // Démarrer le chargement
     try {
       const response = await fetch(SummaryApi.filterProduct.url, {
         method: SummaryApi.filterProduct.method,
@@ -22,49 +22,49 @@ const Promotion = () => {
           'content-type': 'application/json',
         },
         body: JSON.stringify({
-          category: selectedCategories.length > 0 ? selectedCategories : [], // Filter by category if selected
+          category: selectedCategories.length > 0 ? selectedCategories : [], // Filtrer par catégorie si sélectionnée
         }),
       });
 
       const dataResponse = await response.json();
       
       if (response.ok) {
-        // Filter products to keep only those on promotion
+        // Filtrer les produits pour ne conserver que ceux en promotion
         const promoProducts = dataResponse?.data?.filter(product => product.sellingPrice < product.price) || [];
-        setData(promoProducts); // Update data with promotion products
+        setData(promoProducts); // Mettre à jour les données avec les produits en promotion
       } else {
-        console.error('API Error:', dataResponse.message); // Handle API errors
+        console.error('Erreur API:', dataResponse.message); // Gérer les erreurs de l'API
       }
     } catch (error) {
-      console.error('Error fetching products:', error); // Handle errors
+      console.error('Erreur lors de la récupération des produits:', error); // Gérer les erreurs
     }
-    setLoading(false); // End loading
+    setLoading(false); // Fin du chargement
   };
 
-  // Fetch all promotional products on component mount with all categories checked
+  // Récupérer tous les produits en promotion au montage du composant avec toutes les catégories cochées
   useEffect(() => {
-    fetchProducts(filterCategoryList); // Load all promotion products for all categories on initial load
+    fetchProducts(filterCategoryList); // Charger tous les produits en promotion pour toutes les catégories lors du premier affichage
   }, []);
 
-  // Handle category selection
+  // Gérer la sélection des catégories
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
 
     setFilterCategoryList((prev) => {
       if (checked) {
-        return [...prev, value]; // Add the selected category
+        return [...prev, value]; // Ajouter la catégorie sélectionnée
       } else {
-        return prev.filter((category) => category !== value); // Remove the unselected category
+        return prev.filter((category) => category !== value); // Retirer la catégorie non sélectionnée
       }
     });
   };
 
-  // Fetch data whenever filterCategoryList changes
+  // Récupérer les données à chaque changement de filterCategoryList
   useEffect(() => {
-    fetchProducts(filterCategoryList); // Fetch products based on selected categories
+    fetchProducts(filterCategoryList); // Récupérer les produits en fonction des catégories sélectionnées
   }, [filterCategoryList]);
 
-  // Handle product sorting by price
+  // Gérer le tri des produits par prix
   const handleOnChangeSortBy = (e) => {
     const { value } = e.target;
 
@@ -78,74 +78,81 @@ const Promotion = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      {/* Desktop View */}
-      <div className="hidden lg:grid grid-cols-[200px,1fr]">
-        {/* Filters (Left Column) */}
-        <div className="bg-white p-2 min-h-[calc(100vh-120px)] overflow-y-scroll">
-          <h3 className="text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300">
-            Sort by
+    <div className="container mx-auto p-8 bg-white min-h-screen" style={{ fontFamily: 'Calibri, sans-serif', maxWidth: '1428px', paddingLeft: '40px', paddingRight: '40px' }}>
+      {/* Vue Desktop */}
+      <div className="hidden lg:grid grid-cols-[250px,1fr] gap-12">
+        {/* Filtres (Colonne de gauche) */}
+        <div className="bg-white p-6 rounded-xl shadow-lg min-h-[calc(100vh-120px)] overflow-y-auto">
+          <h3 className="text-lg font-semibold text-gray-700 border-b pb-4 mb-6 border-gray-300">
+            Filtrer les produits
           </h3>
-          <form className="text-sm flex flex-col gap-2 py-2">
-            <div className="flex items-center gap-3">
-              <input
-                type="radio"
-                name="sortBy"
-                onChange={handleOnChangeSortBy}
-                value="asc"
-              />
-              <label>Price - Low to High</label>
-            </div>
-            <div className="flex items-center gap-3">
-              <input
-                type="radio"
-                name="sortBy"
-                onChange={handleOnChangeSortBy}
-                value="dsc"
-              />
-              <label>Price - High to Low</label>
-            </div>
-          </form>
 
-          <h3 className="text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300">
-            Category
-          </h3>
-          <form className="text-sm flex flex-col gap-2 py-2">
-            {productCategory.map((categoryName, index) => (
-              <div className="flex items-center gap-3" key={index}>
+          <div className="mb-8">
+            <h4 className="text-base font-bold text-gray-600 mb-3">Trier par prix</h4>
+            <form className="text-sm space-y-3">
+              <div className="flex items-center space-x-3">
                 <input
-                  type="checkbox"
-                  name="category"
-                  value={categoryName?.value}
-                  checked={filterCategoryList.includes(categoryName?.value)} // Handle multiple selections
-                  onChange={handleCategoryChange}
+                  type="radio"
+                  name="sortBy"
+                  onChange={handleOnChangeSortBy}
+                  value="asc"
+                  className="text-gold focus:ring-gold-dark"
                 />
-                <label htmlFor={categoryName?.value}>{categoryName?.label}</label>
+                <label className="text-gray-600">Prix - Croissant</label>
               </div>
-            ))}
-          </form>
+              <div className="flex items-center space-x-3">
+                <input
+                  type="radio"
+                  name="sortBy"
+                  onChange={handleOnChangeSortBy}
+                  value="dsc"
+                  className="text-gold focus:ring-gold-dark"
+                />
+                <label className="text-gray-600">Prix - Décroissant</label>
+              </div>
+            </form>
+          </div>
+
+          <div>
+            <h4 className="text-base font-bold text-gray-600 mb-3">Catégories</h4>
+            <form className="text-sm space-y-3">
+              {productCategory.map((categoryName, index) => (
+                <div className="flex items-center space-x-3" key={index}>
+                  <input
+                    type="checkbox"
+                    name="category"
+                    value={categoryName?.value}
+                    checked={filterCategoryList.includes(categoryName?.value)}
+                    onChange={handleCategoryChange}
+                    className="text-blue-500 focus:ring-blue-400"
+                  />
+                  <label htmlFor={categoryName?.value} className="text-gray-600">{categoryName?.label}</label>
+                </div>
+              ))}
+            </form>
+          </div>
         </div>
 
-        {/* Products (Right Column) */}
-        <div className="px-4">
-          <p className="font-medium text-slate-800 text-lg my-2">Search Results: {data.length}</p>
-          <div className="min-h-[calc(100vh-120px)] overflow-y-scroll max-h-[calc(100vh-120px)]">
+        {/* Produits (Colonne de droite) */}
+        <div className="bg-white p-6 rounded-xl shadow-lg">
+          <p className="font-semibold text-gray-800 text-lg mb-6">Résultats de recherche : {data.length}</p>
+          <div className="min-h-[calc(100vh-120px)] overflow-y-auto max-h-[calc(100vh-120px)] space-y-6">
             {loading ? (
-              <p>Loading...</p>
+              <p>Chargement...</p>
             ) : data.length !== 0 ? (
               <VerticalCard data={data} />
             ) : (
-              <p>No products in promotion.</p>
+              <p>Aucun produit en promotion.</p>
             )}
           </div>
         </div>
       </div>
 
-      {/* Mobile View */}
+      {/* Vue Mobile */}
       <div className="block lg:hidden px-4">
         <div className="bg-white p-2 mb-4">
           <h3 className="text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300">
-            Sort by
+            Trier par
           </h3>
           <form className="text-sm flex flex-col gap-2 py-2">
             <div className="flex items-center gap-3">
@@ -155,7 +162,7 @@ const Promotion = () => {
                 onChange={handleOnChangeSortBy}
                 value="asc"
               />
-              <label>Price - Low to High</label>
+              <label>Prix - Croissant</label>
             </div>
             <div className="flex items-center gap-3">
               <input
@@ -164,12 +171,12 @@ const Promotion = () => {
                 onChange={handleOnChangeSortBy}
                 value="dsc"
               />
-              <label>Price - High to Low</label>
+              <label>Prix - Décroissant</label>
             </div>
           </form>
 
           <h3 className="text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300">
-            Category
+            Catégories
           </h3>
           <form className="text-sm flex flex-col gap-2 py-2">
             {productCategory.map((categoryName, index) => (
@@ -188,14 +195,14 @@ const Promotion = () => {
         </div>
 
         <div>
-          <p className="font-medium text-slate-800 text-lg my-2">Search Results: {data.length}</p>
+          <p className="font-medium text-slate-800 text-lg my-2">Résultats de recherche : {data.length}</p>
           <div className="min-h-[calc(100vh-120px)]">
             {loading ? (
-              <p>Loading...</p>
+              <p>Chargement...</p>
             ) : data.length !== 0 ? (
               <VerticalCard data={data} />
             ) : (
-              <p>No products in promotion.</p>
+              <p>Aucun produit en promotion.</p>
             )}
           </div>
         </div>
