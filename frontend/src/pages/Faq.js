@@ -15,13 +15,10 @@ const FAQ = () => {
         style={{ fontFamily: "Calibri, sans-serif" }}
       >
         {/* Title and introductory paragraph */}
-        <h1 className="text-3xl font-bold text-center mb-6">
-        Besoin d'Aide ?
-        </h1>
+        <h1 className="text-3xl font-bold text-center mb-6">Besoin d'Aide ?</h1>
         <p className="text-center text-gray-600 mb-8">
-          L'équipe VAPEVO est prête à éclaircir toutes vos énigmes sur la
-          navigation et l'utilisation de notre site. Prenez votre loupe
-          virtuelle et partons à la chasse aux réponses !
+          Vous avez des questions sur notre site ou nos services ? Nous sommes
+          là pour vous répondre ! Voici une sélection des questions fréquentes.
         </p>
 
         {/* White container for all FAQ sections */}
@@ -32,31 +29,91 @@ const FAQ = () => {
               <FaUser className="mr-2" /> UTILISATION DU SITE
             </h2>
             <ul className="mt-4">
-              {[
-                "Comment créer un compte client ?",
-                "Comment faire si j'ai perdu mon mot de passe ?",
-                "Comment puis-je contacter le service client ?",
-                "Comment changer de langue ?",
-                "Où puis-je trouver des informations sur les promotions et les nouveautés ?",
-                "Avez-vous un programme de fidélité ?",
-                "Comment supprimer mon compte ?",
-              ].map((question, index) => (
-                <li key={index} className="border-b py-4">
-                  <div
-                    className="flex justify-between items-center cursor-pointer"
-                    onClick={() => toggleAccordion(index)}
-                  >
-                    <span className="font-semibold">{question}</span>
-                    <span>{activeIndex === index ? "-" : "+"}</span>
-                  </div>
-                  {activeIndex === index && (
-                    <p className="mt-2 text-gray-600">
-                      Réponse à la question : Lorem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
-                    </p>
-                  )}
-                </li>
-              ))}
+              {/* Question: Comment créer un compte client ? */}
+              <li className="border-b py-4">
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleAccordion(0)}
+                >
+                  <span className="font-semibold">
+                    Comment puis-je ouvrir un compte client ?
+                  </span>
+                  <span>{activeIndex === 0 ? "-" : "+"}</span>
+                </div>
+                {activeIndex === 0 && (
+                  <p className="mt-2 text-gray-600">
+                    La création d'un compte est facile. Cliquez sur l'icône
+                    profil en haut à droite de la page d’accueil et suivez les
+                    étapes. Vous pouvez aussi le faire avant de finaliser votre
+                    première commande.
+                  </p>
+                )}
+              </li>
+
+              {/* Question: Que faire en cas de perte de mot de passe ? */}
+              <li className="border-b py-4">
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleAccordion(1)}
+                >
+                  <span className="font-semibold">
+                    J'ai perdu mon mot de passe, comment le réinitialiser ?
+                  </span>
+                  <span>{activeIndex === 1 ? "-" : "+"}</span>
+                </div>
+                {activeIndex === 1 && (
+                  <p className="mt-2 text-gray-600">
+                    Cliquez sur "Mon compte" puis sur "Mot de passe oublié".
+                    Suivez les instructions pour recevoir un lien de
+                    réinitialisation par email.
+                  </p>
+                )}
+              </li>
+
+              {/* Question: Comment contacter le service client ? */}
+              <li className="border-b py-4">
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleAccordion(2)}
+                >
+                  <span className="font-semibold">
+                    Comment puis-je joindre le service client ?
+                  </span>
+                  <span>{activeIndex === 2 ? "-" : "+"}</span>
+                </div>
+                {activeIndex === 2 && (
+                  <p className="mt-2 text-gray-600">
+                    Notre service client est à votre disposition du lundi au
+                    vendredi, de 8h à 17h. Vous pouvez les contacter via notre{" "}
+                    <a href="#" className="text-blue-500 underline">
+                      formulaire de contact
+                    </a>{" "}
+                    ou directement via le chat en ligne.
+                  </p>
+                )}
+              </li>
+
+              {/* Question: Où trouver les promotions ? */}
+              <li className="border-b py-4">
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleAccordion(3)}
+                >
+                  <span className="font-semibold">
+                    Où puis-je voir les promotions et nouveautés ?
+                  </span>
+                  <span>{activeIndex === 3 ? "-" : "+"}</span>
+                </div>
+                {activeIndex === 3 && (
+                  <p className="mt-2 text-gray-600">
+                    Consultez la section "Promotions" de notre site pour
+                    découvrir les offres actuelles. Vous pouvez également suivre
+                    nos réseaux sociaux pour ne rien manquer.
+                  </p>
+                )}
+              </li>
+
+              {/* Ajoutez d'autres questions ici avec leurs réponses */}
             </ul>
           </div>
 
@@ -66,30 +123,44 @@ const FAQ = () => {
               <FaShoppingCart className="mr-2" /> COMMANDE
             </h2>
             <ul className="mt-4">
-              {[
-                "Offrez-vous des réductions pour les nouveaux clients ?",
-                "Offrez-vous des remises pour les commandes en gros ?",
-                "Comment fonctionnent les prix dégressifs ?",
-                "Puis-je modifier ma commande une fois qu'elle a été passée ?",
-                "Est-il possible d'annuler ma commande ?",
-                "Ma commande est remboursée. Dans combien de temps vais-je recevoir l'argent ?",
-              ].map((question, index) => (
-                <li key={index} className="border-b py-4">
-                  <div
-                    className="flex justify-between items-center cursor-pointer"
-                    onClick={() => toggleAccordion(index + 7)}
-                  >
-                    <span className="font-semibold">{question}</span>
-                    <span>{activeIndex === index + 7 ? "-" : "+"}</span>
-                  </div>
-                  {activeIndex === index + 7 && (
-                    <p className="mt-2 text-gray-600">
-                      Réponse à la question : Lorem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
-                    </p>
-                  )}
-                </li>
-              ))}
+              {/* Question: Puis-je modifier ma commande après validation ? */}
+              <li className="border-b py-4">
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleAccordion(7)}
+                >
+                  <span className="font-semibold">
+                    Puis-je modifier ma commande après validation ?
+                  </span>
+                  <span>{activeIndex === 7 ? "-" : "+"}</span>
+                </div>
+                {activeIndex === 7 && (
+                  <p className="mt-2 text-gray-600">
+                    Non, une fois votre commande validée, elle ne peut plus être
+                    modifiée. Vous pouvez toutefois l’annuler si elle n’a pas
+                    encore été expédiée, puis en passer une nouvelle.
+                  </p>
+                )}
+              </li>
+
+              {/* Question: Comment annuler une commande ? */}
+              <li className="border-b py-4">
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleAccordion(8)}
+                >
+                  <span className="font-semibold">
+                    Comment puis-je annuler ma commande ?
+                  </span>
+                  <span>{activeIndex === 8 ? "-" : "+"}</span>
+                </div>
+                {activeIndex === 8 && (
+                  <p className="mt-2 text-gray-600">
+                    Tant que votre commande n’a pas été expédiée, vous pouvez la
+                    faire annuler en contactant notre service client.
+                  </p>
+                )}
+              </li>
             </ul>
           </div>
 
@@ -99,30 +170,147 @@ const FAQ = () => {
               <FaTruck className="mr-2" /> LIVRAISON
             </h2>
             <ul className="mt-4">
-              {[
-                "Dans quels pays livrez-vous ?",
-                "Quels sont les délais et les jours de livraison habituels ?",
-                "À partir de quel montant d'achat puis-je profiter de la livraison gratuite ?",
-                "Ma commande n'est pas encore remise au transporteur. Pourquoi ?",
-                "Pourquoi le suivi de ma commande n'est pas toujours disponible ?",
-                "Contacter le transporteur GLS",
-              ].map((question, index) => (
-                <li key={index} className="border-b py-4">
-                  <div
-                    className="flex justify-between items-center cursor-pointer"
-                    onClick={() => toggleAccordion(index + 14)}
-                  >
-                    <span className="font-semibold">{question}</span>
-                    <span>{activeIndex === index + 14 ? "-" : "+"}</span>
-                  </div>
-                  {activeIndex === index + 14 && (
-                    <p className="mt-2 text-gray-600">
-                      Réponse à la question : Lorem ipsum dolor sit amet,
-                      consectetur adipiscing elit.
-                    </p>
-                  )}
-                </li>
-              ))}
+              {/* Question: Dans quels pays livrez-vous ? */}
+              <li className="border-b py-4">
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleAccordion(14)}
+                >
+                  <span className="font-semibold">
+                    Quels sont les pays où vous livrez ?
+                  </span>
+                  <span>{activeIndex === 14 ? "-" : "+"}</span>
+                </div>
+                {activeIndex === 14 && (
+                  <p className="mt-2 text-gray-600">
+                    Actuellement, nous livrons exclusivement en Tunisie. Si vous
+                    avez des questions, contactez notre support pour plus
+                    d’informations.
+                  </p>
+                )}
+              </li>
+
+              {/* Question: Délai et jours de livraison */}
+              <li className="border-b py-4">
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleAccordion(15)}
+                >
+                  <span className="font-semibold">
+                    Quels sont les délais et jours de livraison ?
+                  </span>
+                  <span>{activeIndex === 15 ? "-" : "+"}</span>
+                </div>
+                {activeIndex === 15 && (
+                  <p className="mt-2 text-gray-600">
+                    La livraison prend entre 3 et 7 jours ouvrés. Les jours de
+                    livraison ne peuvent pas être modifiés après validation de
+                    la commande.
+                  </p>
+                )}
+              </li>
+
+              {/* Question: Commande pas encore remise au transporteur */}
+              <li className="border-b py-4">
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleAccordion(16)}
+                >
+                  <span className="font-semibold">
+                    Pourquoi ma commande n'a-t-elle pas encore été remise au
+                    transporteur ?
+                  </span>
+                  <span>{activeIndex === 16 ? "-" : "+"}</span>
+                </div>
+                {activeIndex === 16 && (
+                  <p className="mt-2 text-gray-600">
+                    Des retards peuvent survenir en raison de la disponibilité
+                    des articles ou d’une forte demande. Soyez assuré que votre
+                    commande est en traitement.
+                  </p>
+                )}
+              </li>
+
+              {/* Question: Pourquoi le suivi n'est pas disponible ? */}
+              <li className="border-b py-4">
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleAccordion(17)}
+                >
+                  <span className="font-semibold">
+                    Pourquoi je ne peux pas suivre ma commande ?
+                  </span>
+                  <span>{activeIndex === 17 ? "-" : "+"}</span>
+                </div>
+                {activeIndex === 17 && (
+                  <p className="mt-2 text-gray-600">
+                    Il peut y avoir un délai entre l’expédition et l’activation
+                    du suivi. Si le suivi reste indisponible, n’hésitez pas à
+                    nous contacter.
+                  </p>
+                )}
+              </li>
+
+              {/* Question: Contact avec le livreur */}
+              <li className="border-b py-4">
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleAccordion(18)}
+                >
+                  <span className="font-semibold">
+                    Le livreur peut-il me contacter avant de venir ?
+                  </span>
+                  <span>{activeIndex === 18 ? "-" : "+"}</span>
+                </div>
+                {activeIndex === 18 && (
+                  <p className="mt-2 text-gray-600">
+                    Le livreur peut essayer de vous joindre avant son passage,
+                    mais cela dépend des politiques du transporteur.
+                  </p>
+                )}
+              </li>
+
+              {/* Question: Option de livraison si souvent absent */}
+              <li className="border-b py-4">
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleAccordion(19)}
+                >
+                  <span className="font-semibold">
+                    Puis-je choisir une autre option de livraison si je suis
+                    absent ?
+                  </span>
+                  <span>{activeIndex === 19 ? "-" : "+"}</span>
+                </div>
+                {activeIndex === 19 && (
+                  <p className="mt-2 text-gray-600">
+                    Vous pouvez choisir la livraison à une autre adresse ou dans
+                    un point relais lors de votre commande si vous pensez ne pas
+                    être disponible.
+                  </p>
+                )}
+              </li>
+
+              {/* Question: Que se passe-t-il si je suis absent à la livraison ? */}
+              <li className="border-b py-4">
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleAccordion(20)}
+                >
+                  <span className="font-semibold">
+                    Que se passe-t-il si je suis absent au moment de la
+                    livraison ?
+                  </span>
+                  <span>{activeIndex === 20 ? "-" : "+"}</span>
+                </div>
+                {activeIndex === 20 && (
+                  <p className="mt-2 text-gray-600">
+                    Le livreur laissera un avis de passage. Vous pourrez alors
+                    reprogrammer la livraison ou récupérer votre colis dans un
+                    point relais.
+                  </p>
+                )}
+              </li>
             </ul>
           </div>
 
@@ -132,21 +320,22 @@ const FAQ = () => {
               <FaTools className="mr-2" /> SERVICE APRÈS-VENTE
             </h2>
             <ul className="mt-4">
+              {/* Question: Que faire en cas de produit défectueux ? */}
               <li className="border-b py-4">
                 <div
                   className="flex justify-between items-center cursor-pointer"
                   onClick={() => toggleAccordion(21)}
                 >
                   <span className="font-semibold">
-                    Mon produit est défectueux/ne fonctionne pas correctement.
-                    Quelles démarches pour retourner le produit ?
+                    Mon produit est défectueux, que faire ?
                   </span>
                   <span>{activeIndex === 21 ? "-" : "+"}</span>
                 </div>
                 {activeIndex === 21 && (
                   <p className="mt-2 text-gray-600">
-                    Réponse à la question : Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit.
+                    Si vous avez reçu un produit endommagé ou défectueux,
+                    contactez notre service après-vente pour organiser un
+                    remplacement ou un remboursement.
                   </p>
                 )}
               </li>

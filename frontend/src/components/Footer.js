@@ -9,6 +9,7 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import logo from "../assest/logo.png"; // Import du logo en tant qu'image
 
 const Footer = () => {
   return (
@@ -21,7 +22,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Left Section */}
           <div>
-            <img src="/logo.png" alt="Vape Lhaj" className="mb-4" />
+            {/* Logo image with margin adjustment */}
+            <img
+              src={logo}
+              alt="Vape Lhaj"
+              className="mb-0 w-[100px]"
+              style={{ marginTop: "-20px" }} // Moves the logo upwards
+            />
             <h2 className="font-bold text-lg mb-2">La vape à son meilleur</h2>
             <p className="text-gray-600">
               Vape Lhaj est votre destination idéale pour découvrir les
@@ -38,7 +45,7 @@ const Footer = () => {
               de nos offres exclusives !
             </p>
             <div className="flex space-x-4">
-            <a
+              <a
                 href="https://www.facebook.com/profile.php?id=61563896497673"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -52,7 +59,6 @@ const Footer = () => {
               >
                 <FaInstagram className="text-xl text-black hover:text-gray-600 cursor-pointer" />
               </a>
-            
               <FaTwitter className="text-xl text-black hover:text-gray-600 cursor-pointer" />
               <FaYoutube className="text-xl text-black hover:text-gray-600 cursor-pointer" />
               <FaPinterest className="text-xl text-black hover:text-gray-600 cursor-pointer" />
@@ -76,14 +82,17 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-black">
+                <Link
+                  to="/livraison"
+                  className="text-gray-600 hover:text-black"
+                >
                   Livraison
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-black">
+                <Link to="/retours" className="text-gray-600 hover:text-black">
                   Retours
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -93,19 +102,20 @@ const Footer = () => {
             <h2 className="font-bold text-lg mb-2">Nos services</h2>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-600 hover:text-black">
-                  Tarifs Réduits
-                </a>
+                <Link
+                  to="/cadeaux-offerts"
+                  className="text-gray-600 hover:text-black"
+                >
+                  Cadeaux Offerts
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-black">
-                  Engagement écologique
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 hover:text-black">
+                <Link
+                  to="/protection-jeunesse"
+                  className="text-gray-600 hover:text-black"
+                >
                   Protection de la jeunesse
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -116,9 +126,12 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             {/* Legal Links */}
             <div className="flex items-center space-x-4 mb-4 md:mb-0">
-              <a href="#" className="text-gray-600 hover:text-black">
+              <Link
+                to="/mentions-legales"
+                className="text-gray-600 hover:text-black"
+              >
                 Mentions légales
-              </a>
+              </Link>
               <a href="#" className="text-gray-600 hover:text-black">
                 À propos
               </a>

@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
-import ForgotPassword from "../pages/ForgotPassowrd"; // Corrected spelling
+import ForgotPassword from "../pages/ForgotPassowrd";
 import SignUp from "../pages/SignUp";
 import AdminPanel from "../pages/AdminPanel";
 import AllUsers from "../pages/AllUsers";
@@ -13,8 +13,13 @@ import Cart from "../pages/Cart";
 import SearchProduct from "../pages/SearchProduct";
 import FAQ from "../pages/Faq.js";
 import Contact from "../pages/Contact.js";
-import Promotion from "../pages/Promotion"; // Import du composant Promotion
-import ScrollToTop from "../components/ScrollToTop"; // Import the ScrollToTop component
+import Promotion from "../pages/Promotion";
+import ScrollToTop from "../components/ScrollToTop";
+import Livraison from "../pages/Livraison";
+import Retours from "../pages/Retours";
+import ProtectionJeunesse from "../pages/ProtectionJeunesse";
+import CadeauxOfferts from "../pages/CadeauxOfferts";
+import MentionsLegales from "../pages/MentionsLegales"; // Import for Mentions Legales page
 
 const router = createBrowserRouter([
   {
@@ -25,7 +30,7 @@ const router = createBrowserRouter([
         path: "",
         element: (
           <>
-            <ScrollToTop /> {/* Add ScrollToTop here */}
+            <ScrollToTop />
             <Home />
           </>
         ),
@@ -94,7 +99,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "contact", // Ajout de la route pour la page Contact
+        path: "contact",
         element: (
           <>
             <ScrollToTop />
@@ -103,7 +108,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "faq", // Ajout de la route pour la page FAQ
+        path: "faq",
         element: (
           <>
             <ScrollToTop />
@@ -112,11 +117,56 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "promotion", // Ajout de la route pour la page Promotion
+        path: "promotion",
         element: (
           <>
             <ScrollToTop />
             <Promotion />
+          </>
+        ),
+      },
+      {
+        path: "livraison",
+        element: (
+          <>
+            <ScrollToTop />
+            <Livraison />
+          </>
+        ),
+      },
+      {
+        path: "retours",
+        element: (
+          <>
+            <ScrollToTop />
+            <Retours />
+          </>
+        ),
+      },
+      {
+        path: "protection-jeunesse",
+        element: (
+          <>
+            <ScrollToTop />
+            <ProtectionJeunesse />
+          </>
+        ),
+      },
+      {
+        path: "cadeaux-offerts",
+        element: (
+          <>
+            <ScrollToTop />
+            <CadeauxOfferts />
+          </>
+        ),
+      },
+      {
+        path: "mentions-legales", // Ajout de la route pour Mentions Légales
+        element: (
+          <>
+            <ScrollToTop />
+            <MentionsLegales />
           </>
         ),
       },
