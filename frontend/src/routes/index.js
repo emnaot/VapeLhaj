@@ -14,161 +14,90 @@ import SearchProduct from "../pages/SearchProduct";
 import FAQ from "../pages/Faq.js";
 import Contact from "../pages/Contact.js";
 import Promotion from "../pages/Promotion";
-import ScrollToTop from "../components/ScrollToTop";
 import Livraison from "../pages/Livraison";
 import Retours from "../pages/Retours";
 import ProtectionJeunesse from "../pages/ProtectionJeunesse";
 import CadeauxOfferts from "../pages/CadeauxOfferts";
 import MentionsLegales from "../pages/MentionsLegales"; // Import for Mentions Legales page
+import APropos from "../pages/Apropos"; // Import for À Propos page
+import PolitiqueConfidentialite from "../pages/PolitiqueConfidentialite"; // Import de la page
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <App />, // App now contains ScrollToTop globally
     children: [
       {
         path: "",
-        element: (
-          <>
-            <ScrollToTop />
-            <Home />
-          </>
-        ),
+        element: <Home />,
       },
       {
         path: "login",
-        element: (
-          <>
-            <ScrollToTop />
-            <Login />
-          </>
-        ),
+        element: <Login />,
       },
       {
         path: "forgot-password",
-        element: (
-          <>
-            <ScrollToTop />
-            <ForgotPassword />
-          </>
-        ),
+        element: <ForgotPassword />,
       },
       {
         path: "sign-up",
-        element: (
-          <>
-            <ScrollToTop />
-            <SignUp />
-          </>
-        ),
+        element: <SignUp />,
       },
       {
         path: "product-category",
-        element: (
-          <>
-            <ScrollToTop />
-            <CategoryProduct />
-          </>
-        ),
+        element: <CategoryProduct />,
       },
       {
         path: "product/:id",
-        element: (
-          <>
-            <ScrollToTop />
-            <ProductDetails />
-          </>
-        ),
+        element: <ProductDetails />,
       },
       {
         path: "cart",
-        element: (
-          <>
-            <ScrollToTop />
-            <Cart />
-          </>
-        ),
+        element: <Cart />,
       },
       {
         path: "search",
-        element: (
-          <>
-            <ScrollToTop />
-            <SearchProduct />
-          </>
-        ),
+        element: <SearchProduct />,
       },
       {
         path: "contact",
-        element: (
-          <>
-            <ScrollToTop />
-            <Contact />
-          </>
-        ),
+        element: <Contact />,
       },
       {
         path: "faq",
-        element: (
-          <>
-            <ScrollToTop />
-            <FAQ />
-          </>
-        ),
+        element: <FAQ />,
       },
       {
         path: "promotion",
-        element: (
-          <>
-            <ScrollToTop />
-            <Promotion />
-          </>
-        ),
+        element: <Promotion />,
       },
       {
         path: "livraison",
-        element: (
-          <>
-            <ScrollToTop />
-            <Livraison />
-          </>
-        ),
+        element: <Livraison />,
       },
       {
         path: "retours",
-        element: (
-          <>
-            <ScrollToTop />
-            <Retours />
-          </>
-        ),
+        element: <Retours />,
       },
       {
         path: "protection-jeunesse",
-        element: (
-          <>
-            <ScrollToTop />
-            <ProtectionJeunesse />
-          </>
-        ),
+        element: <ProtectionJeunesse />,
       },
       {
         path: "cadeaux-offerts",
-        element: (
-          <>
-            <ScrollToTop />
-            <CadeauxOfferts />
-          </>
-        ),
+        element: <CadeauxOfferts />,
       },
       {
-        path: "mentions-legales", // Ajout de la route pour Mentions Légales
-        element: (
-          <>
-            <ScrollToTop />
-            <MentionsLegales />
-          </>
-        ),
+        path: "mentions-legales",
+        element: <MentionsLegales />,
+      },
+      {
+        path: "a-propos",
+        element: <APropos />,
+      },
+      {
+        path: "politique-confidentialite",
+        element: <PolitiqueConfidentialite />,
       },
       {
         path: "admin-panel",
@@ -176,21 +105,11 @@ const router = createBrowserRouter([
         children: [
           {
             path: "all-users",
-            element: (
-              <>
-                <ScrollToTop />
-                <AllUsers />
-              </>
-            ),
+            element: <AllUsers />,
           },
           {
             path: "all-products",
-            element: (
-              <>
-                <ScrollToTop />
-                <AllProducts />
-              </>
-            ),
+            element: <AllProducts />,
           },
         ],
       },

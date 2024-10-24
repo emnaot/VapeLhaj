@@ -59,11 +59,14 @@ const Footer = () => {
               >
                 <FaInstagram className="text-xl text-black hover:text-gray-600 cursor-pointer" />
               </a>
-              <FaTwitter className="text-xl text-black hover:text-gray-600 cursor-pointer" />
+              <a
+                href="https://www.tiktok.com/@1ape_lhaj?fbclid=IwY2xjawGGEz5leHRuA2FlbQIxMAABHcHYv3m2D_EQoG3OLdhY1dSNgoM32ctGGmgRGDXNh9v9ToLJFYCazHd5aA_aem_HRqfWjgdZ8WDp063Tkk7TA"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaTiktok className="text-xl text-black hover:text-gray-600 cursor-pointer" />
+              </a>
               <FaYoutube className="text-xl text-black hover:text-gray-600 cursor-pointer" />
-              <FaPinterest className="text-xl text-black hover:text-gray-600 cursor-pointer" />
-              <FaTiktok className="text-xl text-black hover:text-gray-600 cursor-pointer" />
-              <FaLinkedin className="text-xl text-black hover:text-gray-600 cursor-pointer" />
             </div>
           </div>
 
@@ -117,6 +120,7 @@ const Footer = () => {
                   Protection de la jeunesse
                 </Link>
               </li>
+        
             </ul>
           </div>
         </div>
@@ -132,20 +136,23 @@ const Footer = () => {
               >
                 Mentions légales
               </Link>
-              <a href="#" className="text-gray-600 hover:text-black">
+              <Link to="/a-propos" className="text-gray-600 hover:text-black">
                 À propos
-              </a>
+              </Link>
               <a href="#" className="text-gray-600 hover:text-black">
                 CGV
               </a>
-              <a href="#" className="text-gray-600 hover:text-black">
+              <Link
+                to="/politique-confidentialite"
+                className="text-gray-600 hover:text-black"
+              >
                 Politique de confidentialité
-              </a>
+              </Link>
             </div>
 
             {/* Copyright */}
             <div className="text-gray-600 text-sm">
-              © 2023 Vape Lhaj. Tous droits réservés.
+              © 2024 Vape Lhaj. Tous droits réservés.
             </div>
           </div>
         </div>
