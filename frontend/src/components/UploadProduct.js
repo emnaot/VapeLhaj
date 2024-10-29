@@ -80,10 +80,12 @@ const UploadProduct = ({ onClose, fetchData }) => {
   };
 
   return (
-    <div className="fixed w-full h-full bg-gray-800 bg-opacity-75 top-0 left-0 flex justify-center items-center">
+    <div className="fixed w-full h-full bg-gray-800 bg-opacity-75 top-0 left-0 flex justify-center items-center font-calibri">
       <div className="bg-gray-100 p-8 rounded-lg shadow-lg w-full max-w-2xl h-full max-h-[80%] overflow-hidden transition-transform transform hover:scale-105 border border-gold">
         <div className="flex justify-between items-center pb-4">
-          <h2 className="font-bold text-2xl text-gray-800">Ajouter le Produit</h2>
+          <h2 className="font-bold text-2xl text-gray-800">
+            Ajouter le Produit
+          </h2>
           <div
             className="text-2xl hover:text-red-600 cursor-pointer transition duration-300"
             onClick={onClose}
@@ -96,7 +98,8 @@ const UploadProduct = ({ onClose, fetchData }) => {
           className="grid p-4 gap-4 overflow-y-scroll h-full pb-5"
           onSubmit={handleSubmit}
         >
-          <label htmlFor="productName" className="text-lg font-semibold">
+          {/* Espacement entre les champs amélioré avec mb-4 */}
+          <label htmlFor="productName" className="text-lg font-semibold mb-2">
             Nom du Produit :
           </label>
           <input
@@ -106,11 +109,11 @@ const UploadProduct = ({ onClose, fetchData }) => {
             name="productName"
             value={data.productName}
             onChange={handleOnChange}
-            className="p-3 bg-gray-200 border border-gray-300 rounded shadow transition duration-300 hover:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark"
+            className="p-3 bg-gray-200 border border-gray-300 rounded shadow transition duration-300 hover:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark mb-4"
             required
           />
 
-          <label htmlFor="brandName" className="mt-3 text-lg font-semibold">
+          <label htmlFor="brandName" className="text-lg font-semibold mb-2">
             Nom de la Marque :
           </label>
           <input
@@ -120,11 +123,11 @@ const UploadProduct = ({ onClose, fetchData }) => {
             value={data.brandName}
             name="brandName"
             onChange={handleOnChange}
-            className="p-3 bg-gray-200 border border-gray-300 rounded shadow transition duration-300 hover:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark"
+            className="p-3 bg-gray-200 border border-gray-300 rounded shadow transition duration-300 hover:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark mb-4"
             required
           />
 
-          <label htmlFor="category" className="mt-3 text-lg font-semibold">
+          <label htmlFor="category" className="text-lg font-semibold mb-2">
             Catégorie :
           </label>
           <select
@@ -132,7 +135,7 @@ const UploadProduct = ({ onClose, fetchData }) => {
             value={data.category}
             name="category"
             onChange={handleOnChange}
-            className="p-3 bg-gray-200 border border-gray-300 rounded shadow transition duration-300 hover:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark"
+            className="p-3 bg-gray-200 border border-gray-300 rounded shadow transition duration-300 hover:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark mb-4"
           >
             <option value={""}>Sélectionnez une Catégorie</option>
             {productCategory.map((el, index) => (
@@ -142,11 +145,11 @@ const UploadProduct = ({ onClose, fetchData }) => {
             ))}
           </select>
 
-          <label htmlFor="productImage" className="mt-3 text-lg font-semibold">
+          <label htmlFor="productImage" className="text-lg font-semibold mb-2">
             Image du Produit :
           </label>
           <label htmlFor="uploadImageInput">
-            <div className="p-4 bg-gray-200 border border-gray-300 rounded h-32 w-full flex justify-center items-center cursor-pointer transition duration-300 hover:bg-gray-300">
+            <div className="p-4 bg-gray-200 border border-gray-300 rounded h-32 w-full flex justify-center items-center cursor-pointer transition duration-300 hover:bg-gray-300 mb-4">
               <div className="text-gray-600 flex justify-center items-center flex-col gap-2">
                 <span className="text-4xl text-gold">
                   <FaCloudUploadAlt />
@@ -159,9 +162,10 @@ const UploadProduct = ({ onClose, fetchData }) => {
                   onChange={handleUploadProduct}
                 />
               </div>
-            </div>  
+            </div>
           </label>
-          <div>
+
+          <div className="mb-4">
             {data?.productImage[0] ? (
               <div className="flex items-center gap-2">
                 {data.productImage.map((el, index) => (
@@ -194,7 +198,7 @@ const UploadProduct = ({ onClose, fetchData }) => {
             )}
           </div>
 
-          <label htmlFor="price" className="mt-3 text-lg font-semibold">
+          <label htmlFor="price" className="text-lg font-semibold mb-2">
             Prix :
           </label>
           <input
@@ -204,11 +208,11 @@ const UploadProduct = ({ onClose, fetchData }) => {
             value={data.price}
             name="price"
             onChange={handleOnChange}
-            className="p-3 bg-gray-200 border border-gray-300 rounded shadow transition duration-300 hover:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark"
+            className="p-3 bg-gray-200 border border-gray-300 rounded shadow transition duration-300 hover:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark mb-4"
             required
           />
 
-          <label htmlFor="sellingPrice" className="mt-3 text-lg font-semibold">
+          <label htmlFor="sellingPrice" className="text-lg font-semibold mb-2">
             Prix de Vente :
           </label>
           <input
@@ -218,27 +222,15 @@ const UploadProduct = ({ onClose, fetchData }) => {
             value={data.sellingPrice}
             name="sellingPrice"
             onChange={handleOnChange}
-            className="p-3 bg-gray-200 border border-gray-300 rounded shadow transition duration-300 hover:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark"
+            className="p-3 bg-gray-200 border border-gray-300 rounded shadow transition duration-300 hover:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark mb-4"
             required
           />
 
-          {/* Condition d'affichage des prix */}
-          <div className="mt-4">
-            {data.price === data.sellingPrice ? (
-              <p className="text-lg font-semibold">Prix : {data.price} TND</p>
-            ) : (
-              <div>
-                <p className="text-lg font-semibold">Prix : {data.price} TND</p>
-                <p className="text-lg font-semibold">Prix de Vente : {data.sellingPrice} TND</p>
-              </div>
-            )}
-          </div>
-
-          <label htmlFor="description" className="mt-3 text-lg font-semibold">
+          <label htmlFor="description" className="text-lg font-semibold mb-2">
             Description :
           </label>
           <textarea
-            className="h-28 bg-gray-200 border border-gray-300 resize-none p-3 rounded shadow transition duration-300 hover:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark"
+            className="h-28 bg-gray-200 border border-gray-300 resize-none p-3 rounded shadow transition duration-300 hover:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark mb-4"
             placeholder="Décrire le produit"
             value={data.description}
             name="description"
@@ -246,10 +238,10 @@ const UploadProduct = ({ onClose, fetchData }) => {
             required
           />
 
-          <div className="flex justify-center mt-5">
+          <div className="flex justify-center mt-0">
             <button
               type="submit"
-              className="w-full bg-gold text-white p-3 rounded shadow hover:bg-gold-dark transition duration-300"
+              className="w-full bg-gold-dark text-white p-1 rounded shadow  transition duration-300"
             >
               Ajouter le Produit
             </button>

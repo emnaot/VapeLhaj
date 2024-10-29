@@ -77,6 +77,10 @@ const SummaryApi = {
         url : `${backendDomin}/api/filter-product`,
         method : 'post'
     },
+    allContacts: {
+      url: `${backendDomin}/api/admin/contacts`,  // Mettre l'URL correcte pour la récupération des contacts
+      method: 'get',
+    },
     contactForm: {
       url: `${backendDomin}/api/contact`,
       method: 'post'

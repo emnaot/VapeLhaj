@@ -21,6 +21,7 @@ import CadeauxOfferts from "../pages/CadeauxOfferts";
 import MentionsLegales from "../pages/MentionsLegales"; // Import for Mentions Legales page
 import APropos from "../pages/Apropos"; // Import for À Propos page
 import PolitiqueConfidentialite from "../pages/PolitiqueConfidentialite"; // Import de la page
+import AllContact from "../pages/AllContact";  // Import the new AllContact component
 
 const router = createBrowserRouter([
   {
@@ -110,6 +111,10 @@ const router = createBrowserRouter([
           {
             path: "all-products",
             element: <AllProducts />,
+          },
+          {
+            path: "all-contacts",   // Nouvelle route pour les contacts
+            element: <AllContact />,
           },
         ],
       },
