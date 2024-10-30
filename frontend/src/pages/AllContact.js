@@ -2,15 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import SummaryApi from '../common';
 import moment from 'moment';
-import { MdOutlineMessage } from 'react-icons/md'; // Icône pour afficher le message
-import Modal from '../components/Modal'; // Composant Modal pour afficher le message complet
+import { MdOutlineMessage, MdDelete } from 'react-icons/md';  // Icônes pour afficher le message et la suppression
+import Modal from '../components/Modal';  // Composant Modal pour afficher le message complet
 
 const AllContact = () => {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedMessage, setSelectedMessage] = useState(null); // État pour gérer le message sélectionné
-  const [selectedEmail, setSelectedEmail] = useState(''); // Stocke l'email de l'utilisateur pour la réponse
+  const [selectedMessage, setSelectedMessage] = useState(null);  // Gère le message sélectionné
+  const [selectedEmail, setSelectedEmail] = useState('');  // Stocke l'email de l'utilisateur
 
   const fetchContacts = async () => {
     try {
@@ -31,20 +31,41 @@ const AllContact = () => {
     }
   };
 
-  useEffect(() => {
-    fetchContacts(); // Récupère les contacts au chargement du composant
-  }, []);
-
-  // Fonction pour ouvrir le modal avec le message complet
-  const handleOpenMessage = (message, email) => {
-    setSelectedMessage(message); // Définit le message sélectionné pour l'affichage
-    setSelectedEmail(email); // Définit l'email sélectionné pour répondre
+  // Fonction pour supprimer un contact
+  const handleDeleteContact = async (id) => {
+    if (window.confirm('Êtes-vous sûr de vouloir supprimer ce message ?')) {
+      try {
+        const response = await fetch(SummaryApi.deleteContact.url(id), {
+          method: 'DELETE',
+          credentials: 'include',
+        });
+        const data = await response.json();
+        if (response.ok) {
+          setContacts(contacts.filter(contact => contact._id !== id));  // Supprime le contact de l'état local
+          alert(data.message);
+        } else {
+          alert('Erreur lors de la suppression du message');
+        }
+      } catch (error) {
+        alert('Erreur lors de la suppression du message');
+      }
+    }
   };
 
-  // Fonction pour fermer le modal
+  useEffect(() => {
+    fetchContacts();  // Récupère les contacts lors du chargement du composant
+  }, []);
+
+  // Fonction pour afficher le message complet
+  const handleOpenMessage = (message, email) => {
+    setSelectedMessage(message);
+    setSelectedEmail(email);
+  };
+
+  // Fermer le modal de message
   const handleCloseModal = () => {
     setSelectedMessage(null);
-    setSelectedEmail(''); // Réinitialise l'email
+    setSelectedEmail('');
   };
 
   if (loading) {
@@ -67,6 +88,7 @@ const AllContact = () => {
               <th className="p-3 text-left border border-gray-300">Email</th>
               <th className="p-3 text-left border border-gray-300">Message</th>
               <th className="p-3 text-left border border-gray-300">Date</th>
+              <th className="p-3 text-left border border-gray-300">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -87,6 +109,14 @@ const AllContact = () => {
                   </div>
                 </td>
                 <td className="p-3 text-sm border border-gray-300">{moment(contact.createdAt).format('LL')}</td>
+                <td className="p-3 text-sm border border-gray-300">
+                  <button
+                    onClick={() => handleDeleteContact(contact._id)}
+                    className="text-red-600 hover:text-red-800"
+                  >
+                    <MdDelete size={20} />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -95,7 +125,7 @@ const AllContact = () => {
         <p className="text-center">Aucun message de contact disponible.</p>
       )}
 
-      {/* Affiche le modal avec le message complet et le bouton "Répondre" */}
+      {/* Modal pour afficher le message complet */}
       {selectedMessage && (
         <Modal onClose={handleCloseModal}>
           <div className="p-6">
@@ -103,7 +133,7 @@ const AllContact = () => {
             <p className="text-gray-800 mb-4">{selectedMessage}</p>
             <div className="text-right">
               <a
-                href={`mailto:${selectedEmail}`} // Génère le lien mailto avec l'email
+                href={`mailto:${selectedEmail}`}  // Lien pour répondre par email
                 className="bg-gold text-white py-2 px-3 rounded-sm hover:bg-gold-dark transition-colors"
               >
                 Répondre

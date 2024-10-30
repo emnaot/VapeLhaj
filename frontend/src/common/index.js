@@ -81,6 +81,10 @@ const SummaryApi = {
       url: `${backendDomin}/api/admin/contacts`,  // Mettre l'URL correcte pour la récupération des contacts
       method: 'get',
     },
+    deleteContact: {
+      url: (id) => `${backendDomin}/api/admin/contact/${id}`,  // Génère l'URL avec l'ID pour la suppression
+      method: "delete",
+    },
     contactForm: {
       url: `${backendDomin}/api/contact`,
       method: 'post'

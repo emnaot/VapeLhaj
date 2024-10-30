@@ -22,6 +22,7 @@ const updateAddToCartProduct = require('../controller/user/updateAddToCartProduc
 const deleteAddToCartProduct = require('../controller/user/deleteAddToCartProduct')
 const searchProduct = require('../controller/product/searchProduct')
 const filterProductController = require('../controller/product/filterProduct')
+const deleteContact = require('../controller/contact/deleteContact');
 
 const getContacts = require('../controller/contact/getContacts');
 const contactFormController = require('../controller/contact/contactForm');
@@ -36,6 +37,7 @@ router.post('/contact', contactFormController);
 router.get("/all-user",authToken,allUsers)
 router.post("/update-user",authToken,updateUser)
 router.get('/admin/contacts', authToken, getContacts);
+router.delete('/admin/contact/:id', authToken, deleteContact);  // Route pour supprimer un message de contact
 
 //product
 router.post("/upload-product",authToken,UploadProductController)
