@@ -23,6 +23,7 @@ const deleteAddToCartProduct = require('../controller/user/deleteAddToCartProduc
 const searchProduct = require('../controller/product/searchProduct')
 const filterProductController = require('../controller/product/filterProduct')
 const deleteContact = require('../controller/contact/deleteContact');
+const deleteProductController = require('../controller/product/deleteProduct');
 
 const getContacts = require('../controller/contact/getContacts');
 const contactFormController = require('../controller/contact/contactForm');
@@ -48,6 +49,7 @@ router.post("/category-product",getCategoryWiseProduct)
 router.post("/product-details",getProductDetails)
 router.get("/search",searchProduct)
 router.post("/filter-product",filterProductController)
+router.delete('/delete-product/:id', deleteProductController);
 
 //user add to cart
 router.post("/addtocart",authToken,addToCartController)

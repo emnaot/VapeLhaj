@@ -9,17 +9,24 @@ const AllProducts = () => {
   const [allProduct, setAllProduct] = useState([]);
 
   const fetchAllProduct = async () => {
-    const response = await fetch(SummaryApi.allProduct.url);
-    const dataResponse = await response.json();
-
-    console.log("product data", dataResponse);
-
-    setAllProduct(dataResponse?.data || []);
+    try {
+      const response = await fetch(SummaryApi.allProduct.url);
+      const dataResponse = await response.json();
+      console.log("product data", dataResponse);
+      setAllProduct(dataResponse?.data || []);
+    } catch (error) {
+      console.error("Failed to fetch products:", error);
+    }
   };
 
   useEffect(() => {
     fetchAllProduct();
   }, []);
+
+  const handleDeleteProduct = (productId) => {
+    // Supprime le produit de l'état actuel sans refetcher
+    setAllProduct((prevProducts) => prevProducts.filter((product) => product._id !== productId));
+  };
 
   return (
     <div className="bg-white font-calibri">
@@ -47,7 +54,8 @@ const AllProducts = () => {
             <AdminProductCard
               data={product}
               key={index + "allProduct"}
-              fetchdata={fetchAllProduct}
+              fetchdata={fetchAllProduct}  // Utilisé pour mettre à jour la liste si nécessaire
+              onDelete={handleDeleteProduct} // Fonction de suppression
             />
           );
         })}

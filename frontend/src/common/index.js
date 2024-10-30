@@ -85,6 +85,10 @@ const SummaryApi = {
       url: (id) => `${backendDomin}/api/admin/contact/${id}`,  // Génère l'URL avec l'ID pour la suppression
       method: "delete",
     },
+    deleteProduct: {
+      url: (id) => `${backendDomin}/api/delete-product/${id}`, // URL for deleting a product
+      method: 'DELETE'
+  },
     contactForm: {
       url: `${backendDomin}/api/contact`,
       method: 'post'
