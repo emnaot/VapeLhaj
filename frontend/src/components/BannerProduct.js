@@ -115,7 +115,7 @@ const BannerProduct = () => {
           </h2>
           <button
             onClick={handleBuyClick}
-            className="text-white px-4 py-2 border border-white rounded-lg hover:bg-white/50 hover:text-gray-700 "
+            className="text-white px-4 py-2 rounded-lg hover:bg-white/50 hover:text-gray-700 "
           >
             <span className="font-semibold">Acheter</span> &nbsp;{" "}
             <span className="font-semibold ">&#8250;</span>
