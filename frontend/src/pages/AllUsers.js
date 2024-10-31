@@ -1,3 +1,4 @@
+// src/pages/AllUsers.js
 import React, { useEffect, useState } from "react";
 import SummaryApi from "../common";
 import { toast } from "react-toastify";
@@ -66,46 +67,48 @@ const AllUsers = () => {
         />
       </div>
 
-      {/*** Table Desktop ***/}
+      {/*** Table Desktop avec défilement ***/}
       {!isMobile ? (
-        <table className="w-full userTable bg-white shadow-md rounded-lg">
-          <thead>
-            <tr className="bg-[#111111] text-white">
-              <th className="p-3">N°</th>
-              <th className="p-3">Nom</th>
-              <th className="p-3">Email</th>
-              <th className="p-3">Numéro de téléphone</th>
-              <th className="p-3">Rôle</th>
-              <th className="p-3">Date de création</th>
-              <th className="p-3">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredUsers.map((el, index) => {
-              return (
-                <tr key={el._id} className="border-b hover:bg-gray-50">
-                  <td className="p-3">{index + 1}</td>
-                  <td className="p-3">{el?.name}</td>
-                  <td className="p-3">{el?.email}</td>
-                  <td className="p-3">{el?.phone}</td>
-                  <td className="p-3">{el?.role}</td>
-                  <td className="p-3">{moment(el?.createdAt).format("LL")}</td>
-                  <td className="p-3">
-                    <button
-                      className="bg-gold-white p-2 rounded-full cursor-pointer hover:bg-gold hover:text-white transition duration-300"
-                      onClick={() => {
-                        setUpdateUserDetails(el);
-                        setOpenUpdateRole(true);
-                      }}
-                    >
-                      <MdModeEdit />
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="overflow-y-auto max-h-96"> {/* Conteneur avec défilement vertical */}
+          <table className="w-full userTable bg-white shadow-md rounded-lg">
+            <thead>
+              <tr className="bg-[#111111] text-white">
+                <th className="p-3">N°</th>
+                <th className="p-3">Nom</th>
+                <th className="p-3">Email</th>
+                <th className="p-3">Numéro de téléphone</th>
+                <th className="p-3">Rôle</th>
+                <th className="p-3">Date de création</th>
+                <th className="p-3">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredUsers.map((el, index) => {
+                return (
+                  <tr key={el._id} className="border-b hover:bg-gray-50">
+                    <td className="p-3">{index + 1}</td>
+                    <td className="p-3">{el?.name}</td>
+                    <td className="p-3">{el?.email}</td>
+                    <td className="p-3">{el?.phone}</td>
+                    <td className="p-3">{el?.role}</td>
+                    <td className="p-3">{moment(el?.createdAt).format("LL")}</td>
+                    <td className="p-3">
+                      <button
+                        className="bg-gold-white p-2 rounded-full cursor-pointer hover:bg-gold hover:text-white transition duration-300"
+                        onClick={() => {
+                          setUpdateUserDetails(el);
+                          setOpenUpdateRole(true);
+                        }}
+                      >
+                        <MdModeEdit />
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       ) : (
         /*** Version mobile ***/
         <div className="grid gap-4">

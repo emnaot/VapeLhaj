@@ -1,3 +1,4 @@
+// src/components/AdminEditProduct.js
 import React, { useState } from 'react';
 import { CgClose } from "react-icons/cg";
 import productCategory from '../helpers/productCategory';
@@ -28,11 +29,20 @@ const AdminEditProduct = ({
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
+        
+        setData((prev) => {
+            let updatedData = { ...prev, [name]: value };
+            
+            // Validation to ensure sellingPrice does not exceed price
+            if (name === "price" && parseFloat(updatedData.sellingPrice) > parseFloat(value)) {
+                updatedData.sellingPrice = value; // Adjust sellingPrice to be equal to price
+            }
+            if (name === "sellingPrice" && parseFloat(value) > parseFloat(updatedData.price)) {
+                return prev; // Prevent updating sellingPrice if it's greater than price
+            }
 
-        setData((prev) => ({
-            ...prev,
-            [name]: value
-        }));
+            return updatedData;
+        });
     };
 
     const handleUploadProduct = async (e) => {
@@ -57,6 +67,12 @@ const AdminEditProduct = ({
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Vérification : Le Prix de vente ne doit pas être supérieur au Prix
+        if (parseFloat(data.sellingPrice) > parseFloat(data.price)) {
+            toast.error("Le Prix de vente ne peut pas être supérieur au Prix.");
+            return;
+        }
 
         const response = await fetch(SummaryApi.updateProduct.url, {
             method: SummaryApi.updateProduct.method,

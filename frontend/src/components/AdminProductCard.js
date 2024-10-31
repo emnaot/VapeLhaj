@@ -66,7 +66,7 @@ const AdminProductCard = ({
 
                         {/* Delete button */}
                         <div
-                            className='w-fit p-2 bg-red-500 hover:bg-red-400 rounded-full text-white cursor-pointer transition-colors duration-300'
+                            className='w-fit p-2 bg-gray-500 hover:bg-gray-400 rounded-full text-white cursor-pointer transition-colors duration-300'
                             onClick={handleDeleteProduct}
                         >
                             <MdDelete size={20} />

@@ -1,3 +1,4 @@
+// src/components/UploadProduct.js
 import React, { useState } from "react";
 import { CgClose } from "react-icons/cg";
 import productCategory from "../helpers/productCategory";
@@ -38,13 +39,13 @@ const UploadProduct = ({ onClose, fetchData }) => {
     }));
   };
 
-  const handleDeleteProductImage = async (index) => {
+  const handleDeleteProductImage = (index) => {
     const newProductImage = [...data.productImage];
     newProductImage.splice(index, 1);
 
     setData((prev) => ({
       ...prev,
-      productImage: [...newProductImage],
+      productImage: newProductImage,
     }));
   };
 
@@ -83,9 +84,7 @@ const UploadProduct = ({ onClose, fetchData }) => {
     <div className="fixed w-full h-full bg-gray-800 bg-opacity-75 top-0 left-0 flex justify-center items-center font-calibri">
       <div className="bg-gray-100 p-8 rounded-lg shadow-lg w-full max-w-2xl h-full max-h-[80%] overflow-hidden transition-transform transform hover:scale-105 border border-gold">
         <div className="flex justify-between items-center pb-4">
-          <h2 className="font-bold text-2xl text-gray-800">
-            Ajouter le Produit
-          </h2>
+          <h2 className="font-bold text-2xl text-gray-800">Ajouter le Produit</h2>
           <div
             className="text-2xl hover:text-red-600 cursor-pointer transition duration-300"
             onClick={onClose}
@@ -98,7 +97,6 @@ const UploadProduct = ({ onClose, fetchData }) => {
           className="grid p-4 gap-4 overflow-y-scroll h-full pb-5"
           onSubmit={handleSubmit}
         >
-          {/* Espacement entre les champs amélioré avec mb-4 */}
           <label htmlFor="productName" className="text-lg font-semibold mb-2">
             Nom du Produit :
           </label>
@@ -137,7 +135,7 @@ const UploadProduct = ({ onClose, fetchData }) => {
             onChange={handleOnChange}
             className="p-3 bg-gray-200 border border-gray-300 rounded shadow transition duration-300 hover:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark mb-4"
           >
-            <option value={""}>Sélectionnez une Catégorie</option>
+            <option value="">Sélectionnez une Catégorie</option>
             {productCategory.map((el, index) => (
               <option value={el.value} key={el.value + index}>
                 {el.label}
@@ -166,7 +164,7 @@ const UploadProduct = ({ onClose, fetchData }) => {
           </label>
 
           <div className="mb-4">
-            {data?.productImage[0] ? (
+            {data.productImage[0] ? (
               <div className="flex items-center gap-2">
                 {data.productImage.map((el, index) => (
                   <div className="relative group" key={index}>
@@ -181,7 +179,6 @@ const UploadProduct = ({ onClose, fetchData }) => {
                         setFullScreenImage(el);
                       }}
                     />
-
                     <div
                       className="absolute bottom-0 right-0 p-1 text-white bg-red-600 rounded-full hidden group-hover:block cursor-pointer transition duration-300"
                       onClick={() => handleDeleteProductImage(index)}
@@ -241,7 +238,7 @@ const UploadProduct = ({ onClose, fetchData }) => {
           <div className="flex justify-center mt-0">
             <button
               type="submit"
-              className="w-full bg-gold-dark text-white p-1 rounded shadow  transition duration-300"
+              className="w-full bg-gold-dark text-white p-1 rounded shadow transition duration-300"
             >
               Ajouter le Produit
             </button>

@@ -11,7 +11,9 @@ import image3Mobile from "../assest/banner/img3_mobile.gif";
 import image4Mobile from "../assest/banner/img4_mobile.gif";
 import image5Mobile from "../assest/banner/img5_mobile.gif";
 
-import { FaAngleRight, FaAngleLeft, FaPause, FaPlay } from "react-icons/fa";
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
+import { CiPause1 } from "react-icons/ci"; // Import de l'icône pause
+import { CiPlay1 } from "react-icons/ci"; // Import de l'icône play
 import { useNavigate } from "react-router-dom";
 
 const BannerProduct = () => {
@@ -100,9 +102,9 @@ const BannerProduct = () => {
               style={{ backgroundColor: "#ffffff80" }}
             >
               {paused ? (
-                <FaPlay className="text-black text-base" />
+                <CiPlay1 className="text-black text-base" /> // Utilisation de l'icône play
               ) : (
-                <FaPause className="text-black text-base" />
+                <CiPause1 className="text-black text-base" /> // Utilisation de l'icône pause
               )}
             </button>
           </>
@@ -116,7 +118,7 @@ const BannerProduct = () => {
             className="text-white px-4 py-2 border border-white rounded-lg hover:bg-white/50 hover:text-gray-700 "
           >
             <span className="font-semibold">Acheter</span> &nbsp;{" "}
-            <span className="font-semibold " > &#8250;</span>
+            <span className="font-semibold ">&#8250;</span>
           </button>
         </div>
         <div

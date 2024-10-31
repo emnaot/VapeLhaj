@@ -59,17 +59,18 @@ const AdminPanel = () => {
           {/***navigation mobile */} 
           <div className="p-4">
             <nav className="grid gap-4">
-              <Link
-                to={"all-users"}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105 shadow-md"
-              >
-                Tous les utilisateurs
-              </Link>
+            
               <Link
                 to={"all-products"}
                 className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105 shadow-md"
               >
                 Tous les produits
+              </Link>
+              <Link
+                to={"all-users"}
+                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105 shadow-md"
+              >
+                Tous les utilisateurs
               </Link>
               <Link
                 to={"all-contacts"}

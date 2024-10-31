@@ -25,9 +25,9 @@ const WhyChooseUs = () => {
       icon: "💬",
     },
     {
-      title: "SAV Efficace",
-      description: "Produit défectueux sans retour grâce au SAV efficace et simple",
-      icon: "📦",
+      title: "Paiement sécurisé", // Updated title
+      description: "Payer en toute sérénité grâce au Carte e dinar", // Updated description
+      icon: "🔒", // Changed to a lock icon to signify secure payment
     },
   ];
 
@@ -36,7 +36,7 @@ const WhyChooseUs = () => {
       className="py-12"
       style={{ fontFamily: "Calibri, sans-serif", backgroundColor: "#111111" }}
     >
-      <div className={`container ${isMobile ? "px-4" : "mx-auto px-24"}`}> {/* Increased side padding for desktop */}
+      <div className={`container ${isMobile ? "px-4" : "mx-auto px-24"}`}>
         <h2
           className={`text-center ${isMobile ? "text-2xl" : "text-3xl"} font-bold mb-4 text-white`}
         >
@@ -63,7 +63,7 @@ const WhyChooseUs = () => {
                 backgroundColor: "#252525",
                 flexShrink: 0,
               }}
-              whileHover={{ scale: 1.05, transition: { duration: 0.3 } }} // Only hover effect
+              whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
             >
               <div className={`mb-4 ${isMobile ? "text-3xl" : "text-4xl"}`}>
                 {feature.icon}
