@@ -1,17 +1,15 @@
-// src/pages/AdminPanel.js
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import ROLE from "../common/role";
-import img2 from "../assest/banner/categ.gif"; // Import de l'image GIF
+import img2 from "../assest/banner/categ.gif";
 
 const AdminPanel = () => {
   const user = useSelector((state) => state?.user?.user);
   const navigate = useNavigate();
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Détection mobile
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  // Update isMobile state on window resize
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -28,53 +26,53 @@ const AdminPanel = () => {
   }, [user]);
 
   if (isMobile) {
-    // Version mobile
     return (
-      <div className="min-h-[calc(100vh-200px)] bg-white flex flex-col justify-center items-center font-calibri p-4">
+      <div className="min-h-[calc(100vh-200px)] bg-white flex flex-col items-center font-calibri p-4">
         <aside className="bg-white w-full shadow-xl rounded-xl mb-4">
           <div
-            className="h-32 flex justify-center items-center flex-col rounded-t-xl"
+            className="h-40 flex flex-col items-center justify-center rounded-t-xl"
             style={{
               backgroundImage: `url(${img2})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
           >
-            <div className="text-5xl cursor-pointer relative flex justify-center">
+            <div className="relative w-24 h-24 rounded-full border-4 border-white shadow-md overflow-hidden">
               {user?.profilePic ? (
                 <img
                   src={user?.profilePic}
-                  className="w-20 h-20 rounded-full border-4 border-white shadow-md"
+                  className="w-full h-full object-cover"
                   alt={user?.name}
                 />
               ) : (
-                <FaRegCircleUser className="text-black" />
+                <FaRegCircleUser className="text-6xl text-gray-300" />
               )}
             </div>
-            <p className="capitalize text-lg font-semibold text-black mt-2">
+            <p className="capitalize text-xl font-bold text-black mt-3">
               {user?.name}
             </p>
-            <p className="text-sm text-white">{user?.role}</p>
+            <p className="text-sm text-white mt-1 p-0">
+              {user?.role}
+            </p>
           </div>
-          {/***navigation mobile */} 
+
           <div className="p-4">
             <nav className="grid gap-4">
-            
               <Link
                 to={"all-products"}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105 shadow-md"
+                className="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300 shadow-sm"
               >
                 Tous les produits
               </Link>
               <Link
                 to={"all-users"}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105 shadow-md"
+                className="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300 shadow-sm"
               >
                 Tous les utilisateurs
               </Link>
               <Link
                 to={"all-contacts"}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105 shadow-md"
+                className="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300 shadow-sm"
               >
                 Messages de Contact
               </Link>
@@ -89,55 +87,54 @@ const AdminPanel = () => {
     );
   }
 
-  // Version desktop reste intacte
   return (
     <div className="min-h-[calc(100vh-200px)] bg-white flex justify-center font-calibri">
       <div className="max-w-[1380px] w-full px-0 md:flex hidden">
-        <aside className="bg-white min-h-[calc(100vh-300px)] w-full max-w-60 shadow-xl rounded-xl m-4">
-          <div
-            className="h-32 flex justify-center items-center flex-col rounded-t-xl"
+      <aside className="bg-white min-h-[calc(100vh-300px)] w-full max-w-[295px] shadow-xl rounded-xl m-4">
+      <div
+            className="h-40 flex flex-col items-center justify-center rounded-t-xl"
             style={{
               backgroundImage: `url(${img2})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
           >
-            <div className="text-5xl cursor-pointer relative flex justify-center">
+            <div className="relative w-24 h-24 rounded-full border-4 border-white shadow-md overflow-hidden">
               {user?.profilePic ? (
                 <img
                   src={user?.profilePic}
-                  className="w-20 h-20 rounded-full border-4 border-white shadow-md"
+                  className="w-full h-full object-cover"
                   alt={user?.name}
                 />
               ) : (
-                <FaRegCircleUser className="text-black" />
+                <FaRegCircleUser className="text-6xl text-gray-300" />
               )}
             </div>
-            <p className="capitalize text-lg font-semibold text-black mt-2">
+            <p className="capitalize text-xl font-bold text-black mt-3">
               {user?.name}
             </p>
-            <p className="text-sm text-white">{user?.role}</p>
+            <p className="text-sm text-white mt-1 p-0">
+              {user?.role}
+            </p>
           </div>
 
-          {/***navigation */} 
           <div className="p-6">
-            <nav className="grid gap-4">
-          
+            <nav className="grid gap-6">
               <Link
                 to={"all-products"}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105 shadow-md"
+                className="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300 shadow-sm"
               >
                 Tous les produits
               </Link>
               <Link
                 to={"all-users"}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105 shadow-md"
+                className="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300 shadow-sm"
               >
                 Tous les utilisateurs
               </Link>
               <Link
                 to={"all-contacts"}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105 shadow-md"
+                className="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300 shadow-sm"
               >
                 Messages de Contact
               </Link>

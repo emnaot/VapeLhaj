@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import loginIcons from "../assest/signin.png";
-import { FaEye } from "react-icons/fa";
-import { FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaCloudUploadAlt } from "react-icons/fa"; // Ajoutez l'icône de téléchargement
 import { Link, useNavigate } from "react-router-dom";
 import imageTobase64 from "../helpers/imageTobase64";
 import SummaryApi from "../common";
@@ -21,37 +20,21 @@ const SignUp = () => {
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-
-    setData((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
+    setData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleUploadPic = async (e) => {
     const file = e.target.files[0];
-
     const imagePic = await imageTobase64(file);
-
-    setData((prev) => {
-      return {
-        ...prev,
-        profilePic: imagePic,
-      };
-    });
+    setData((prev) => ({ ...prev, profilePic: imagePic }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (data.password === data.confirmPassword) {
       const dataResponse = await fetch(SummaryApi.signUP.url, {
         method: SummaryApi.signUP.method,
-        headers: {
-          "content-type": "application/json",
-        },
+        headers: { "content-type": "application/json" },
         body: JSON.stringify(data),
       });
 
@@ -60,9 +43,7 @@ const SignUp = () => {
       if (dataApi.success) {
         toast.success(dataApi.message);
         navigate("/login");
-      }
-
-      if (dataApi.error) {
+      } else {
         toast.error(dataApi.message);
       }
     } else {
@@ -71,23 +52,28 @@ const SignUp = () => {
   };
 
   return (
-    <section
-      id="signup"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 via-gold-dark to-gray-900"
-    >
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <div className="bg-gradient-to-r from-gold to-gold-dark p-6 text-center">
-          <div className="w-24 h-24 mx-auto mb-4 relative overflow-hidden rounded-full">
-            <img
-              src={data.profilePic || loginIcons}
-              alt="Icône d'inscription"
-              className="w-full h-full object-cover rounded-full border-4 border-white"
-            />
+    <section id="signup">
+      <div
+        className="mx-auto container flex justify-center items-center min-h-screen"
+        style={{ padding: "0.25px", marginTop: "-25px" }}
+      >
+        <div className="bg-white p-8 w-full max-w-md shadow-md rounded-lg">
+          <h1 className="text-4xl font-bold text-center mb-6">
+            Créer un compte
+          </h1>
+
+          <div className="w-20 h-20 mx-auto relative overflow-hidden rounded-full mb-4">
+            <img src={data.profilePic || loginIcons} alt="login icons" />
             <form>
               <label>
-                <div className="text-xs bg-opacity-80 bg-slate-200 pb-4 pt-2 cursor-pointer text-center absolute bottom-0 w-full">
-                  Upload Photo
+                <div
+                  className="flex justify-center items-center bg-transparent text-center absolute w-full py-2 cursor-pointer"
+                  style={{ bottom: "25px" }} // Ajustez la valeur en pixels pour déplacer l'icône
+                >
+                  <FaCloudUploadAlt className="text-2xl text-gray-100" />{" "}
+                  {/* Icône de téléchargement */}
                 </div>
+
                 <input
                   type="file"
                   className="hidden"
@@ -96,115 +82,90 @@ const SignUp = () => {
               </label>
             </form>
           </div>
-          <h2 className="text-white text-2xl font-bold">Inscription</h2>
-          <p className="text-gray-200">Créez votre compte</p>
-        </div>
-        <form
-          className="p-6 space-y-4 overflow-y-auto max-h-96"
-          onSubmit={handleSubmit}
-        >
-          <div>
-            <label className="block text-gray-700 font-semibold mb-2">
-              Nom :
-            </label>
+
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="Entrez votre nom"
+              placeholder="Prénom"
               name="name"
               value={data.name}
               onChange={handleOnChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gold transition"
+              className="bg-gray-100 p-3 rounded-md outline-none"
             />
-          </div>
-          <div>
-            <label className="block text-gray-700 font-semibold mb-2">
-              Email :
-            </label>
             <input
               type="email"
-              placeholder="Entrez votre email"
+              placeholder="Courriel"
               name="email"
               value={data.email}
               onChange={handleOnChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gold transition"
+              className="bg-gray-100 p-3 rounded-md outline-none"
             />
-          </div>
-          <div>
-            <label className="block text-gray-700 font-semibold mb-2">
-              Numéro de téléphone :
-            </label>
-            <input
-              type="tel"
-              placeholder="Entrez votre numéro de téléphone"
-              name="phone"
-              value={data.phone}
-              onChange={handleOnChange}
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gold transition"
-            />
-          </div>
-          <div>
-            <label className="block text-gray-700 font-semibold mb-2">
-              Mot de passe :
-            </label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="Entrez votre mot de passe"
-                value={data.password}
+                placeholder="Mot de passe"
                 name="password"
+                value={data.password}
                 onChange={handleOnChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gold transition"
+                className="bg-gray-100 p-3 rounded-md w-full outline-none"
               />
               <div
-                className="absolute inset-y-0 right-4 flex items-center cursor-pointer text-gold"
+                className="absolute right-3 top-3 cursor-pointer text-xl"
                 onClick={() => setShowPassword((prev) => !prev)}
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </div>
             </div>
-          </div>
-          <div>
-            <label className="block text-gray-700 font-semibold mb-2">
-              Confirmez le mot de passe :
-            </label>
             <div className="relative">
               <input
                 type={showConfirmPassword ? "text" : "password"}
-                placeholder="Confirmez votre mot de passe"
-                value={data.confirmPassword}
+                placeholder="Confirmez le mot de passe"
                 name="confirmPassword"
+                value={data.confirmPassword}
                 onChange={handleOnChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gold transition"
+                className="bg-gray-100 p-3 rounded-md w-full outline-none"
               />
               <div
-                className="absolute inset-y-0 right-4 flex items-center cursor-pointer text-gold"
+                className="absolute right-3 top-3 cursor-pointer text-xl"
                 onClick={() => setShowConfirmPassword((prev) => !prev)}
               >
                 {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
               </div>
             </div>
-          </div>
-          <button
-            type="submit"
-            className="w-full py-3 bg-gradient-to-r from-gold to-gold-dark text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 font-semibold"
-          >
-            S'inscrire
-          </button>
-        </form>
-        <p className="text-center text-gray-600 py-4">
-          Vous avez déjà un compte ?
-          <Link
-            to={"/login"}
-            className="text-gold hover:text-gold-dark font-semibold ml-1"
-          >
-            Connectez-vous
-          </Link>
-        </p>
+
+            <div className="flex items-center gap-2">
+              <input type="checkbox" className="cursor-pointer" />
+              <p className="text-sm text-gray-600">
+                En entrant sur ce site, vous reconnaissez être majeur(e) et que
+                vous êtes autorisé(e) par la législation de votre pays à acheter
+                des produits contenant de la nicotine.
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <input type="checkbox" className="cursor-pointer" />
+              <p className="text-sm text-gray-600">
+                En soumettant ce formulaire, j'accepte que les données fournies
+                soient utilisées pour vous recontacter.
+              </p>
+            </div>
+
+            <div className="flex gap-4 mt-6">
+              <button className="bg-black text-white py-3 rounded-full font-semibold flex-1">
+                Créer
+              </button>
+              <Link
+                to={"/login"}
+                className="text-center text-black border py-3 rounded-full font-semibold flex-1"
+              >
+                Se connecter
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
     </section>
   );

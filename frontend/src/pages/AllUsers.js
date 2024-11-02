@@ -12,7 +12,6 @@ const AllUsers = () => {
   const [updateUserDetails, setUpdateUserDetails] = useState({
     email: "",
     name: "",
-    phone: "",
     role: "",
     _id: "",
   });
@@ -76,7 +75,6 @@ const AllUsers = () => {
                 <th className="p-3">N°</th>
                 <th className="p-3">Nom</th>
                 <th className="p-3">Email</th>
-                <th className="p-3">Numéro de téléphone</th>
                 <th className="p-3">Rôle</th>
                 <th className="p-3">Date de création</th>
                 <th className="p-3">Action</th>
@@ -89,7 +87,6 @@ const AllUsers = () => {
                     <td className="p-3">{index + 1}</td>
                     <td className="p-3">{el?.name}</td>
                     <td className="p-3">{el?.email}</td>
-                    <td className="p-3">{el?.phone}</td>
                     <td className="p-3">{el?.role}</td>
                     <td className="p-3">{moment(el?.createdAt).format("LL")}</td>
                     <td className="p-3">
@@ -122,9 +119,6 @@ const AllUsers = () => {
                 <span className="font-semibold">Email :</span> {el?.email}
               </p>
               <p className="text-gray-700">
-                <span className="font-semibold">Téléphone :</span> {el?.phone}
-              </p>
-              <p className="text-gray-700">
                 <span className="font-semibold">Rôle :</span> {el?.role}
               </p>
               <p className="text-gray-700">
@@ -150,7 +144,6 @@ const AllUsers = () => {
           onClose={() => setOpenUpdateRole(false)}
           name={updateUserDetails.name}
           email={updateUserDetails.email}
-          phone={updateUserDetails.phone}
           role={updateUserDetails.role}
           userId={updateUserDetails._id}
           callFunc={fetchAllUsers}

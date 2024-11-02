@@ -133,9 +133,11 @@ const Header = () => {
         {!isMobile && (
           <>
             {/* Logo Section */}
-            <div className="flex items-center">
+            <div className="flex items-center py-4">
+              {" "}
+              {/* Ajout de py-4 pour un espace vertical égal en haut et en bas */}
               <Link to={"/"}>
-                <img src={logo} alt="Logo" width={100} height={40} />{" "}
+                <img src={logo} alt="Logo" width={80} height={40} />{" "}
                 {/* Taille ajustée */}
               </Link>
             </div>
@@ -266,7 +268,7 @@ const Header = () => {
 
             {/* Logo centré */}
             <Link to="/">
-              <img src={logo} alt="Logo" width={100} height={40} />{" "}
+              <img src={logo} alt="Logo" width={80} height={40} />{" "}
               {/* Taille ajustée */}
             </Link>
 
