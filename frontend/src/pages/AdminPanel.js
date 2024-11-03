@@ -90,7 +90,7 @@ const AdminPanel = () => {
   return (
     <div className="min-h-[calc(100vh-200px)] bg-white flex justify-center font-calibri">
       <div className="max-w-[1380px] w-full px-0 md:flex hidden">
-      <aside className="bg-white min-h-[calc(100vh-300px)] w-full max-w-[295px] shadow-xl rounded-xl m-4">
+      <aside className="bg-white min-h-[calc(100vh-300px)] w-full max-w-xs shadow-xl rounded-xl m-4">
       <div
             className="h-40 flex flex-col items-center justify-center rounded-t-xl"
             style={{
