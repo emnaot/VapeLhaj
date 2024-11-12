@@ -17,9 +17,10 @@ const Footer = () => {
       className="bg-white py-8"
       style={{ fontFamily: "Calibri, sans-serif" }}
     >
-      <div className="container mx-auto px-4 md:px-8 max-w-[1350px]">
+      {/* Container with Top Border for Separator */}
+      <div className="container mx-auto px-4 md:px-8 max-w-[1350px] border-t ">
         {/* Top Section */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pt-8">
           {/* Left Section */}
           <div>
             {/* Logo image with margin adjustment */}
@@ -120,13 +121,12 @@ const Footer = () => {
                   Protection de la jeunesse
                 </Link>
               </li>
-        
             </ul>
           </div>
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-8 border-t pt-6">
+        <div className="mt-8 border-t pt-6 ">
           <div className="flex flex-col md:flex-row justify-between items-center">
             {/* Legal Links */}
             <div className="flex items-center space-x-4 mb-4 md:mb-0">

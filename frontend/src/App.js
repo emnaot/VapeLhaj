@@ -71,7 +71,10 @@ function App() {
           <Outlet />
         </main>
 
-        <WhyChooseUs />
+        {location.pathname !== '/admin-panel' && !location.pathname.startsWith('/admin-panel') && (
+                  <WhyChooseUs />
+
+        )}
         <Footer />
       </Context.Provider>
     </>
