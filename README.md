@@ -1,11 +1,12 @@
-```markdown
+
 # Full-Stack E-Commerce MERN App
 
 ![Alt text](Full%20Stack%20E-Commerce%20MERN%20App.png?raw=true "Full-Stack E-Commerce MERN App")
 
 ## Description
 
-This project is a full-stack e-commerce platform built for a vape store. The platform enables customers to browse, search, and purchase products seamlessly, with key features such as product filtering, add-to-cart functionality, and secure checkout using Stripe integration. It also includes image zoom for product detail views and complete CRUD operations for product management. Admins and users have role-based access, while JWT token authentication ensures secure access.
+This project is a full-stack e-commerce platform built for a vape store. 
+The platform enables customers to browse, search, and purchase products seamlessly, with key features such as product filtering, add-to-cart functionality, and secure checkout using Stripe integration. It also includes image zoom for product detail views and complete CRUD operations for product management. Admins and users have role-based access, while JWT token authentication ensures secure access.
 
 ## Key Features
 
@@ -36,7 +37,7 @@ Make sure you have [Node.js](https://nodejs.org/), [MongoDB](https://www.mongodb
 ```bash
 git clone https://github.com/yourusername/Full-Stack-E-Commerce-MERN-APP.git
 cd Full-Stack-E-Commerce-MERN-APP
-```
+
 
 ### Backend Setup
 
