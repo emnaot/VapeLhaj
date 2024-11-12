@@ -1,12 +1,13 @@
+Voici le fichier `README.md` mis à jour, avec les sections supprimées comme demandé :
 
+```markdown
 # Full-Stack E-Commerce MERN App
 
 ![Alt text](Full%20Stack%20E-Commerce%20MERN%20App.png?raw=true "Full-Stack E-Commerce MERN App")
 
 ## Description
 
-This project is a full-stack e-commerce platform built for a vape store. 
-The platform enables customers to browse, search, and purchase products seamlessly, with key features such as product filtering, add-to-cart functionality, and secure checkout using Stripe integration. It also includes image zoom for product detail views and complete CRUD operations for product management. Admins and users have role-based access, while JWT token authentication ensures secure access.
+This project is a full-stack e-commerce platform built for a vape store. The platform enables customers to browse, search, and purchase products seamlessly, with key features such as product filtering, add-to-cart functionality, and secure checkout using Stripe integration. It also includes image zoom for product detail views and complete CRUD operations for product management. Admins and users have role-based access, while JWT token authentication ensures secure access.
 
 ## Key Features
 
@@ -91,37 +92,6 @@ cd Full-Stack-E-Commerce-MERN-APP
 
 To enable Stripe payments, you’ll need to add your Stripe API keys in the backend (ensure secure handling of these credentials).
 
-## Usage
-
-1. Access the frontend at `http://localhost:3000`.
-2. The backend will run on `http://localhost:5000`.
-3. Use the Admin role to manage products, view orders, and access the platform’s backend functionalities.
-4. Regular users can browse, add items to the cart, and complete purchases via the Stripe-integrated checkout.
-
-## Screenshots
-
-*(Add relevant screenshots to showcase the UI and features of your app)*
-
-## Folder Structure
-
-```
-Full-Stack-E-Commerce-MERN-APP/
-├── backend/
-│   ├── config/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   └── ...
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   └── ...
-│   └── ...
-└── README.md
-```
-
 ## Environment Variables
 
 ### Backend `.env`
@@ -137,5 +107,3 @@ Full-Stack-E-Commerce-MERN-APP/
 ## License
 
 This project is licensed under the MIT License.
-```
-
