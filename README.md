@@ -1,6 +1,3 @@
-Voici le fichier `README.md` mis à jour, avec les sections supprimées comme demandé :
-
-```markdown
 # Full-Stack E-Commerce MERN App
 
 ![Alt text](Full%20Stack%20E-Commerce%20MERN%20App.png?raw=true "Full-Stack E-Commerce MERN App")
