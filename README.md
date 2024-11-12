@@ -1,3 +1,6 @@
+Voici le code complet pour le fichier `README.md` formaté comme demandé, prêt à être ajouté dans VSCode :
+
+```markdown
 # Full-Stack E-Commerce MERN App
 
 ![Alt text](Full%20Stack%20E-Commerce%20MERN%20App.png?raw=true "Full-Stack E-Commerce MERN App")
@@ -28,70 +31,81 @@ This project is a full-stack e-commerce platform built for a vape store. The pla
 
 ### Prerequisites
 
-Make sure you have [Node.js](https://nodejs.org/), [MongoDB](https://www.mongodb.com/), and [Stripe](https://stripe.com/) account and API keys.
+Make sure you have [Node.js](https://nodejs.org/), [MongoDB](https://www.mongodb.com/), and a [Stripe](https://stripe.com/) account and API keys.
 
 ### Clone the Repository
 
 ```bash
 git clone https://github.com/yourusername/Full-Stack-E-Commerce-MERN-APP.git
 cd Full-Stack-E-Commerce-MERN-APP
-Backend Setup
-Navigate to the backend directory:
+```
 
-bash
-Copier le code
-cd backend
-Install backend dependencies:
+### Backend Setup
 
-bash
-Copier le code
-npm install
-Create a .env file in the backend directory and add your MongoDB URI, Token Secret Key, and frontend URL:
+1. Navigate to the backend directory:
+    ```bash
+    cd backend
+    ```
 
-plaintext
-Copier le code
-MONGODB_URI=your_mongodb_uri
-TOKEN_SECRET_KEY=your_secret_key
-FRONTEND_URL=http://localhost:3000
-Start the backend server:
+2. Install backend dependencies:
+    ```bash
+    npm install
+    ```
 
-bash
-Copier le code
-npm start
-Frontend Setup
-Navigate to the frontend directory:
+3. Create a `.env` file in the backend directory and add your MongoDB URI, Token Secret Key, and frontend URL:
 
-bash
-Copier le code
-cd frontend
-Install frontend dependencies:
+    ```plaintext
+    MONGODB_URI=your_mongodb_uri
+    TOKEN_SECRET_KEY=your_secret_key
+    FRONTEND_URL=http://localhost:3000
+    ```
 
-bash
-Copier le code
-npm install
-Create a .env file in the frontend directory and add your Cloudinary Cloud Name if using Cloudinary for image hosting:
+4. Start the backend server:
+    ```bash
+    npm start
+    ```
 
-plaintext
-Copier le code
-REACT_APP_CLOUD_NAME_CLOUDINARY=your_cloud_name
-Start the frontend server:
+### Frontend Setup
 
-bash
-Copier le code
-npm start
-Stripe Setup
+1. Navigate to the frontend directory:
+    ```bash
+    cd frontend
+    ```
+
+2. Install frontend dependencies:
+    ```bash
+    npm install
+    ```
+
+3. Create a `.env` file in the frontend directory and add your Cloudinary Cloud Name if using Cloudinary for image hosting:
+
+    ```plaintext
+    REACT_APP_CLOUD_NAME_CLOUDINARY=your_cloud_name
+    ```
+
+4. Start the frontend server:
+    ```bash
+    npm start
+    ```
+
+### Stripe Setup
+
 To enable Stripe payments, you’ll need to add your Stripe API keys in the backend (ensure secure handling of these credentials).
-Usage
-Access the frontend at http://localhost:3000.
-The backend will run on http://localhost:5000.
-Use the Admin role to manage products, view orders, and access the platform’s backend functionalities.
-Regular users can browse, add items to the cart, and complete purchases via the Stripe-integrated checkout.
-Screenshots
-(Add relevant screenshots to showcase the UI and features of your app)
 
-Folder Structure
-mathematica
-Copier le code
+## Usage
+
+1. Access the frontend at `http://localhost:3000`.
+2. The backend will run on `http://localhost:5000`.
+3. Use the Admin role to manage products, view orders, and access the platform’s backend functionalities.
+4. Regular users can browse, add items to the cart, and complete purchases via the Stripe-integrated checkout.
+
+## Screenshots
+
+*(Add relevant screenshots to showcase the UI and features of your app)*
+
+## Folder Structure
+
+```
 Full-Stack-E-Commerce-MERN-APP/
 ├── backend/
 │   ├── config/
@@ -107,12 +121,24 @@ Full-Stack-E-Commerce-MERN-APP/
 │   │   └── ...
 │   └── ...
 └── README.md
-Environment Variables
-Backend .env
-MONGODB_URI: Your MongoDB connection URI.
-TOKEN_SECRET_KEY: Secret key for JWT authentication.
-FRONTEND_URL: URL of the frontend application.
-Frontend .env
-REACT_APP_CLOUD_NAME_CLOUDINARY: Cloudinary cloud name if using Cloudinary for images.
-License
+```
+
+## Environment Variables
+
+### Backend `.env`
+
+- `MONGODB_URI`: Your MongoDB connection URI.
+- `TOKEN_SECRET_KEY`: Secret key for JWT authentication.
+- `FRONTEND_URL`: URL of the frontend application.
+
+### Frontend `.env`
+
+- `REACT_APP_CLOUD_NAME_CLOUDINARY`: Cloudinary cloud name if using Cloudinary for images.
+
+## License
+
 This project is licensed under the MIT License.
+```
+
+---
+
