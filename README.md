@@ -1,6 +1,6 @@
 # Full-Stack E-Commerce MERN App
 
-![Alt text](Full%20Stack%20E-Commerce%20MERN%20App.png?raw=true "Full-Stack E-Commerce MERN App")
+[Watch Demo on YouTube](https://www.youtube.com/watch?v=9yBf5LDiSpw&t=7s&ab_channel=emnaothmen)
 
 ## Description
 
