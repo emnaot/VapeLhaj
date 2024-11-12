@@ -1,6 +1,6 @@
 # Full-Stack E-Commerce MERN App
-![Admin Panel](./photo/admin_panel.PNG)
-![Banner in Home Page](./photo/banner_in_home_page.PNG)
+![Admin Panel](../photo/admin_panel.PNG)
+![Banner in Home Page](/photo/banner_in_home_page.PNG)
 ![Le Panier](./photo/le_panier.PNG)
 ![Product Category](./photo/product_category.PNG)
 ![Product Details](./photo/product_details.PNG)
