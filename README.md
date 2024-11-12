@@ -59,7 +59,7 @@ cd Full-Stack-E-Commerce-MERN-APP
 
 4. Start the backend server:
     ```bash
-    npm start
+    npm run dev
     ```
 
 ### Frontend Setup
