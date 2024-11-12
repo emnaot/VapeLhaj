@@ -1,12 +1,13 @@
 # Full-Stack E-Commerce MERN App
 
 
-![Admin Panel](photo/admin_panel.PNG)
-![Banner in Home Page](photo/banner_in_home_page.PNG)
-![Le Panier](photo/le_panier.PNG)
-![Product Category](photo/product_category.PNG)
-![Product Details](photo/product_details.PNG)
-![Product in Home Page](photo/product_in_home_page.PNG)
+
+![Admin Panel](screenshots/admin_panel.PNG)
+![Home Page Banner](screenshots/home_page_banner.PNG)
+![Shopping Cart](screenshots/shopping_cart.PNG)
+![Product Category](screenshots/product_category.PNG)
+![Product Details](screenshots/product_details.PNG)
+![Home Page Product](screenshots/home_page_product.PNG)
 
 [Watch Demo on YouTube](https://www.youtube.com/watch?v=9yBf5LDiSpw&t=7s&ab_channel=emnaothmen)
 
