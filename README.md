@@ -37,7 +37,7 @@ Make sure you have [Node.js](https://nodejs.org/), [MongoDB](https://www.mongodb
 ```bash
 git clone https://github.com/yourusername/Full-Stack-E-Commerce-MERN-APP.git
 cd Full-Stack-E-Commerce-MERN-APP
-
+```
 
 ### Backend Setup
 
