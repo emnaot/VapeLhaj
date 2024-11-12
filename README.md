@@ -1,5 +1,3 @@
-Voici le code complet pour le fichier `README.md` formaté comme demandé, prêt à être ajouté dans VSCode :
-
 ```markdown
 # Full-Stack E-Commerce MERN App
 
@@ -139,6 +137,4 @@ Full-Stack-E-Commerce-MERN-APP/
 
 This project is licensed under the MIT License.
 ```
-
----
 
