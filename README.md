@@ -1,7 +1,8 @@
 # Full-Stack E-Commerce MERN App
 
-[![Watch the demo](https://img.youtube.com/vi/9yBf5LDiSpw/0.jpg)](https://www.youtube.com/watch?v=9yBf5LDiSpw)
-
+<a href="https://www.youtube.com/watch?v=9yBf5LDiSpw" target="_blank">
+  <img src="https://img.youtube.com/vi/9yBf5LDiSpw/0.jpg" alt="Watch the demo" />
+</a>
 ## Description
 
 This project is a full-stack e-commerce platform built for a vape store. The platform enables customers to browse, search, and purchase products seamlessly, with key features such as product filtering, add-to-cart functionality, and secure checkout using Stripe integration. It also includes image zoom for product detail views and complete CRUD operations for product management. Admins and users have role-based access, while JWT token authentication ensures secure access.
