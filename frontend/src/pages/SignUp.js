@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import loginIcons from "../assest/signin.png";
-import { FaEye, FaEyeSlash, FaCloudUploadAlt } from "react-icons/fa"; // Ajoutez l'icône de téléchargement
+import { FaEye, FaEyeSlash, FaCloudUploadAlt } from "react-icons/fa"; 
 import { Link, useNavigate } from "react-router-dom";
 import imageTobase64 from "../helpers/imageTobase64";
 import SummaryApi from "../common";
@@ -25,6 +25,10 @@ const SignUp = () => {
 
   const handleUploadPic = async (e) => {
     const file = e.target.files[0];
+    if (file.size > 1 * 1024 * 1024) {
+      toast.error("La taille de l'image ne doit pas dépasser 1MB.");
+      return;
+    }
     const imagePic = await imageTobase64(file);
     setData((prev) => ({ ...prev, profilePic: imagePic }));
   };
@@ -32,22 +36,30 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (data.password === data.confirmPassword) {
-      const dataResponse = await fetch(SummaryApi.signUP.url, {
-        method: SummaryApi.signUP.method,
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      try {
+        const dataResponse = await fetch(SummaryApi.signUP.url, {
+          method: SummaryApi.signUP.method,
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(data),
+        });
 
-      const dataApi = await dataResponse.json();
+        if (dataResponse.status === 413) {
+          throw new Error("Payload Too Large: Réduisez la taille de l'image.");
+        }
 
-      if (dataApi.success) {
-        toast.success(dataApi.message);
-        navigate("/login");
-      } else {
-        toast.error(dataApi.message);
+        const dataApi = await dataResponse.json();
+
+        if (dataApi.success) {
+          toast.success(dataApi.message);
+          navigate("/login");
+        } else {
+          toast.error(dataApi.message);
+        }
+      } catch (error) {
+        toast.error(error.message || "Une erreur est survenue");
       }
     } else {
-      toast.error("Please check password and confirm password");
+      toast.error("Veuillez vérifier le mot de passe et sa confirmation.");
     }
   };
 
@@ -68,10 +80,9 @@ const SignUp = () => {
               <label>
                 <div
                   className="flex justify-center items-center bg-transparent text-center absolute w-full py-2 cursor-pointer"
-                  style={{ bottom: "25px" }} // Ajustez la valeur en pixels pour déplacer l'icône
+                  style={{ bottom: "25px" }}
                 >
-                  <FaCloudUploadAlt className="text-2xl text-gray-100" />{" "}
-                  {/* Icône de téléchargement */}
+                  <FaCloudUploadAlt className="text-2xl text-gray-100" />
                 </div>
 
                 <input
