@@ -2,7 +2,7 @@
 
 <div style="display: flex; overflow-x: auto; white-space: nowrap; gap: 10px; padding: 10px;">
 
-  <img src="screenshots/home_page_banner.PNG" alt="Home Page Banner" width="400">
+  <img src="https://github.com/user-attachments/assets/3e12883d-9e68-4032-b761-670d3025b30b" alt="Home Page Banner" width="400">
   <img src="screenshots/home_page_product.PNG" alt="Home Page Product" width="400">
   <img src="screenshots/product_category.PNG" alt="Product Category" width="400">
   <img src="screenshots/product_details.PNG" alt="Product Details" width="400">
