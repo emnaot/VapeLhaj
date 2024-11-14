@@ -25,7 +25,6 @@ This project is a full-stack e-commerce platform built for a vape store. The pla
 - **CRUD Operations for Product Management**: Full management capabilities for adding, editing, and deleting products.
 - **Role-Based Access**: Admins have full access to manage products and view orders, while users can browse and purchase items.
 - **JWT Token Authentication**: Secures the platform with token-based user authentication.
-- **Modern UI with Tailwind CSS**: Clean and intuitive interface for a smooth shopping experience.
 
 ## Tech Stack
 
@@ -34,70 +33,7 @@ This project is a full-stack e-commerce platform built for a vape store. The pla
 - **Payment Integration**: Stripe
 - **Authentication**: JWT Token Authentication
 
-## Installation
 
-### Prerequisites
-
-Make sure you have [Node.js](https://nodejs.org/), [MongoDB](https://www.mongodb.com/), and a [Stripe](https://stripe.com/) account and API keys.
-
-### Clone the Repository
-
-```bash
-git clone https://github.com/yourusername/Full-Stack-E-Commerce-MERN-APP.git
-cd Full-Stack-E-Commerce-MERN-APP
-```
-
-### Backend Setup
-
-1. Navigate to the backend directory:
-    ```bash
-    cd backend
-    ```
-
-2. Install backend dependencies:
-    ```bash
-    npm install
-    ```
-
-3. Create a `.env` file in the backend directory and add your MongoDB URI, Token Secret Key, and frontend URL:
-
-    ```plaintext
-    MONGODB_URI=your_mongodb_uri
-    TOKEN_SECRET_KEY=your_secret_key
-    FRONTEND_URL=http://localhost:3000
-    ```
-
-4. Start the backend server:
-    ```bash
-    npm run dev
-    ```
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-    ```bash
-    cd frontend
-    ```
-
-2. Install frontend dependencies:
-    ```bash
-    npm install
-    ```
-
-3. Create a `.env` file in the frontend directory and add your Cloudinary Cloud Name if using Cloudinary for image hosting:
-
-    ```plaintext
-    REACT_APP_CLOUD_NAME_CLOUDINARY=your_cloud_name
-    ```
-
-4. Start the frontend server:
-    ```bash
-    npm start
-    ```
-
-### Stripe Setup
-
-To enable Stripe payments, you’ll need to add your Stripe API keys in the backend (ensure secure handling of these credentials).
 
 ## Environment Variables
 
