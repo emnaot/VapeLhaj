@@ -1,12 +1,16 @@
+Copier le code
 # Full-Stack E-Commerce MERN App
 
+<div style="display: flex; overflow-x: auto; gap: 10px; padding: 10px;">
 
-![Home Page Banner](screenshots/home_page_banner.PNG)
-![Home Page Product](screenshots/home_page_product.PNG)
-![Product Category](screenshots/product_category.PNG)
-![Product Details](screenshots/product_details.PNG)
-![Shopping Cart](screenshots/shopping_cart.PNG)
-![Admin Panel](screenshots/admin_panel.PNG)
+  <img src="screenshots/home_page_banner.PNG" alt="Home Page Banner" width="300">
+  <img src="screenshots/home_page_product.PNG" alt="Home Page Product" width="300">
+  <img src="screenshots/product_category.PNG" alt="Product Category" width="300">
+  <img src="screenshots/product_details.PNG" alt="Product Details" width="300">
+  <img src="screenshots/shopping_cart.PNG" alt="Shopping Cart" width="300">
+  <img src="screenshots/admin_panel.PNG" alt="Admin Panel" width="300">
+
+</div>
 
 [Watch Demo on YouTube](https://www.youtube.com/watch?v=9yBf5LDiSpw&t=7s&ab_channel=emnaothmen)
 
