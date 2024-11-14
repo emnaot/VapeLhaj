@@ -1,19 +1,17 @@
-Copier le code
 # Full-Stack E-Commerce MERN App
 
-<div style="display: flex; overflow-x: auto; gap: 10px; padding: 10px;">
+<div style="display: flex; overflow-x: auto; white-space: nowrap; gap: 10px; padding: 10px;">
 
-  <img src="screenshots/home_page_banner.PNG" alt="Home Page Banner" width="300">
-  <img src="screenshots/home_page_product.PNG" alt="Home Page Product" width="300">
-  <img src="screenshots/product_category.PNG" alt="Product Category" width="300">
-  <img src="screenshots/product_details.PNG" alt="Product Details" width="300">
-  <img src="screenshots/shopping_cart.PNG" alt="Shopping Cart" width="300">
-  <img src="screenshots/admin_panel.PNG" alt="Admin Panel" width="300">
+  <img src="screenshots/home_page_banner.PNG" alt="Home Page Banner" width="400">
+  <img src="screenshots/home_page_product.PNG" alt="Home Page Product" width="400">
+  <img src="screenshots/product_category.PNG" alt="Product Category" width="400">
+  <img src="screenshots/product_details.PNG" alt="Product Details" width="400">
+  <img src="screenshots/shopping_cart.PNG" alt="Shopping Cart" width="400">
+  <img src="screenshots/admin_panel.PNG" alt="Admin Panel" width="400">
 
 </div>
 
 [Watch Demo on YouTube](https://www.youtube.com/watch?v=9yBf5LDiSpw&t=7s&ab_channel=emnaothmen)
-
 ## Description
 
 This project is a full-stack e-commerce platform built for a vape store. The platform enables customers to browse, search, and purchase products seamlessly, with key features such as product filtering, add-to-cart functionality, and secure checkout using Stripe integration. It also includes image zoom for product detail views and complete CRUD operations for product management. Admins and users have role-based access, while JWT token authentication ensures secure access.
