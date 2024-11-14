@@ -3,11 +3,11 @@
 <div style="display: flex; overflow-x: auto; white-space: nowrap; gap: 10px; padding: 10px;">
 
   <img src="https://github.com/user-attachments/assets/3e12883d-9e68-4032-b761-670d3025b30b" alt="Home Page Banner" width="400">
-  <img src="screenshots/home_page_product.PNG" alt="Home Page Product" width="400">
-  <img src="screenshots/product_category.PNG" alt="Product Category" width="400">
-  <img src="screenshots/product_details.PNG" alt="Product Details" width="400">
-  <img src="screenshots/shopping_cart.PNG" alt="Shopping Cart" width="400">
-  <img src="screenshots/admin_panel.PNG" alt="Admin Panel" width="400">
+  <img src="https://github.com/user-attachments/assets/7954a700-150e-465d-a875-531cd11a46ee" alt="Home Page Product" width="400">
+  <img src="https://github.com/user-attachments/assets/3480abfb-35a3-4e5c-b356-428bc6f1b610" alt="Product Category" width="400">
+  <img src="https://github.com/user-attachments/assets/03503d9d-4a5f-4ef4-b34a-e783b32e47df" alt="Product Details" width="400">
+  <img src="https://github.com/user-attachments/assets/ac977cac-c8c2-4ee0-9cb8-8333aed3439f" alt="Shopping Cart" width="400">
+  <img src="https://github.com/user-attachments/assets/df472da4-4743-4513-97c9-ae0945b22708" alt="Admin Panel" width="400">
 
 </div>
 
