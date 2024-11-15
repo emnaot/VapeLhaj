@@ -1,4 +1,4 @@
-# Full-Stack E-Commerce MERN App
+# Vape Store Online Shopping Platform - MERN Stack
 
 <div style="display: flex; overflow-x: auto; white-space: nowrap; gap: 10px; padding: 10px;">
 
