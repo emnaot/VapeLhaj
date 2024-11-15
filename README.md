@@ -36,4 +36,8 @@ This project is a full-stack e-commerce platform built for a vape store. The pla
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0).  
+By using this project, you agree to the terms and conditions of the AGPL-3.0 license, which requires you to share any modifications if you deploy this project publicly.
+
+For more details, please refer to the [LICENSE](./LICENSE) file.
+
