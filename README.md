@@ -34,19 +34,6 @@ This project is a full-stack e-commerce platform built for a vape store. The pla
 - **Authentication**: JWT Token Authentication
 
 
-
-## Environment Variables
-
-### Backend `.env`
-
-- `MONGODB_URI`: Your MongoDB connection URI.
-- `TOKEN_SECRET_KEY`: Secret key for JWT authentication.
-- `FRONTEND_URL`: URL of the frontend application.
-
-### Frontend `.env`
-
-- `REACT_APP_CLOUD_NAME_CLOUDINARY`: Cloudinary cloud name if using Cloudinary for images.
-
 ## License
 
 This project is licensed under the MIT License.
