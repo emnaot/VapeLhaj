@@ -19,7 +19,7 @@ const MentionsLegales = () => {
           <strong>Email :</strong> vapelhaj@gmail.com <br />
           <strong>Téléphone :</strong> 40 700 976 <br />
           <strong>Hébergement / Réalisation :</strong> Vape Lhaj <br />
-          <strong>Email de la développeuse :</strong> emna.othmen@gmail.com <br />
+          <strong>Email de la développeuse :</strong> youssef.chebil@gmail.com <br />
         </p>
 
         {/* Responsabilité */}

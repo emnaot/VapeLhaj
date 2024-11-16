@@ -31,7 +31,7 @@ const SearchProduct = () => {
                 )
             }
 
-            <p className='text-lg font-semibold my-3'>Search Results : {data.length}</p>
+            <p className='text-lg font-semibold my-3'>Résultats de recherche : {data.length}</p>
 
             {
                 data.length === 0 && !loading && (
